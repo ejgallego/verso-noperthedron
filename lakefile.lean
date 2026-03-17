@@ -14,6 +14,6 @@ lean_lib Noperthedron where
   roots := #[`Authors, `Contents, `Chapters, `Noperthedron, `Bibliography, `Macros]
 
 @[default_target]
-lean_exe blueprint-gen where
+lean_exe «blueprint-gen» where
   root := `Main
   supportInterpreter := true
