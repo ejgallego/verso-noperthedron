@@ -16,5 +16,5 @@ lake exe blueprint-gen
 ```
 
 This repository keeps its committed `VersoBlueprint` dependency pointed at the
-official upstream package. Local maintainers can override that dependency with
-Lake package overrides for ephemeral testing.
+official upstream package. Local maintainers can override that dependency
+ephemerally during testing.
