@@ -18,7 +18,7 @@ open Std (HashMap)
 def htmlAssets : HtmlAssets where
   features := .all
   extraCss := {}
-  extraJs := [tex_prelude_table_js%, include_str "static-web/math.js"]
+  extraJs := [tex_prelude_table_js%, Informal.Macros.blueprintMathJs]
   extraJsFiles := {}
   extraCssFiles := {}
   extraDataFiles := {}
