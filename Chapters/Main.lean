@@ -47,7 +47,7 @@ $$`
 `
 :::
 
-:::proof "thm:no_nopert_tight_pose" (leanok := true)
+:::proof "thm:no_nopert_tight_pose"
 Using {uses "thm:exists_solution_table"}[] and {uses "thm:row_valid_imp_not_rupert"}[].
 
 By {uses "thm:exists_solution_table"}[this theorem], there is a valid solution table
@@ -60,7 +60,7 @@ there is no Rupert solution in that interval.
 There is no 5-parameter pose that makes the noperthedron have the Rupert property.
 :::
 
-:::proof "thm:no_nopert_pose" (leanok := true)
+:::proof "thm:no_nopert_pose"
 Using {uses "thm:no_nopert_tight_pose"}[] and {uses "cor:rupert_tightening"}[].
 
 Theorem {uses "thm:no_nopert_tight_pose"}[] rules out tight poses,
@@ -71,7 +71,7 @@ and {uses "cor:rupert_tightening"}[] reduces the general case to the tight case.
 There is no purely rotational pose that makes the noperthedron have the Rupert property.
 :::
 
-:::proof "thm:no_nopert_rot_pose" (leanok := true)
+:::proof "thm:no_nopert_rot_pose"
 Using {uses "thm:pose_of_matrix_pose"}[] and {uses "thm:no_nopert_pose"}[].
 
 A purely rotational pose can be converted to an equivalent 5-parameter pose
@@ -82,7 +82,7 @@ via {uses "thm:pose_of_matrix_pose"}[], which contradicts {uses "thm:no_nopert_p
 There is no pose that makes the noperthedron have the Rupert property.
 :::
 
-:::proof "thm:no_nopert_matrix_pose" (leanok := true)
+:::proof "thm:no_nopert_matrix_pose"
 Using {uses "lemma:nopert_point_symmetric"}[], {uses "thm:no_nopert_rot_pose"}[], and {uses "thm:rupert_implies_rot_rupert"}[].
 
 By {uses "thm:rupert_implies_rot_rupert"}[], it is enough to show point symmetry.
@@ -96,7 +96,7 @@ Using {uses "def:noperthedron"}[].
 The noperthedron is not a Rupert set.
 :::
 
-:::proof "thm:nopert_not_rupert_set" (leanok := true)
+:::proof "thm:nopert_not_rupert_set"
 Using {uses "thm:no_nopert_matrix_pose"}[].
 By {uses "thm:no_nopert_matrix_pose"}[this theorem], no pose makes the noperthedron Rupert.
 :::
@@ -105,7 +105,7 @@ By {uses "thm:no_nopert_matrix_pose"}[this theorem], no pose makes the noperthed
 The noperthedron is not a Rupert polyhedron.
 :::
 
-:::proof "thm:nopert_not_rupert" (leanok := true)
+:::proof "thm:nopert_not_rupert"
 Using {uses "thm:rupert_iff_rupert_set"}[] and {uses "thm:nopert_not_rupert_set"}[].
 
 By {uses "thm:rupert_iff_rupert_set"}[], it suffices to show that the convex hull of

@@ -431,7 +431,7 @@ $$`
 The norm of any vertex in the prepointsymmetrized version of the Noperthedron is no more than 1.
 :::
 
-:::proof "lemma:half_nopert_verts_norm_le_one" (leanok := true)
+:::proof "lemma:half_nopert_verts_norm_le_one"
 Evident from definitions.
 :::
 
@@ -439,7 +439,7 @@ Evident from definitions.
 The pointsymmetrization of any set is point-symmetric.
 :::
 
-:::proof "lemma:pointsymmetrization_is_pointsym" (leanok := true)
+:::proof "lemma:pointsymmetrization_is_pointsym"
 Evident from definitions.
 :::
 
@@ -447,7 +447,7 @@ Evident from definitions.
 The {uses "def:noperthedron"}[noperthedron] is {uses "def:pointsymmetric"}[point-symmetric].
 :::
 
-:::proof "lemma:nopert_point_symmetric" (leanok := true)
+:::proof "lemma:nopert_point_symmetric"
 Follows from {uses "lemma:pointsymmetrization_is_pointsym"}[]
 :::
 
@@ -471,7 +471,7 @@ $$`
 `
 :::
 
-:::proof "lem:symmetries" (leanok := true)
+:::proof "lem:symmetries"
 See {citet polyhedron.without.rupert (kind := lemma) (index := 7)}[].
 :::
 
@@ -489,7 +489,7 @@ $$`
 `
 :::
 
-:::proof "cor:rupert_tightening" (leanok := true)
+:::proof "cor:rupert_tightening"
 Using {uses "lem:symmetries"}[].
 
 See {citep polyhedron.without.rupert (kind := lemma) (index := 8)}[].

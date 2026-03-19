@@ -63,7 +63,7 @@ $$`
 `
 :::
 
-:::proof "lem:sin27cos26" (leanok := true)
+:::proof "lem:sin27cos26"
 Use Taylor-series remainder bounds and that all higher derivatives of sine/cosine have absolute value at most 1.
 :::
 
@@ -72,7 +72,7 @@ For every $`x\in [-4,4]`,
 $`|\ssin(x)-\sin(x)| \leq \kappa/7` and $`|\scos(x)-\cos(x)|\leq \kappa/7`.
 :::
 
-:::proof "lem:kappa7" (leanok := true)
+:::proof "lem:kappa7"
 Using {uses "lem:sin27cos26"}[].
 Straightforward numerical computation.
 :::
@@ -82,7 +82,7 @@ Let $`A = (a_{i,j})_{1 \leq i \leq m,\,1 \leq j \leq n} \in \mathbb{R}^{m \times
 If $`|a_{i,j}| \leq \delta` for all entries, then $`\|A\| \leq \delta \sqrt{mn}`.
 :::
 
-:::proof "lem:A_le_deltamn" (leanok := true)
+:::proof "lem:A_le_deltamn"
 Standard norm estimate via Cauchy-Schwarz.
 :::
 
@@ -93,7 +93,7 @@ Let $`A_\mathbb{Q}(x,y)` be obtained by replacing $`\sin,\cos` with $`\ssin,\sco
 Then for $`x,y\in[-4,4]`, $`\|A(x,y)-A_{\mathbb{Q}}(x,y)\|\leq\kappa`.
 :::
 
-:::proof "lem:dist_le_kappa" (leanok := true)
+:::proof "lem:dist_le_kappa"
 Using {uses "lem:kappa7"}[] and {uses "lem:A_le_deltamn"}[].
 See {citet polyhedron.without.rupert (kind := lemma) (index := 40)}[].
 :::
@@ -111,7 +111,7 @@ are all at most $`\kappa`.
 Moreover $`\|R_\mathbb{Q}(\alpha)\|,\|M_\mathbb{Q}(\theta,\phi)\|\leq 1+\kappa`.
 :::
 
-:::proof "corr:kappa1kappa" (leanok := true)
+:::proof "corr:kappa1kappa"
 Using {uses "lem:dist_le_kappa"}[] and {uses "lem:RaRalpha"}[].
 :::
 
@@ -124,7 +124,7 @@ then
 $`\|A_1\cdots A_n-B_1\cdots B_n\|\leq n\kappa\,\delta_1\cdots\delta_n`.
 :::
 
-:::proof "lem:A1AnB1Bn" (leanok := true)
+:::proof "lem:A1AnB1Bn"
 See {citet polyhedron.without.rupert (kind := lemma) (index := 42)}[].
 :::
 
@@ -135,7 +135,7 @@ Then the seven quantitative bounds (equations (1)-(7) in Lemma 44 of the paper)
 hold for inner products involving $`M,M^\theta,M^\phi,R,R'` and their rational versions.
 :::
 
-:::proof "lem:boundskappa" (leanok := true)
+:::proof "lem:boundskappa"
 Using {uses "lem:A1AnB1Bn"}[] and {uses "corr:kappa1kappa"}[].
 See {citet polyhedron.without.rupert (kind := lemma) (index := 44)}[].
 :::
@@ -149,7 +149,7 @@ in the interval
 $`[\bar\theta_1\pm\epsilon,\bar\phi_1\pm\epsilon,\bar\theta_2\pm\epsilon,\bar\phi_2\pm\epsilon,\bar\alpha\pm\epsilon]`.
 :::
 
-:::proof "thm:global_rational" (leanok := true)
+:::proof "thm:global_rational"
 Using {uses "thm:global"}[] and {uses "lem:boundskappa"}[].
 :::
 
@@ -171,7 +171,7 @@ If the rational points are $`\epsilon`-$`\kappa`-spanning,
 then the original points are $`\epsilon`-spanning.
 :::
 
-:::proof "lem:ekspanningespanning" (leanok := true)
+:::proof "lem:ekspanningespanning"
 Using {uses "lem:A1AnB1Bn"}[], {uses "lem:eps-spanning"}[], and {uses "corr:kappa1kappa"}[].
 See {citet polyhedron.without.rupert (kind := lemma) (index := 46)}[].
 :::
@@ -186,7 +186,7 @@ Then, for parameters in $`[-4,4]`,
 - $`|\| M Q \| - \| M_{\mathbb{Q}}\widetilde{Q} \| | \leq 3\kappa`
 :::
 
-:::proof "lem:boundskappa3" (leanok := true)
+:::proof "lem:boundskappa3"
 Using {uses "lem:A1AnB1Bn"}[].
 See {citet polyhedron.without.rupert (kind := lemma) (index := 49)}[].
 :::
@@ -203,7 +203,7 @@ $$`
 `
 :::
 
-:::proof "corr:deltakappa" (leanok := true)
+:::proof "corr:deltakappa"
 Using {uses "lem:boundskappa3"}[].
 See {citet polyhedron.without.rupert (kind := corollary) (index := 50)}[].
 :::
@@ -214,7 +214,7 @@ and rational lower surrogate $`A_{\mathbb{Q}}` as in Corollary 51.
 Then $`A \geq A_{\mathbb{Q}}`.
 :::
 
-:::proof "lem:boundskappa4" (leanok := true)
+:::proof "lem:boundskappa4"
 Using {uses "lem:boundskappa3"}[].
 See {citet polyhedron.without.rupert (kind := corollary) (index := 51)}[].
 :::
@@ -232,7 +232,7 @@ Then there is no Rupert solution in
 $`[\bar\theta_1\pm\epsilon,\bar\phi_1\pm\epsilon,\bar\theta_2\pm\epsilon,\bar\phi_2\pm\epsilon,\bar\alpha\pm\epsilon]`.
 :::
 
-:::proof "thm:local_rational" (leanok := true)
+:::proof "thm:local_rational"
 Using {uses "thm:local"}[], {uses "lem:boundskappa3"}[], {uses "lem:boundskappa4"}[],
 {uses "corr:deltakappa"}[], and {uses "lem:ekspanningespanning"}[].
 :::

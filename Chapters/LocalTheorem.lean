@@ -49,7 +49,7 @@ For any $`P \in \mathbb{R}^3` one has
 $`\|M(\theta, \phi) P\|^2=\|P\|^2-\langle X(\theta,\varphi),P\rangle^2`.
 :::
 
-:::proof "lem:pythagoras" (leanok := true)
+:::proof "lem:pythagoras"
 See {citet polyhedron.without.rupert (kind := lemma) (index := 21)}[].
 :::
 
@@ -73,7 +73,7 @@ Then at least one of the following inequalities fails:
 - $`\langle V_3, Y \rangle > \langle V_3, Z \rangle`
 :::
 
-:::proof "lem:langles" (leanok := true)
+:::proof "lem:langles"
 See {citet polyhedron.without.rupert (kind := lemma) (index := 23)}[].
 :::
 
@@ -86,7 +86,7 @@ $$`
 `
 :::
 
-:::proof "lem:scalarprodbars" (leanok := true)
+:::proof "lem:scalarprodbars"
 See {citet polyhedron.without.rupert (kind := lemma) (index := 24)}[].
 :::
 
@@ -99,7 +99,7 @@ $$`
 `
 :::
 
-:::proof "lem:absscalar" (leanok := true)
+:::proof "lem:absscalar"
 See {citet polyhedron.without.rupert (kind := lemma) (index := 25)}[].
 :::
 
@@ -111,7 +111,7 @@ $`\langle R(\pi/2) C,A\rangle > 0`.
 Then the origin lies strictly in triangle $`ABC`.
 :::
 
-:::proof "lem:origintriangle" (leanok := true)
+:::proof "lem:origintriangle"
 See {citet polyhedron.without.rupert (kind := lemma) (index := 26)}[].
 :::
 
@@ -136,7 +136,7 @@ If $`\langle X(\theta, \phi), P_i \rangle > 0` for $`i=1,2,3`, then
 $`X(\theta, \phi) \in \spanp(P_1, P_2, P_3)`.
 :::
 
-:::proof "lem:eps-spanning" (leanok := true)
+:::proof "lem:eps-spanning"
 Using {uses "lem:scalarprodbars"}[], {uses "lem:origintriangle"}[], and {uses "lem:sqrt2"}[].
 See {citet polyhedron.without.rupert (kind := lemma) (index := 28)}[].
 :::
@@ -156,7 +156,7 @@ then $`R(\alpha)M(\theta_1, \phi_1) P` and $`M(\theta_2, \phi_2) Q` lie in
 $`\mathrm{Circ}_{\delta + \sqrt{5} \epsilon}(T)`.
 :::
 
-:::proof "lem:inCirc" (leanok := true)
+:::proof "lem:inCirc"
 Using {uses "lem:sqrt2"}[] and {uses "lem:sqrt5"}[].
 See {citet polyhedron.without.rupert (kind := lemma) (index := 30)}[].
 :::
@@ -185,7 +185,7 @@ for all other vertices $`P_j \in \mathbf{P} \setminus Q`.
 Then $`Q` is $`\delta`-locally maximally distant with respect to $`\overline{Q}`.
 :::
 
-:::proof "lem:LMD" (leanok := true)
+:::proof "lem:LMD"
 See {citet polyhedron.without.rupert (kind := lemma) (index := 32)}[].
 :::
 
@@ -203,7 +203,7 @@ $$`
 `
 :::
 
-:::proof "lem:coss" (leanok := true)
+:::proof "lem:coss"
 Using {uses "lem:absscalar"}[] and {uses "lem:sqrt2"}[].
 See {citet polyhedron.without.rupert (kind := lemma) (index := 33)}[].
 :::
@@ -214,7 +214,7 @@ Define $`P := (P_1|P_2|P_3)` and $`Q := (Q_1|Q_2|Q_3)` and assume $`Q` is invert
 Then $`P_1, P_2, P_3` and $`Q_1, Q_2, Q_3` are congruent iff $`P^t P = Q^t Q`.
 :::
 
-:::proof "lem:congruent" (leanok := true)
+:::proof "lem:congruent"
 From {citet polyhedron.without.rupert (kind := lemma) (index := 35)}[].
 :::
 
@@ -230,7 +230,7 @@ $$`
 `
 :::
 
-:::proof "thm:local" (leanok := true)
+:::proof "thm:local"
 Using {uses "lem:langles"}[], {uses "lem:XPgt0"}[], {uses "lem:eps-spanning"}[],
 {uses "lem:MPgtr"}[], {uses "lem:inCirc"}[], {uses "lem:coss"}[], {uses "lem:LMD"}[], and {uses "lem:pythagoras"}[].
 See {citet polyhedron.without.rupert (kind := theorem) (index := 36)}[].

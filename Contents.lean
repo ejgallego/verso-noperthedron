@@ -54,6 +54,6 @@ We follow for the most part the structure of {citet polyhedron.without.rupert}[]
 
 {blueprint_graph}
 
-{bp_summary}
+{blueprint_summary}
 
-{bp_bibliography}
+{blueprint_bibliography}

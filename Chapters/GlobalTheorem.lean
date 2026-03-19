@@ -48,7 +48,7 @@ $$`
 `
 :::
 
-:::proof "lem:hullscalarprod" (leanok := true)
+:::proof "lem:hullscalarprod"
 This is a mild generalization of {citet polyhedron.without.rupert (kind := lemma) (index := 18)}[].
 :::
 
@@ -62,7 +62,7 @@ $$`
 `
 :::
 
-:::proof "lem:leq1" (leanok := true)
+:::proof "lem:leq1"
 See {citet polyhedron.without.rupert (kind := lemma) (index := 19)}[].
 :::
 
@@ -80,7 +80,7 @@ $$`
 `
 :::
 
-:::proof "lem:n2" (leanok := true)
+:::proof "lem:n2"
 See {citet polyhedron.without.rupert (kind := lemma) (index := 20)}[].
 :::
 
@@ -100,7 +100,7 @@ and
 $`g(\theta,\phi) =  \langle M(\theta,\phi) P / \|P\|, w\rangle`.
 :::
 
-:::proof "lem:rotation_derivatives" (leanok := true)
+:::proof "lem:rotation_derivatives"
 By basic properties of derivatives.
 :::
 
@@ -121,7 +121,7 @@ $$`
 `
 :::
 
-:::proof "thm:global" (leanok := true)
+:::proof "thm:global"
 Using {uses "lem:hullscalarprod"}[], {uses "lem:leq1"}[], {uses "lem:n2"}[], and {uses "lem:rotation_derivatives"}[].
 See {citet polyhedron.without.rupert (kind := section) (index := "4.2")}[].
 :::

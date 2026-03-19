@@ -49,7 +49,7 @@ The following are equivalent:
 - The convex closure of $`v` is a Rupert set.
 :::
 
-:::proof "thm:rupert_iff_rupert_set" (leanok := true)
+:::proof "thm:rupert_iff_rupert_set"
 TODO: import this from the other repo
 :::
 
@@ -61,7 +61,7 @@ TODO
 Given a pose with zero offset, there exists a 5-parameter pose that is equivalent to it.
 :::
 
-:::proof "thm:pose_of_matrix_pose" (leanok := true)
+:::proof "thm:pose_of_matrix_pose"
 By putting the pose into a canonical form as a Z rotation followed by a Y followed by a Z.
 :::
 
@@ -72,7 +72,7 @@ If a set is point symmetric and convex, then it being Rupert implies
 it being purely rotationally Rupert.
 :::
 
-:::proof "thm:rupert_implies_rot_rupert" (leanok := true)
+:::proof "thm:rupert_implies_rot_rupert"
 TODO: informalize proof
 :::
 
@@ -83,7 +83,7 @@ The radius of the polyhedron $`S` is $`r` iff:
 - all vectors $`v \in S` have $`\|v\| \le r`
 :::
 
-:::proof "thm:polyhedron_radius_iff" (leanok := true)
+:::proof "thm:polyhedron_radius_iff"
 Immediate from definition.
 :::
 
@@ -91,7 +91,7 @@ Immediate from definition.
 Alias of {uses "thm:polyhedron_radius_iff"}[] used in the original TeX source.
 :::
 
-:::proof "thm:polyhedron_radius_def" (leanok := true)
+:::proof "thm:polyhedron_radius_def"
 Immediate from {uses "thm:polyhedron_radius_iff"}[].
 :::
 
@@ -99,7 +99,7 @@ Immediate from {uses "thm:polyhedron_radius_iff"}[].
 Pointsymmetrization preserves radius.
 :::
 
-:::proof "thm:pointsymmetrize_pres_radius" (leanok := true)
+:::proof "thm:pointsymmetrize_pres_radius"
 Using {uses "thm:polyhedron_radius_iff"}[].
 Because the reflection of a point about the origin preserves its norm.
 :::

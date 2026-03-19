@@ -42,7 +42,7 @@ $$`
 `
 :::
 
-:::proof "thm:exists_solution_table" (leanok := true)
+:::proof "thm:exists_solution_table"
 By exhibiting the table and running the validity checking algorithm.
 :::
 
@@ -50,7 +50,7 @@ By exhibiting the table and running the validity checking algorithm.
 If a global node in the solution tree is valid, then there is no Rupert solution for its interval.
 :::
 
-:::proof "thm:solution_global" (leanok := true)
+:::proof "thm:solution_global"
 Using {uses "thm:global_rational"}[].
 :::
 
@@ -58,7 +58,7 @@ Using {uses "thm:global_rational"}[].
 If a local node in the solution tree is valid, then there is no Rupert solution for its interval.
 :::
 
-:::proof "thm:solution_local" (leanok := true)
+:::proof "thm:solution_local"
 Using {uses "thm:local_rational"}[], {uses "lem:radius_noperthedron_one"}[], and {uses "lem:congruent"}[].
 :::
 
@@ -69,7 +69,7 @@ If we have a valid solution table, and in particular its $`i`th row is valid,
 then there is no Rupert solution of the interval of its $`i`th row.
 :::
 
-:::proof "thm:row_valid_imp_not_rupert_ix" (leanok := true)
+:::proof "thm:row_valid_imp_not_rupert_ix"
 Using {uses "thm:solution_global"}[] and {uses "thm:solution_local"}[].
 
 By a mutual induction on the number of rows left in the table following the $`i`th.
@@ -84,7 +84,7 @@ Using {uses "def:noperthedron"}[].
 If we have a valid solution table, then there is no Rupert solution of the interval of its zeroth row.
 :::
 
-:::proof "thm:row_valid_imp_not_rupert" (leanok := true)
+:::proof "thm:row_valid_imp_not_rupert"
 Using {uses "thm:row_valid_imp_not_rupert_ix"}[].
 Immediate special case of {uses "thm:row_valid_imp_not_rupert_ix"}[this theorem].
 :::
