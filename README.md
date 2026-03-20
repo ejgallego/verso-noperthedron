@@ -1,7 +1,12 @@
 # Verso Noperthedron
 
+[![Blueprint Pages](https://github.com/ejgallego/verso-noperthedron/actions/workflows/pages.yml/badge.svg)](https://github.com/ejgallego/verso-noperthedron/actions/workflows/pages.yml)
+
 Standalone Verso Blueprint example project for the Rupert counterexample
 development.
+
+Published site on `main`: <https://ejgallego.github.io/verso-noperthedron/>
+(after the first successful GitHub Pages deployment).
 
 ## Build
 
