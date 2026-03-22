@@ -3,7 +3,7 @@
  "packagesDir": ".lake/packages",
  "packages": [
   {
-   "url": "https://github.com/leanprover/verso-blueprint",
+   "url": "https://github.com/ejgallego/verso-blueprint",
    "type": "git",
    "subDir": null,
    "scope": "",
