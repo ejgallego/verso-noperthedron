@@ -3,8 +3,7 @@ open Lake DSL
 
 require verso from git "https://github.com/leanprover/verso"@"main"
 require mathlib from git "https://github.com/leanprover-community/mathlib4"@"v4.29.0-rc6"
-require VersoBlueprint from git "https://github.com/ejgallego/verso-blueprint"@"main"
-
+require VersoBlueprint from git "https://github.com/ejgallego/verso-blueprint"@"0c236007b9e702a188af84a2dc4f3725e778e2af"
 package VersoNoperthedron where
   precompileModules := false
   leanOptions := #[⟨`experimental.module, true⟩]
