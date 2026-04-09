@@ -2,6 +2,7 @@
 # imported formalization remains vendored directly in this repository.
 package_name = "Contents"
 blueprint_main = "Main"
+formalization_path = "Noperthedron"
 chapter_root = "Chapters"
 
 # Canonical TeX source of truth, vendored from jcreed upstream main.
