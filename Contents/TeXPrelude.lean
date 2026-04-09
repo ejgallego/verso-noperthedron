@@ -9,7 +9,6 @@ tex_prelude r#"
 % \newcommand{\Q}{\mathbb{Q}}
 % \newcommand{\R}{\mathbb{R}}
 % \newcommand{\N}{\mathbb{N}}
-\newcommand{\coloneqq}{:=}
 \newcommand{\hull}[1]{\mathsf{Co}(#1)}
 \newcommand{\PPP}{\mathbf{P}}
 \newcommand{\OOO}{\mathbf{O}}
