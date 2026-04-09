@@ -70,7 +70,6 @@ open Real
 
 # Definition of the Noperthedron
 
-:::definition "def:noperthedron_main" (parent := "nopert_construction")
 We define three points $`C_1,C_2,C_3\in \mathbb{Q}^3`.
 $$`
     C_1\coloneqq
@@ -91,7 +90,6 @@ $$`
         8193990033 \\ 5298215096 \\ 1230614493
         \end{pmatrix}.
 `
-:::
 
 ```tex
 We define three points $C_1,C_2,C_3\in \mathbb{Q}^3$.
