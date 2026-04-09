@@ -11,8 +11,11 @@ import VersoBlueprint.Commands.Graph
 import VersoBlueprint.Commands.Summary
 import VersoBlueprint.Commands.Bibliography
 
+import Contents.TeXPrelude
 import Authors
 import Bibliography
+import Chapters.Introduction
+import Chapters.Compatibility
 import Chapters.Noperthedron
 import Chapters.Bounding
 import Chapters.Prelims
@@ -39,10 +42,7 @@ shortTitle := "Rupert Counterexample"
 authors := ["David Renshaw", "Jason Reed"]
 %%%
 
-# Introduction
-
-We follow for the most part the structure of {citet polyhedron.without.rupert}[].
-
+{include 0 Chapters.Introduction}
 {include 0 Chapters.Noperthedron}
 {include 0 Chapters.Bounding}
 {include 0 Chapters.Prelims}

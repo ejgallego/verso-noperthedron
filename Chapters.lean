@@ -1,3 +1,5 @@
+import Chapters.Introduction
+import Chapters.Compatibility
 import Chapters.Prelims
 import Chapters.Bounding
 import Chapters.Noperthedron

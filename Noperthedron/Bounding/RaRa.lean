@@ -19,8 +19,7 @@ theorem norm_sub_rotR_le (α β : ℝ) : ‖rotR α - rotR β‖ ≤ 2 * |Real.s
     Matrix.vecHead, Matrix.vecTail, Matrix.dotProduct_of_isEmpty, Real.norm_eq_abs, sq_abs, Fin.sum_univ_two]
   ring_nf
   simp only [one_div, Fin.isValue, sq_abs, Real.cos_sq']
-  ring_nf
-  norm_num
+  grind
 
 theorem norm_rotR_sub_rotR_lt {ε α α_ : ℝ} (hε : 0 < ε) (hα : |α - α_| ≤ ε) :
     ‖rotR α - rotR α_‖ < ε := by

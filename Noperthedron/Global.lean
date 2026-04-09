@@ -20,7 +20,6 @@ private lemma f_le_max {n : ℕ} {V : Finset (E n)} (Vne : V.Nonempty) (w : E n 
     refine Finset.le_max' _ _ ?_
     simp only [Finset.mem_image]
     exact ⟨x, Finset.coe_mem x, rfl⟩
-  push_cast
   refine Finset.sum_le_sum ?_
   intro x hx
   grw [fx_le_fvmax ⟨x, hx⟩]
@@ -40,7 +39,7 @@ private lemma extract_constant {n : ℕ} {V : Finset (E n)} (w : E n → ℝ)
 
 theorem finset_hull_linear_max {n : ℕ} {V : Finset (E n)} (Vne : V.Nonempty)
     (S : E n) (hs : S ∈ convexHull ℝ V) (f : E n →ₗ[ℝ] ℝ) :
-    f S ≤ (V.image f).max' (by simp [Finset.image_nonempty]; exact Vne) := by
+    f S ≤ (V.image f).max' (Finset.image_nonempty.mpr Vne) := by
   have Vine : (V.image f).Nonempty := by simp [Finset.image_nonempty]; exact Vne
   have hs_orig := hs
   rw [Finset.convexHull_eq] at hs
@@ -50,12 +49,12 @@ theorem finset_hull_linear_max {n : ℕ} {V : Finset (E n)} (Vne : V.Nonempty)
     _       = ∑ x ∈ V, w x * f x := by simp
     _       ≤ ∑ x ∈ V, w x * ((Finset.image f V).max' Vine) := f_le_max Vne w hw1 f
     _       = (∑ x ∈ V, w x) * ((Finset.image f V).max' Vine) := by rw [← Finset.sum_mul]
-    _       = (Finset.image f V).max' (by simp [Finset.image_nonempty]; exact Vne) := by rw [hw2]; simp
+    _       = (Finset.image f V).max' _ := by rw [hw2]; simp
 
 /- [SY25] Lemma 18 -/
 theorem hull_scalar_prod {n : ℕ} (V : Finset (E n)) (Vne : V.Nonempty)
     (S : E n) (hs : S ∈ convexHull ℝ V) (w : E n) :
-    ⟪w, S⟫ ≤ Finset.max' (V.image (⟪w, ·⟫)) (by simp [Finset.image_nonempty]; exact Vne) := by
+    ⟪w, S⟫ ≤ Finset.max' (V.image (⟪w, ·⟫)) (Finset.image_nonempty.mpr Vne) := by
   exact finset_hull_linear_max Vne S hs (InnerProductSpace.toDual ℝ (E n) w |>.toLinearMap)
 
 -- rotproj_inner, rotproj_inner_unit, rotproj_outer_unit, rotation_partials_exist,
@@ -288,7 +287,7 @@ private lemma nth_partial_rotproj_outer_0 (pbar : Pose) (P : ℝ³) (w : ℝ²) 
     ((Differentiable.rotM_outer P).differentiableAt)]
   congr 1
   rw [(HasFDerivAt.rotM_outer pbar P).fderiv]
-  ext i; simp [rotM'_apply, EuclideanSpace.single_apply]
+  ext i; simp [rotM'_apply]
 
 private lemma nth_partial_rotproj_outer_1 (pbar : Pose) (P : ℝ³) (w : ℝ²) :
     nth_partial 1 (rotproj_outer P w) pbar.outerParams = ⟪rotMφ pbar.θ₂ pbar.φ₂ P, w⟫ := by
@@ -297,7 +296,7 @@ private lemma nth_partial_rotproj_outer_1 (pbar : Pose) (P : ℝ³) (w : ℝ²) 
     ((Differentiable.rotM_outer P).differentiableAt)]
   congr 1
   rw [(HasFDerivAt.rotM_outer pbar P).fderiv]
-  ext i; simp [rotM'_apply, EuclideanSpace.single_apply]
+  ext i; simp [rotM'_apply]
 
 lemma partials_helper3 {pbar : Pose} {ε : ℝ} {poly : GoodPoly}
     (pc : GlobalTheoremPrecondition poly pbar ε) (P : ℝ³) :
@@ -338,13 +337,8 @@ lemma partials_helper_outer {pbar : Pose} {ε : ℝ} {poly : GoodPoly}
     (pc : GlobalTheoremPrecondition poly pbar ε) (P : ℝ³) :
     |⟪pbar.rotM₂θ P, pc.w⟫| + |⟪pbar.rotM₂φ P, pc.w⟫| =
     ‖P‖ * ∑ i, |nth_partial i (pc.fu_outer P) pbar.outerParams| := by
-  /- BP_MATHLIB_MIGRATION_ORIGINAL
   rw [Finset.mul_sum, Fin.sum_univ_two, ← abs_norm, ← abs_mul, ← abs_mul]
-  simp only [Fin.isValue]
   rw [partials_helper3 pc P, partials_helper4 pc P]
-  -/
-  -- BP_MATHLIB_MIGRATION: simplification/no-progress regression on current mathlib.
-  sorry
 
 theorem fu_times_norm_S_eq_f {pbar p : Pose} {ε : ℝ} {poly : GoodPoly}
     (pc : GlobalTheoremPrecondition poly pbar ε) :
@@ -364,7 +358,7 @@ lemma rotproj_helper {pbar p : Pose} {ε : ℝ} {poly : GoodPoly}
 /--
 Use the analytic bounds on rotations, Lemmas 19 and 20.
 -/
-lemma global_theorem_inequality_ii (pbar p : Pose) (ε : ℝ) (hε : ε > 0)
+lemma global_theorem_inequality_ii (pbar p : Pose) (ε : ℝ) (hε : 0 ≤ ε)
     (p_near_pbar : p ∈ pbar.closed_ball ε)
     (poly : GoodPoly)
     (pc : GlobalTheoremPrecondition poly pbar ε) :
@@ -388,12 +382,11 @@ lemma global_theorem_inequality_ii (pbar p : Pose) (ε : ℝ) (hε : ε > 0)
 /--
 Use the analytic bounds on rotations, Lemmas 19 and 20.
 -/
-lemma global_theorem_inequality_iv (pbar p : Pose) (ε : ℝ) (hε : ε > 0)
+lemma global_theorem_inequality_iv (pbar p : Pose) (ε : ℝ) (hε : 0 ≤ ε)
     (p_near_pbar : p ∈ pbar.closed_ball ε)
     (poly : GoodPoly)
     (pc : GlobalTheoremPrecondition poly pbar ε) :
     maxOuter p poly pc.w ≤ maxH pbar poly ε pc.w := by
-  /- BP_MATHLIB_MIGRATION_ORIGINAL
   -- First of all, we can relate these two maximums by relating
   -- their components.
   suffices h : ∀ vert ∈ poly.vertices,
@@ -428,14 +421,11 @@ lemma global_theorem_inequality_iv (pbar p : Pose) (ε : ℝ) (hε : ε > 0)
   nth_grw 2 [P_norm_le_one] at hz
   simp only [mul_one] at hz
   exact hz
-  -/
-  -- BP_MATHLIB_MIGRATION: arithmetic simplification/cast obligations changed in current mathlib.
-  sorry
 
 /--
 Here we run through the "sequence of inequalities [which yield] the desired contradiction"
 -/
-theorem global_theorem_gt_reasoning (pbar p : Pose) (ε : ℝ) (hε : ε > 0)
+theorem global_theorem_gt_reasoning (pbar p : Pose) (ε : ℝ) (hε : 0 ≤ ε)
     (p_near_pbar : p ∈ pbar.closed_ball ε)
     (poly : GoodPoly)
     (pc : GlobalTheoremPrecondition poly pbar ε) :
@@ -455,7 +445,7 @@ theorem global_theorem_gt_reasoning (pbar p : Pose) (ε : ℝ) (hε : ε > 0)
 /--
 The Global Theorem, [SY25] Theorem 17
 -/
-theorem global_theorem (pbar : Pose) (ε : ℝ) (hε : ε > 0)
+theorem global_theorem (pbar : Pose) (ε : ℝ) (hε : 0 ≤ ε)
     (poly : GoodPoly)
     (_poly_pointsym : PointSym poly.hull)
     (pc : GlobalTheoremPrecondition poly pbar ε) :
@@ -468,7 +458,7 @@ theorem global_theorem (pbar : Pose) (ε : ℝ) (hε : ε > 0)
 /--
 The Global Theorem specialized to the noperthedron.
 -/
-theorem global_theorem_nopert (pbar : Pose) (ε : ℝ) (hε : ε > 0)
+theorem global_theorem_nopert (pbar : Pose) (ε : ℝ) (hε : 0 ≤ ε)
     (pc : GlobalTheoremPrecondition Nopert.poly pbar ε) :
     ¬ ∃ p ∈ pbar.closed_ball ε, RupertPose p nopert.hull :=
   global_theorem pbar ε hε Nopert.poly

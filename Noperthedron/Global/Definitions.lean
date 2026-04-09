@@ -68,22 +68,14 @@ def rotproj_outer' (pbar : Pose) (P : ℝ³) (w : ℝ²) : ℝ² →L[ℝ] ℝ :
 
 lemma rotation_partials_exist {S : ℝ³} (S_nonzero : ‖S‖ > 0) {w : ℝ²} :
     ContDiff ℝ 2 (rotproj_inner_unit S w) := by
-  /- BP_MATHLIB_MIGRATION_ORIGINAL
   refine ContDiff.div ?_ contDiff_const (fun x ↦ (ne_of_lt S_nonzero).symm)
   simp [inner, rotprojRM, rotR, rotM, rotM_mat, Matrix.vecHead, Matrix.vecTail]
   fun_prop
-  -/
-  -- BP_MATHLIB_MIGRATION: `fun_prop` no longer discharges the `inner`/matrix subgoals here.
-  sorry
 
 lemma rotation_partials_exist_outer {S : ℝ³} (S_nonzero : ‖S‖ > 0) {w : ℝ²} :
     ContDiff ℝ 2 (rotproj_outer_unit S w) := by
-  /- BP_MATHLIB_MIGRATION_ORIGINAL
   refine ContDiff.div ?_ contDiff_const (fun x ↦ (ne_of_lt S_nonzero).symm)
   simp [inner, rotM, rotM_mat, Matrix.vecHead, Matrix.vecTail]
   fun_prop
-  -/
-  -- BP_MATHLIB_MIGRATION: `fun_prop` no longer discharges the `inner`/matrix subgoals here.
-  sorry
 
 end GlobalTheorem

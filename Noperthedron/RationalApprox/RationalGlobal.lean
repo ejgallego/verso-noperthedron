@@ -28,7 +28,7 @@ def Hℚ (p : Pose) (ε : ℝ) (w : ℝ²) (P : ℝ³) : ℝ :=
 A measure of how far all of the outer-shadow vertices can "reach" along w.
 -/
 noncomputable
-def maxHℚ (p : Pose) (poly : GoodPoly) (ε : ℝ) (w : ℝ²) : ℝ :=
+def maxHℚ (p : Pose) (poly : ApproxGoodPoly) (ε : ℝ) (w : ℝ²) : ℝ :=
   poly.vertices.image (Hℚ p ε w) |>.max' <| by
     simp only [Finset.image_nonempty]
     exact poly.nonempty
@@ -39,7 +39,7 @@ We require the existence of some inner-shadow vertex S from the polyhedron, and 
 the direction we're projecting ℝ² → ℝ to find that S "sticks out too far" compared to all the
 other outer-shadow vertices P (which the calculation of H iterates over) in the polygon that lies in ℝ².
 -/
-structure RationalGlobalTheoremPrecondition (poly poly_ : GoodPoly)
+structure RationalGlobalTheoremPrecondition (poly : GoodPoly) (poly_ : ApproxGoodPoly)
     (happrox : κApproxPoly poly.vertices poly_.vertices) (p : Pose) (ε : ℝ) : Type where
   S : ℝ³
   S_in_poly : S ∈ poly_.vertices
@@ -51,7 +51,7 @@ structure RationalGlobalTheoremPrecondition (poly poly_ : GoodPoly)
 private lemma abs_le_abs_add_of_norm_sub_le {a b C : ℝ} (h : ‖a - b‖ ≤ C) : |a| ≤ |b| + C := by
   linarith [abs_sub_abs_le_abs_sub a b, (Real.norm_eq_abs _).symm ▸ h]
 
-private lemma Gℚ_le_G {pbar : Pose} {ε : ℝ} (hε : ε > 0)
+private lemma Gℚ_le_G {pbar : Pose} {ε : ℝ} (hε : 0 ≤ ε)
     {S S_ : ℝ³} {w : ℝ²}
     (hS : ‖S‖ ≤ 1) (hS_approx : ‖S - S_‖ ≤ κ) (hw : ‖w‖ = 1)
     (hp : fourInterval.contains pbar) :
@@ -95,7 +95,7 @@ private lemma Gℚ_le_G {pbar : Pose} {ε : ℝ} (hε : ε > 0)
   have hRφ_abs := abs_le_abs_add_of_norm_sub_le h_RMφ
   nlinarith
 
-private lemma H_le_Hℚ {pbar : Pose} {ε : ℝ} (hε : ε > 0)
+private lemma H_le_Hℚ {pbar : Pose} {ε : ℝ} (hε : 0 ≤ ε)
     {P P_ : ℝ³} {w : ℝ²}
     (hP : ‖P‖ ≤ 1) (hP_approx : ‖P - P_‖ ≤ κ) (hw : ‖w‖ = 1)
     (hp : fourInterval.contains pbar) :
@@ -127,8 +127,8 @@ private lemma H_le_Hℚ {pbar : Pose} {ε : ℝ} (hε : ε > 0)
 /--
 [SY25] Theorem 43
 -/
-theorem rational_global (pbar : Pose) (ε : ℝ) (hε : ε > 0)
-    (poly poly_ : GoodPoly)
+theorem rational_global (pbar : Pose) (ε : ℝ) (hε : 0 ≤ ε)
+    (poly : GoodPoly) (poly_ : ApproxGoodPoly)
     (happrox : κApproxPoly poly.vertices poly_.vertices)
     (_poly_pointsym : PointSym poly.hull)
     (pc : RationalGlobalTheoremPrecondition poly poly_ happrox pbar ε) :

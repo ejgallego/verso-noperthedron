@@ -1,4 +1,4 @@
-import Mathlib.Data.Real.CompleteField
+import Mathlib.Data.Real.Hom
 import Mathlib.Analysis.InnerProductSpace.PiL2
 
 import Noperthedron.Basic
@@ -139,8 +139,7 @@ theorem local_theorem (P Q : Triangle)
     rw [←zpow_add₀ (show (-1:ℝ) ≠ 0 by norm_num)]
     ring_nf
     rw [zpow_add₀ (show (-1:ℝ) ≠ 0 by norm_num), mul_comm σQ, zpow_mul]
-    have hsq : ((-1 : ℝ) ^ (2 : ℤ)) = 1 := by norm_num
-    rw [hsq, one_zpow, one_mul]
+    norm_num
   have h₁ : Y ∈ Spanp P_ ∧ Z ∈ Spanp P_ := by
     constructor
     · have h₄ (i) : 0 < ⟪vecX p.θ₁ p.φ₁, P_ i⟫ := by
@@ -253,9 +252,7 @@ theorem local_theorem (P Q : Triangle)
     rw [hL i, L.inner_map_map]
     have h_exp : (-1 : ℝ)^(σP + σQ) * (-1 : ℝ)^σP = (-1 : ℝ)^σQ := by
       rw [← zpow_add₀ (by norm_num : (-1 : ℝ) ≠ 0), show σP + σQ + σP = 2 * σP + σQ by ring,
-          zpow_add₀ (by norm_num), zpow_mul]
-      have hsq : ((-1 : ℝ) ^ (2 : ℤ)) = 1 := by norm_num
-      rw [hsq, one_zpow, one_mul]
+          zpow_add₀ (by norm_num), zpow_mul]; norm_num
     rw [←mul_assoc, h_exp]
   have h_YP : ⟪Y, P_ i⟫ = (-1 : ℝ)^σP * ⟪Y, P i⟫ := by simp only [P_, real_inner_smul_right]
   rw [h_ZP, h_YP]

@@ -144,8 +144,7 @@ lemma coord_ei_same (i : Fin 3) (y : E 3) (t : ℝ) :
 @[simp]
 lemma coord_ei_at_other (i j : Fin 3) (hij : j ≠ i) (y : E 3) (t : ℝ) :
     (y + t • (EuclideanSpace.single i 1 : E 3)).ofLp j = y.ofLp j := by
-  simp only [EuclideanSpace.single, PiLp.add_apply, PiLp.smul_apply, Pi.single_apply, hij,
-    ↓reduceIte, smul_eq_mul, mul_zero, add_zero]
+  simp [hij]
 
 /-- Shorthand for coord_ei_same 0 -/
 abbrev coord_e0_same := coord_ei_same 0
@@ -305,7 +304,7 @@ noncomputable def inner_second_partial_A (α θ φ : ℝ) (i j : Fin 3) : ℝ³ 
 lemma comp_norm_le_one {A : ℝ² →L[ℝ] ℝ²} {B : ℝ³ →L[ℝ] ℝ²} (hA : ‖A‖ ≤ 1) (hB : ‖B‖ ≤ 1) :
     ‖A ∘L B‖ ≤ 1 :=
   calc ‖A ∘L B‖ ≤ ‖A‖ * ‖B‖ := ContinuousLinearMap.opNorm_comp_le A B
-    _ ≤ 1 * 1 := mul_le_mul hA hB (norm_nonneg _) (by linarith)
+    _ ≤ 1 * 1 := mul_le_mul hA hB (norm_nonneg _) zero_le_one
     _ = 1 := one_mul 1
 
 /-- Negated composition norm bound: ‖-(A ∘L B)‖ ≤ 1 when ‖A‖ ≤ 1 and ‖B‖ ≤ 1 -/

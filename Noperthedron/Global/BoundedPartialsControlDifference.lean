@@ -64,7 +64,7 @@ private noncomputable
 def Differentiable.interpolated {n : ℕ} (x y : E n) (f : E n → ℝ) (fc : ContDiff ℝ 2 f) :
     Differentiable ℝ (interpolated x y f)  := by
   have := Differentiable.interpolator x y
-  have := fc.differentiable (by decide)
+  have := fc.differentiable (by norm_num)
   unfold GlobalTheorem.interpolated
   fun_prop
 
@@ -78,7 +78,7 @@ def interpolated_deriv2 {n : ℕ} (x y : E n) (f : E n → ℝ) (t : ℝ) : ℝ 
 
 private
 lemma interpolated_deriv2_bound {n : ℕ} (x y : E n) {f : E n → ℝ}
-    (mpb : mixed_partials_bounded f) {ε : ℝ} (hε : 0 < ε) (hdiff : (i : Fin n) → |x i - y i| ≤ ε)
+    (mpb : mixed_partials_bounded f) {ε : ℝ} (hε : 0 ≤ ε) (hdiff : (i : Fin n) → |x i - y i| ≤ ε)
     (t : ℝ) :
     |interpolated_deriv2 x y f t| ≤ n^2 * ε^2 := by
   calc |interpolated_deriv2 x y f t|
@@ -122,7 +122,7 @@ def interpolated_has_deriv {n : ℕ} (x y : E n) (f : E n → ℝ) (fc : ContDif
   unfold interpolated interpolated_deriv
   rw [hasDerivAt_iff_hasFDerivAt]
   have hfd : HasFDerivAt f (fderiv ℝ f (interpolator x y t)) (interpolator x y t) :=
-    fc.differentiable (by decide) |>.differentiableAt.hasFDerivAt
+    fc.differentiable (by norm_num) |>.differentiableAt.hasFDerivAt
 
   have : (toSpanSingleton ℝ (∑ i, (y.ofLp i - x.ofLp i) * nth_partial i f ((1 - t) • x + t • y)))
       = ((fderiv ℝ f (interpolator x y t)).comp (interpolator' x y)) := by
@@ -153,7 +153,7 @@ def interpolated_has_deriv2 {n : ℕ} (x y : E n) (f : E n → ℝ) (fc : ContDi
     rw [Finset.sum_comm]
     apply Finset.sum_congr rfl; intro i hi
     apply Finset.sum_congr rfl; intro j hj
-    ring
+    ring_nf
 
 def deriv_interpolated {n : ℕ} (x y : E n) (f : E n → ℝ) (fc : ContDiff ℝ 2 f) :
     deriv (interpolated x y f) = interpolated_deriv x y f := by
@@ -186,7 +186,7 @@ def continuous_deriv_interpolated2 {n : ℕ} (x y : E n) (f : E n → ℝ) (fc :
 
 theorem bounded_partials_control_difference {n : ℕ} (f : E n → ℝ)
     (fc : ContDiff ℝ 2 f) (x y : E n)
-    (ε : ℝ) (hε : ε > 0) (hdiff : (i : Fin n) → |x i - y i| ≤ ε)
+    (ε : ℝ) (hε : 0 ≤ ε) (hdiff : (i : Fin n) → |x i - y i| ≤ ε)
     (mpb : mixed_partials_bounded f) :
     |f x - f y| ≤ ε * ∑ i, |nth_partial i f x| + (n^2 / 2) * ε^2 := by
   let g₀ := interpolator x y
@@ -195,7 +195,7 @@ theorem bounded_partials_control_difference {n : ℕ} (f : E n → ℝ)
   let g' := interpolated_deriv x y f
   let g'' := interpolated_deriv2 x y f
 
-  have f_diff : Differentiable ℝ f := fc.differentiable (by decide)
+  have f_diff : Differentiable ℝ f := fc.differentiable (by norm_num)
   have g₀_diff : Differentiable ℝ g₀ := Differentiable.interpolator x y
   have g_diff : Differentiable ℝ g := Differentiable.interpolated x y f fc
   have g'_diff : Differentiable ℝ g' := differentiable_deriv_interpolated x y f fc

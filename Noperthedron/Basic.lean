@@ -1,5 +1,4 @@
 import Noperthedron.Rupert.Basic
-import Noperthedron.PushLeft
 
 open scoped Matrix
 
@@ -335,21 +334,14 @@ lemma rotM_identity (θ φ : ℝ) : rotM θ φ = reduceL ∘L RyL φ ∘L RzL (-
 lemma rotprojRM_identity (θ φ α : ℝ) : rotprojRM θ φ α = reduceL ∘L RzL α ∘L RyL φ ∘L RzL (-θ) := by
   simp only [rotprojRM]
   ext v i
-  fin_cases i
+  fin_cases i <;>
   · simp [RzL, RyL, rotR, rotM, rotM_mat, Matrix.vecHead, Matrix.vecTail]
-    ring
-  · simp [RzL, RyL, rotR, rotM, rotM_mat, Matrix.vecHead, Matrix.vecTail]
-    ring
+    ring_nf
 
 lemma projxy_rotRM_eq_rotprojRM (θ φ α : ℝ) : proj_xyL ∘ rotRM θ φ α = rotprojRM θ φ α := by
-  ext v i
-  fin_cases i
-  · simp [proj_xyL, proj_xy_mat, RyL, RzL, rotprojRM, rotRM, rotR, rotM, rotM_mat,
-      Matrix.vecHead, Matrix.vecTail]
-    ring
-  · simp [proj_xyL, proj_xy_mat, RyL, RzL, rotprojRM, rotRM, rotR, rotM, rotM_mat,
-      Matrix.vecHead, Matrix.vecTail]
-    ring
+  ext v i; fin_cases i <;>
+  · simp [proj_xyL, proj_xy_mat, RyL, RzL, rotprojRM, rotRM, rotR, rotM, rotM_mat, Matrix.vecHead, Matrix.vecTail]
+    ring_nf
 
 lemma reduce_identity : reduceL = proj_xyL ∘L RzL (-(π / 2)) := by
   ext v i
@@ -404,10 +396,12 @@ theorem polyhedron_vertex_norm_le_radius {n : ℕ} (S : Finset (E n))
   apply Finset.le_max'
   exact Finset.mem_image_of_mem _ hv
 
-structure GoodPoly : Type where
+structure ApproxGoodPoly : Type where
   vertices : Finset ℝ³
   nonempty : vertices.Nonempty
   nontriv : ∀ v ∈ vertices, ‖v‖ > 0
+
+structure GoodPoly extends ApproxGoodPoly where
   radius_eq_one : polyhedronRadius vertices nonempty = 1
 
 def GoodPoly.hull (poly : GoodPoly) : Set ℝ³ :=

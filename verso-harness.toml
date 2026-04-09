@@ -1,0 +1,26 @@
+# Existing in-place retrofit: the blueprint root is `Contents.lean`, while the
+# imported formalization remains vendored directly in this repository.
+package_name = "Contents"
+blueprint_main = "Main"
+chapter_root = "Chapters"
+
+# Canonical TeX source of truth, vendored from jcreed upstream main.
+tex_source_glob = "./blueprint/src/chapters/*.tex"
+
+[lt]
+default_chapters = [
+  "Chapters/Noperthedron.lean",
+  "Chapters/Bounding.lean",
+  "Chapters/Prelims.lean",
+  "Chapters/GlobalTheorem.lean",
+  "Chapters/LocalTheorem.lean",
+  "Chapters/Rational.lean",
+  "Chapters/Computational.lean",
+  "Chapters/Main.lean",
+]
+
+[harness]
+non_port_chapters = [
+  "Chapters/Compatibility.lean",
+  "Chapters/Introduction.lean",
+]

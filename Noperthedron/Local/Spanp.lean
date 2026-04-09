@@ -1,5 +1,5 @@
 import Mathlib.Analysis.InnerProductSpace.PiL2
-import Mathlib.Data.Real.CompleteField
+import Mathlib.Data.Real.Hom
 
 import Noperthedron.EuclideanSpaceNotation
 
@@ -28,14 +28,10 @@ def mat (V : Vec3) : Matrix (Fin 3) (Fin 3) ℝ := fun i j => V j i
 end Vec3
 
 theorem V_apply (i : Fin 3) (V : Vec3) (X : Euc(3)): (V.matᵀ *ᵥ X) i = ⟪V i, X⟫ := by
-  calc
-    (V.matᵀ *ᵥ X) i = (V i).ofLp ⬝ᵥ X.ofLp := by
-      simp [Vec3.mat, Matrix.mulVec, dotProduct]
-    _ = X.ofLp ⬝ᵥ star (V i).ofLp := by
-      simp [dotProduct, Fin.sum_univ_three]
-      ring_nf
-    _ = ⟪V i, X⟫ := by
-      simpa using (EuclideanSpace.inner_eq_star_dotProduct (x := V i) (y := X)).symm
+  simp only [Matrix.mulVec, dotProduct, Fin.sum_univ_three, Fin.isValue, inner,
+    Real.ringHom_apply, Matrix.transpose, Matrix.of_apply, Vec3.mat,
+    RCLike.mul_re, RCLike.re_to_real, RCLike.im_to_real]
+  ring_nf
 
 instance : Coe (Matrix (Fin 1) (Fin 1) ℝ) ℝ where
   coe x := x 0 0
@@ -143,4 +139,4 @@ theorem langles {Y Z : Euc(3)} {V : Vec3} (hYZ : ‖Y‖ = ‖Z‖)
     _     = ‖Z‖^2 := by rw [real_inner_self_eq_norm_sq Z]
 
   rw [show ‖Y‖^2 = ‖Z‖^2 from congrFun (congrArg HPow.hPow hYZ) 2] at hz
-  simp_all only [lt_self_iff_false]
+  exact lt_irrefl _ hz

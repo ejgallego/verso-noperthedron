@@ -78,13 +78,8 @@ lemma convexOn_cos_sqrt : ConvexOn ℝ (Set.Icc 0 (π^2)) (cos ∘ sqrt) := by
     apply DifferentiableOn.congr (f := (-((sin ·) / (2 * ·)) ∘ sqrt))
     · simp only [differentiableOn_neg_iff]
       apply DifferentiableOn.comp (t:=Set.Ioi 0)
-      · apply DifferentiableOn.div
-        · fun_prop
-        · fun_prop
-        · grind
-      · apply DifferentiableOn.sqrt
-        · fun_prop
-        · grind
+      · fun_prop (disch := grind)
+      · fun_prop (disch := grind)
       · apply Set.mapsTo_iff_subset_preimage.mpr
         simp only [Set.subset_def, Set.mem_Ioo, Set.mem_preimage, Set.mem_Ioi, sqrt_pos, and_imp]
         grind
@@ -105,14 +100,10 @@ lemma convexOn_cos_sqrt : ConvexOn ℝ (Set.Icc 0 (π^2)) (cos ∘ sqrt) := by
         rw [add_comm]
         apply sin_sub_mul_cos_nonneg
         simp only [Set.mem_Icc, sqrt_nonneg, sqrt_le_iff, true_and]
-        refine ⟨pi_nonneg, ?_⟩
-        linarith
+        exact ⟨pi_nonneg, x_lt.le⟩
       · simp only [differentiableAt_fun_neg_iff]
-        apply DifferentiableAt.fun_comp'
-        · simp
-        apply DifferentiableAt.sqrt
-        · simp
-        linarith
+        refine DifferentiableAt.fun_comp' _ differentiableAt_sin ?_
+        exact DifferentiableAt.sqrt differentiableAt_fun_id x_pos.ne.symm
       · apply DifferentiableAt.const_mul
         apply DifferentiableAt.sqrt
         · simp
@@ -129,47 +120,30 @@ theorem one_plus_cos_mul_one_plus_cos_ge'' {a b : ℝ} (a_nonneg : 0 ≤ a) (a_l
   calc
     2 * cos √(x ^ 2 + y ^ 2) = _ := by rfl
     _ = 2 * f (x ^ 2 + y ^ 2) := by rfl
-    _ = 2 * f (1/2 * (x - y)^2 + 1/2 * (x + y)^2) := by
-      have hxy : x ^ 2 + y ^ 2 = x ^ 2 * (1 : ℝ) + y ^ 2 * (1 : ℝ) := by
-        ring
-      have hxy' : x ^ 2 * (1 : ℝ) + y ^ 2 * (1 : ℝ) = 1/2 * (x - y)^2 + 1/2 * (x + y)^2 := by
-        ring
-      rw [hxy, hxy']
+    _ = 2 * f (1/2 * (x - y)^2 + 1/2 * (x + y)^2) := by ring_nf
     _ ≤ 2 * (1/2 * f ((x - y)^2) + 1/2 * f ((x + y)^2)) := by
       subst ha hb
       simp only [mul_le_mul_iff_right₀, Nat.ofNat_pos]
       apply convexOn_cos_sqrt.2
-      · simp
+      · rw [Set.mem_Icc]
         constructor
         · positivity
         · apply sq_le_sq.mpr
-          field_simp
-          simp only [abs_div, Nat.abs_ofNat]
-          field_simp
-          apply le_of_lt
-          calc
-            |a - b| = _ := by rfl
-            _ ≤ |a| + |b| := by apply abs_sub
-            _ ≤ 2 * 3 := by (repeat rw [abs_of_nonneg]) <;> linarith
-            _ < 2 * π := by simp [pi_gt_three]
-            _ = 2 * |π| := by rw [abs_of_nonneg] ; positivity
-      · simp
+          grw [abs_sub]
+          repeat rw [abs_of_nonneg (by positivity)]
+          grw [a_le, b_le, ← pi_gt_three]
+          norm_num
+      · rw [Set.mem_Icc]
         constructor
         · positivity
         · apply sq_le_sq.mpr
-          repeat rw [abs_of_nonneg]
-          · field_simp
-            apply le_of_lt
-            calc
-              a + b = _ := by rfl
-              _ ≤ 2 * 3 := by linarith
-              _ < 2 * π := by simp [pi_gt_three]
-          · positivity
-          · positivity
+          repeat rw [abs_of_nonneg (by positivity)]
+          grw [a_le, b_le, ← pi_gt_three]
+          norm_num
       · positivity
       · positivity
-      · ring
-    _ = f ((x - y)^2) + f ((x + y)^2) := by field_simp
+      · norm_num
+    _ = f ((x - y)^2) + f ((x + y)^2) := by ring
     _ = cos √((x - y)^2) + cos √((x + y)^2) := by simp [f]
     _ = cos |x - y| + cos |x + y| := by simp [sqrt_sq_eq_abs]
     _ = cos (x - y) + cos (x + y) := by simp

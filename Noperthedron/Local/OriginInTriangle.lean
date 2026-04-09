@@ -1,4 +1,4 @@
-import Mathlib.Data.Real.CompleteField
+import Mathlib.Data.Real.Hom
 import Mathlib.Analysis.InnerProductSpace.PiL2
 
 import Noperthedron.Basic
@@ -19,14 +19,11 @@ noncomputable def det2 (u v : EuclideanSpace ℝ (Fin 2)) : ℝ := u 0 * v 1 - u
 Relate determinant to inner product with rotated vector.
 -/
 lemma det2_eq_inner_rot (u v : EuclideanSpace ℝ (Fin 2)) : det2 u v = ⟪rotR (π/2) u, v⟫ := by
+  -- By definition of determinant, we know that
   simp only [det2, Fin.isValue, rotR, rotR_mat, AddChar.coe_mk, Real.cos_pi_div_two,
     Real.sin_pi_div_two, LinearMap.coe_toContinuousLinearMap']
-  have hinner :
-      ⟪(Matrix.toEuclideanLin !![0, -1; 1, 0]) u, v⟫ =
-        v.ofLp ⬝ᵥ star ((Matrix.toEuclideanLin !![0, -1; 1, 0] u).ofLp) := by
-    simpa using
-      (EuclideanSpace.inner_eq_star_dotProduct (x := (Matrix.toEuclideanLin !![0, -1; 1, 0]) u) (y := v))
-  rw [hinner]
+  set_option backward.isDefEq.respectTransparency false in
+  rw [EuclideanSpace.inner_eq_star_dotProduct]
   simp only [Fin.isValue, Matrix.ofLp_toLpLin, Matrix.toLin'_apply, Matrix.cons_mulVec,
     Matrix.cons_dotProduct, zero_mul, neg_mul, one_mul, Matrix.dotProduct_of_isEmpty, add_zero,
     zero_add, Matrix.empty_mulVec, star_trivial, Matrix.dotProduct_cons, mul_neg]
@@ -41,7 +38,7 @@ lemma det2_identity (A B C : EuclideanSpace ℝ (Fin 2)) :
   fin_cases i
   · simp only [det2, Fin.isValue, Fin.zero_eta, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul,
       PiLp.zero_apply]
-    linarith
+    ring
   · simp only [det2, Fin.isValue, Fin.mk_one, PiLp.add_apply, PiLp.smul_apply, smul_eq_mul,
       PiLp.zero_apply]
     ring

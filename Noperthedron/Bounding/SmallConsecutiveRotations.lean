@@ -1,3 +1,4 @@
+import Mathlib.LinearAlgebra.Trace
 import Noperthedron.Basic
 import Noperthedron.Bounding.OpNorm
 import Noperthedron.Bounding.RaRa
@@ -83,11 +84,8 @@ namespace PreferComp
   variable [AddCommMonoid A] [Module R A] [TopologicalSpace A]
   variable [AddCommMonoid B] [Module R B] [TopologicalSpace B]
   variable [AddCommMonoid C] [Module R C] [TopologicalSpace C]
-  def mul_eq_comp {f g : A →L[R] A} : g * f = g ∘L f := by rfl
   @[simp] def comp_image S (g : B →L[R] C) (f : A →L[R] B) : ⇑(g ∘L f) '' S = ⇑g '' (⇑f '' S) := by ext p; simp
 end PreferComp
-
-open PreferComp
 
 theorem lemma12_2a {d d' : Fin 3} {α β : ℝ} (dne : d ≠ d') :
     ‖(rot3 d (2 * α)) ∘L (rot3 d' (2 * β)) - (rot3 d α) ∘L (rot3 d' β)‖  =
@@ -95,7 +93,7 @@ theorem lemma12_2a {d d' : Fin 3} {α β : ℝ} (dne : d ≠ d') :
   fin_cases d, d' <;> {
     try contradiction
     try simp only [rot3]
-    try repeat rw [two_mul, AddChar.map_add_eq_mul, mul_eq_comp]
+    try repeat rw [two_mul, AddChar.map_add_eq_mul, ContinuousLinearMap.mul_def]
   }
 
 theorem lemma12_2 {d d' : Fin 3} {α β : ℝ} :
@@ -177,8 +175,7 @@ theorem norm_rot3_comp_rot3_sq {d d' : Fin 3} {α β : ℝ} (h : d ≠ d') :
   have h_norm_sq : ‖RzL γ - 1‖^2 = 2 * (1 - Real.cos γ) := by
     have h_norm : ‖RzL γ - 1‖ = 2 * |Real.sin (γ / 2)| := by
       have := @Bounding.dist_rot3 2 γ 0; aesop
-    rw [h_norm, mul_pow, sq_abs, Real.sin_sq, Real.cos_sq]
-    ring_nf
+    rw [h_norm, mul_pow, sq_abs, Real.sin_sq, Real.cos_sq]; ring_nf
   have h_trace : tr (rot3 d α ∘L rot3 d' β) = 1 + 2 * Real.cos γ := by
     convert tr_RzL using 1
     convert LinearMap.trace_conj' _ _ using 2; aesop
@@ -199,8 +196,7 @@ lemma two_mul_one_sub_cos_le (x : ℝ) : 2 * (1 - Real.cos x) ≤ x^2 := by
 lemma two_mul_one_sub_cos_eq_imp {x : ℝ} (hx : 2 * (1 - Real.cos x) = x^2) : x = 0 := by
   by_contra hx_zero
   have h_cos_sq : 1 - Real.cos x = 2 * Real.sin (x / 2) ^ 2 := by
-    rw [Real.sin_sq, Real.cos_sq]
-    ring_nf
+    rw [Real.sin_sq, Real.cos_sq]; ring_nf
   linarith [sin_sq_lt_sq (div_ne_zero hx_zero two_ne_zero)]
 
 theorem lemma12_equality_iff {d d' : Fin 3} {α β : ℝ} (d_ne_d' : d ≠ d') :

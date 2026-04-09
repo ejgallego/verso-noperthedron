@@ -37,7 +37,7 @@ namespace RationalApprox.LocalTheorem
 If we have a triangle `P` in `poly`, yield the corresponding
 triangle in `poly_` which κ-approximates P.
 -/
-def transportTri {poly poly_ : GoodPoly} {P : Triangle}
+def transportTri {poly : GoodPoly} {poly_ : ApproxGoodPoly} {P : Triangle}
     (hP : ∀ i, P i ∈ poly.vertices)
     (hpoly : κApproxPoly poly.vertices poly_.vertices) : Triangle :=
   fun i => hpoly.bijection ⟨P i, hP i⟩
@@ -53,7 +53,7 @@ def BoundRℚ (r ε : ℝ) (p : Pose) (Q : Triangle) (sl : LowerSqrt) : Prop :=
 /--
 [SY25] Theorem 48 "The Rational Local Theorem"
 -/
-theorem rational_local (poly poly_ : GoodPoly)
+theorem rational_local (poly : GoodPoly) (poly_ : ApproxGoodPoly)
     (hpoly : κApproxPoly poly.vertices poly_.vertices)
     (P Q : Triangle)
     (cong_tri : P.Congruent Q)
@@ -216,7 +216,7 @@ theorem rational_local (poly poly_ : GoodPoly)
       have h_sub_le : 2 * ε * (‖Q_ i - v_‖ + 2 * κ) * (√2 + ε) ≤
           2 * ε * (su.norm (Q_ i - v_) + 2 * κ) * (√2 + ε) := by
         apply mul_le_mul_of_nonneg_right
-        · exact mul_le_mul_of_nonneg_left (by linarith [hsu_ge]) (by linarith)
+        · exact mul_le_mul_of_nonneg_left (by grw [hsu_ge]) (by linarith)
         · positivity
       linarith [hBεℚ_num_pos]
     -- From inner_product_bound_10kappa: |innerA - innerAℚ| ≤ 10κ
@@ -235,7 +235,7 @@ theorem rational_local (poly poly_ : GoodPoly)
     have h_norm_QR : ‖Q i - v‖ ≤ ‖Q_ i - v_‖ + 2 * κ :=
       calc ‖Q i - v‖
         _ ≤ ‖Q_ i - v_‖ + ‖(Q i - v) - (Q_ i - v_)‖ := norm_le_insert' _ _
-        _ ≤ ‖Q_ i - v_‖ + 2 * κ := by linarith [hQv_approx]
+        _ ≤ ‖Q_ i - v_‖ + 2 * κ := by grw [hQv_approx]
     have hA_nonneg : 0 ≤ ⟪(rotM ↑θ₂ ↑φ₂) (Q i), (rotM ↑θ₂ ↑φ₂) (Q i - v)⟫ -
         2 * ε * ‖Q i - v‖ * (√2 + ε) := by
       have h_inner_le : ⟪(rotMℚ ↑θ₂ ↑φ₂) (Q_ i), (rotMℚ ↑θ₂ ↑φ₂) (Q_ i - v_)⟫ - 10 * κ ≤
@@ -267,9 +267,9 @@ theorem rational_local (poly poly_ : GoodPoly)
       have h_sub_le : 2 * ε * (‖Q_ i - v_‖ + 2 * κ) * (√2 + ε) ≤
           2 * ε * (su.norm (Q_ i - v_) + 2 * κ) * (√2 + ε) := by
         apply mul_le_mul_of_nonneg_right
-        · exact mul_le_mul_of_nonneg_left (by linarith [hsu_ge]) (by linarith)
+        · exact mul_le_mul_of_nonneg_left (by grw [hsu_ge]) (by linarith)
         · positivity
-      linarith [h_sub_le]
+      grw [h_sub_le]
     -- bounds_kappa4_A = Bε.lhs (definitionally: rotM ↑θ₂ ↑φ₂ = p_.rotM₂)
     have hA_eq : bounds_kappa4_A (Q i) v θ₂ φ₂ ε = Local.Triangle.Bε.lhs (Q i) v p_ ε := rfl
     -- Combine

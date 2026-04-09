@@ -132,7 +132,6 @@ private lemma second_partial_rotM_inner_eq (S : ℝ³) (w : ℝ²) (x : E 3) (i 
 theorem second_partial_inner_rotM_inner (S : ℝ³) {w : ℝ²} (w_unit : ‖w‖ = 1) (i j : Fin 3) (y : ℝ³) :
     |(fderiv ℝ (fun z => (fderiv ℝ (rotproj_inner_unit S w) z) (EuclideanSpace.single i 1)) y)
       (EuclideanSpace.single j 1)| ≤ 1 := by
-  /- BP_MATHLIB_MIGRATION_ORIGINAL
   change |nth_partial j (nth_partial i (rotproj_inner_unit S w)) y| ≤ 1
   have hf_smooth : ContDiff ℝ 2 (rotproj_inner S w) := by
     change ContDiff ℝ 2 (fun x : ℝ³ => ⟪rotprojRM (x 1) (x 2) (x 0) S, w⟫)
@@ -148,9 +147,6 @@ theorem second_partial_inner_rotM_inner (S : ℝ³) {w : ℝ²} (w_unit : ‖w�
         (Differentiable.rotproj_inner S w) hg_diff
   obtain ⟨A, hAnorm, hAeq⟩ := second_partial_rotM_inner_eq S w y j i
   simpa [hscale, hAeq] using inner_bound_helper A S w w_unit hAnorm
-  -/
-  -- BP_MATHLIB_MIGRATION: blocked by `fun_prop` regression on `inner` smoothness goals.
-  sorry
 
 /- [SY25] Lemma 19 -/
 theorem rotation_partials_bounded (S : ℝ³) {w : ℝ²} (w_unit : ‖w‖ = 1) :

@@ -93,6 +93,29 @@ $$`
 `
 :::
 
+```tex
+We define three points $C_1,C_2,C_3\in \mathbb{Q}^3$.
+\[
+    C_1\coloneqq
+        \frac{1}{259375205}
+        \begin{pmatrix}
+        {152024884} \\ 0 \\ {210152163}
+        \end{pmatrix},
+\qquad
+    C_2\coloneqq \frac{1}{10^{10}}
+        \begin{pmatrix}
+        6632738028 \\ 6106948881 \\ 3980949609
+        \end{pmatrix},
+\]
+\[
+    C_3\coloneqq
+        \frac{1}{10^{10}}
+        \begin{pmatrix}
+        8193990033 \\ 5298215096 \\ 1230614493
+        \end{pmatrix}.
+\]
+```
+
 ```lean "def:noperthedron_main"
 def C1 : Fin 3 → ℚ := (1/259375205) * ![152024884, 0, 210152163]
 def C2 : Fin 3 → ℚ := (1/10^10) * ![6632738028, 6106948881, 3980949609]
@@ -108,17 +131,35 @@ noncomputable
 def C3R : EuclideanSpace ℝ (Fin 3) := WithLp.toLp 2 (fun i => C3 i)
 ```
 
-:::lemma_ "c1_c2_c3_norms" (parent := "nopert_radius")
+:::lemma_ "c1_c2_c3_norms" (lean := "Nopert.c1_norm_one,Nopert.c2_norm_bound,Nopert.c3_norm_bound,Nopert.C15") (parent := "nopert_radius")
 $`\| C_1 \| = 1`,
 $`{98 \over 100} < \| C_2 \| < {99 \over 100}`, and
 $`{98 \over 100} < \| C_3 \| < {99 \over 100}`.
 :::
 
+```tex
+\begin{lemma}
+\label{c1_c2_c3_norms}
+\lean{Nopert.c1_norm_one, Nopert.c2_norm_bound, Nopert.c3_norm_bound, Nopert.C15}
+\leanok
+$\| C_1 \| = 1$,
+${98 \over 100} < \| C_2 \| < {99 \over 100}$, and
+${98 \over 100} < \| C_3 \| < {99 \over 100}$.
+\end{lemma}
+```
+
 :::proof "c1_c2_c3_norms"
 Trivial arithmetic.
 :::
 
-```lean "c1_c2_c3_norms"
+```tex
+\begin{proof}
+\leanok
+Trivial arithmetic.
+\end{proof}
+```
+
+```lean "code:c1_c2_c3_norms"
 
 -- expose: {NopertInline.c1_norm_one, NopertInline.c2_norm_bound, NopertInline.c3_norm_bound, NopertInline.C15}
 
@@ -193,16 +234,36 @@ lemma C15_pres_norm (pt v : ℝ³) (hv : v ∈ C15 pt) : ‖v‖ = ‖pt‖ := b
 end NopertInline
 ```
 
-:::lemma_ "lem:radius_noperthedron_one" (parent := "nopert_radius")
+:::lemma_ "lem:radius_noperthedron_one" (lean := "Nopert.noperthedron_radius_one") (parent := "nopert_radius")
 The radius of the Noperthedron is one.
 :::
 
+```tex
+\begin{lemma}
+\label{lem:radius_noperthedron_one}
+\lean{Nopert.noperthedron_radius_one}
+\leanok
+The radius of the Noperthedron is one.
+\end{lemma}
+```
+
 :::proof "lem:radius_noperthedron_one"
 By {uses "c1_c2_c3_norms"}[], {uses "thm:pointsymmetrize_pres_radius"}[],
-{uses "thm:polyhedron_radius_def"}[], and {uses "lemma:half_nopert_verts_norm_le_one"}[].
+{uses "thm:polyhedron_radius_def"}[], and {uses "lemma:half_nopert_verts_norm_le_one"}[],
+namely `c1_c2_c3_norms`, `thm:pointsymmetrize_pres_radius`,
+`thm:polyhedron_radius_def`, and `lemma:half_nopert_verts_norm_le_one`.
 :::
 
-```lean "lem:radius_noperthedron_one"
+```tex
+\begin{proof}
+\leanok
+\uses{c1_c2_c3_norms, thm:pointsymmetrize_pres_radius, thm:polyhedron_radius_def, lemma:half_nopert_verts_norm_le_one}
+By \cref{c1_c2_c3_norms}, \cref{thm:pointsymmetrize_pres_radius}, \cref{thm:polyhedron_radius_def},
+and \cref{lemma:half_nopert_verts_norm_le_one}.
+\end{proof}
+```
+
+```lean "code:lem:radius_noperthedron_one"
 namespace NopertInline
 
 /--
@@ -389,12 +450,47 @@ $$`
         \end{pmatrix}.
 `
 
-Where Steininger and Yurkevich define a 30-element set $`C_{30}`:
+```tex
+Rotations about the $x, y, z$ axes $R_x,R_y,R_z:$  $\mathbb{R}\to \mathbb{R}^{3\times 3}$
+are defined in the usual way:
+    \[
+            R_x(\alpha)\coloneqq
+        \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & \cos\alpha & -\sin\alpha\\
+            0 & \sin\alpha & \cos\alpha
+        \end{pmatrix},
+        \hspace{1cm}
+        R_y(\alpha)\coloneqq
+        \begin{pmatrix}
+            \cos\alpha & 0 & -\sin\alpha\\
+            0 & 1 & 0\\
+            \sin\alpha & 0 & \cos\alpha
+        \end{pmatrix},
+    \]
+    \[
+        R_z(\alpha)\coloneqq
+        \begin{pmatrix}
+            \cos\alpha & -\sin\alpha &0\\
+            \sin\alpha & \cos\alpha &0\\
+            0 & 0 & 1
+        \end{pmatrix}.
+    \]
+```
 
- $$`
+Where Steininger and Yurkevich define a 30-element set $`C_{30}`:
+$$`
     \mathcal{C}_{30} \coloneqq \left\{(-1)^\ell R_z\left(\frac{2\pi k}{15}\right) \colon k=0,\dots,14; \ell=0,1\right\}.
 `
 of rotations, we instead define
+
+```tex
+Where Steininger and Yurkevich define a 30-element set $C_{30}$
+\[
+    \mathcal{C}_{30} \coloneqq \left\{(-1)^\ell R_z\left(\frac{2\pi k}{15}\right) \colon k=0,\dots,14; \ell=0,1\right\}.
+\]
+of rotations, we instead define
+```
 
 :::definition "def:C15" (lean := "Nopert.C15") (parent := "nopert_construction")
 $$`
@@ -402,11 +498,35 @@ $$`
 `
 :::
 
+```tex
+\begin{definition}
+  \label{def:C15}
+  \leanok
+  \lean{Nopert.C15}
+\[
+    \mathcal{C}_{15} \coloneqq \left\{ R_z\left(\frac{2\pi k}{15}\right) \colon k=0,\dots,14 \right\}.
+\]
+\end{definition}
+```
+
 without point-symmetricness "baked in" as it is in $`C_{30}`. It's more convenient for the formalization to apply $`C_{15}` to the points $`C_1, C_2, C_3`, and then point-symmetrize that set afterwards.
+
+```tex
+without point-symmetricness `baked in' as it is in $C_{30}$. It's more convenient for the formalization to apply $C_{15}$ to the points $C_1, C_2, C_3$, and then point-symmetrize that set afterwards.
+```
 
 :::definition "def:pointsymmetric" (lean := "PointSym") (parent := "nopert_construction")
 A set $`S \subseteq \R^3` is _point-symmetric_ if $`x \in S` implies $`-x \in S`.
 :::
+
+```tex
+\begin{definition}
+\label{def:pointsymmetric}
+\lean{PointSym}
+\leanok
+A set $S \subseteq \R^3$ is {\em point-symmetric} if $x \in S$ implies $-x \in S$.
+\end{definition}
+```
 
 :::definition "def:pointsymmetrize" (lean := "pointsymmetrize") (parent := "nopert_construction")
 
@@ -414,11 +534,25 @@ The _pointsymmetrization_ of a collection of vertices $`v_1, \ldots, v_n \in \R^
 is $`v_1, \ldots, v_n, -v_1, \ldots, -v_n`.
 :::
 
+```tex
+\begin{definition}
+\label{def:pointsymmetrize}
+\lean{pointsymmetrize}
+\leanok
+The {\em pointsymmetrization} of a collection of vertices $v_1, \ldots, v_n \in \R^3$
+is $v_1, \ldots, v_n, -v_1, \ldots, -v_n$.
+\end{definition}
+```
+
 We write $`\mathcal{C}_{15} \cdot P = \{c P \,\text{ for } \, c \in \mathcal{C}_{15}\}` for the orbit of $`P` under the action of $`\mathcal{C}_{15}`.
+
+```tex
+We write $\mathcal{C}_{15} \cdot P = \{c P \,\text{ for } \, c \in \mathcal{C}_{15}\}$ for the orbit of $P$ under the action of $\mathcal{C}_{15}$.
+```
 
 :::definition "def:noperthedron" (lean := "halfNopertVerts, nopertVerts, nopert") (parent := "nopert_construction")
 
-Using {uses "def:C15"}[].
+Using {uses "def:pointsymmetrize"}[] and {uses "def:C15"}[].
 
 The Noperthedron is the polyhedron given by the vertex set that is the
 {uses "def:pointsymmetrize"}[pointsymmetrization] of
@@ -427,29 +561,93 @@ $$`
 `
 :::
 
+```tex
+\begin{definition}
+\label{def:noperthedron}
+\lean{halfNopertVerts, nopertVerts, nopert}
+\uses{def:pointsymmetrize,def:C15}
+\leanok
+The Noperthedron is polyhedron given by the vertex set that is the
+pointsymmetrization of
+\[\mathcal{C}_{15} \cdot C_1 \cup \mathcal{C}_{15} \cdot C_2 \cup \mathcal{C}_{15} \cdot C_3\]
+\end{definition}
+```
+
 :::lemma_ "lemma:half_nopert_verts_norm_le_one" (lean := "half_nopert_verts_norm_le_one") (parent := "nopert_radius")
 The norm of any vertex in the prepointsymmetrized version of the Noperthedron is no more than 1.
 :::
+
+```tex
+\begin{lemma}
+\label{lemma:half_nopert_verts_norm_le_one}
+\lean{half_nopert_verts_norm_le_one}
+\leanok
+The norm of any vertex in the prepointsymmetrized version of the Noperthedron is no more than 1.
+\end{lemma}
+```
 
 :::proof "lemma:half_nopert_verts_norm_le_one"
 Evident from definitions.
 :::
 
+```tex
+\begin{proof}
+\leanok
+Evident from definitions.
+\end{proof}
+```
+
 :::lemma_ "lemma:pointsymmetrization_is_pointsym" (lean := "pointsymmetrize_is_pointsym") (parent := "nopert_pointsymmetry")
 The pointsymmetrization of any set is point-symmetric.
 :::
+
+```tex
+\begin{lemma}
+\label{lemma:pointsymmetrization_is_pointsym}
+\lean{pointsymmetrize_is_pointsym}
+\leanok
+The pointsymmetrization of any set is point-symmetric.
+\end{lemma}
+```
 
 :::proof "lemma:pointsymmetrization_is_pointsym"
 Evident from definitions.
 :::
 
+```tex
+\begin{proof}
+\leanok
+Evident from definitions.
+\end{proof}
+```
+
 :::lemma_ "lemma:nopert_point_symmetric" (lean := "nopert_point_symmetric") (parent := "nopert_pointsymmetry")
-The {uses "def:noperthedron"}[noperthedron] is {uses "def:pointsymmetric"}[point-symmetric].
+{uses "def:pointsymmetric"}[] {uses "def:noperthedron"}[]
+
+The noperthedron is point-symmetric.
 :::
+
+```tex
+\begin{lemma}
+\label{lemma:nopert_point_symmetric}
+\lean{nopert_point_symmetric}
+\leanok
+\uses{def:pointsymmetric, def:noperthedron}
+The noperthedron is point-symmetric.
+\end{lemma}
+```
 
 :::proof "lemma:nopert_point_symmetric"
 Follows from {uses "lemma:pointsymmetrization_is_pointsym"}[]
 :::
+
+```tex
+\begin{proof}
+\leanok
+\uses{lemma:pointsymmetrization_is_pointsym}
+Follows from Lemma~\ref{lemma:pointsymmetrization_is_pointsym}.
+\end{proof}
+```
 
 # Refined Rupert's property for the Noperthedron
 
@@ -471,9 +669,34 @@ $$`
 `
 :::
 
+```tex
+\begin{lemma} \label{lem:symmetries}
+\leanok
+\lean{Tightening.lemma7_1,Tightening.lemma7_2,Tightening.lemma7_3}
+Let $\PPP = \NOP$, then for all $\theta, \varphi, \alpha \in \R$, the following three identities hold (as sets):
+\begin{align*}
+    M({\theta+2\pi/15,\varphi})\cdot \PPP &=M(\theta, \phi) \cdot \PPP,\\
+    R(\alpha+\pi)M(\theta, \phi) \cdot \PPP &=R(\alpha)M(\theta, \phi) \cdot \PPP,\\
+    \begin{pmatrix}
+        1&0\\
+        0&-1
+    \end{pmatrix}
+    M(\theta, \phi) \cdot \PPP&=
+    M({\theta+\pi/15,\pi-\varphi}) \cdot \PPP.
+\end{align*}
+\end{lemma}
+```
+
 :::proof "lem:symmetries"
-See {citet polyhedron.without.rupert (kind := lemma) (index := 7)}[].
+See polyhedron.without.rupert, Lemma 7.
 :::
+
+```tex
+\begin{proof}
+\leanok
+See \cite{polyhedron.without.rupert}, Lemma 7.
+\end{proof}
+```
 
 :::corollary "cor:rupert_tightening" (lean := "Tightening.rupert_tightening") (parent := "nopert_rupert_tightening")
 
@@ -489,8 +712,31 @@ $$`
 `
 :::
 
+```tex
+\begin{corollary}
+\label{cor:rupert_tightening}
+\lean{Tightening.rupert_tightening}
+\leanok
+If the noperthedron is Rupert, then there exists a solution with
+\begin{align*}
+\theta_1,\theta_2&\in[0,2\pi/15] \subset [0,0.42], \\
+\varphi_1&\in [0,\pi] \subset [0,3.15],\\
+\varphi_2&\in [0,\pi/2] \subset [0,1.58],\\
+\alpha &\in [-\pi/2,\pi/2] \subset [-1.58,1.58].
+\end{align*}
+\end{corollary}
+```
+
 :::proof "cor:rupert_tightening"
 Using {uses "lem:symmetries"}[].
 
-See {citep polyhedron.without.rupert (kind := lemma) (index := 8)}[].
+See polyhedron.without.rupert, Lemma 8.
 :::
+
+```tex
+\begin{proof}
+\uses{lem:symmetries}
+\leanok
+See \cite{polyhedron.without.rupert}, Lemma 8.
+\end{proof}
+```
