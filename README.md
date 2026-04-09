@@ -1,12 +1,21 @@
 # Verso Noperthedron
 
-[![Blueprint Pages](https://github.com/ejgallego/verso-noperthedron/actions/workflows/pages.yml/badge.svg)](https://github.com/ejgallego/verso-noperthedron/actions/workflows/pages.yml)
+[![Blueprint Pages](https://github.com/ejgallego/verso-noperthedron/actions/workflows/blueprint.yml/badge.svg)](https://github.com/ejgallego/verso-noperthedron/actions/workflows/blueprint.yml)
 
-Standalone Verso Blueprint example project for the Rupert counterexample
-development.
+This repository is the Verso blueprint harness and integration repo for the
+Noperthedron Rupert-counterexample development.
 
-Published site on `main`: <https://ejgallego.github.io/verso-noperthedron/>
-(after the first successful GitHub Pages deployment).
+- Upstream formalization source of truth: `Noperthedron/`
+- Shared harness: `tools/verso-harness/`
+- Harness config: `verso-harness.toml`
+- TeX blueprint source of truth: `blueprint/src/chapters/*.tex`
+
+## Pages
+
+- Public site: <https://ejgallego.github.io/verso-noperthedron/>
+- Workflow: `.github/workflows/blueprint.yml`
+- Local build: `bash ./scripts/ci-pages.sh`
+- Local output: `_out/site/html-multi/index.html`
 
 ## Build
 
@@ -17,18 +26,32 @@ lake build
 ## Generate
 
 ```bash
-lake exe blueprint-gen
+lake exe blueprint-gen --output _out/site
 ```
 
-## CI / Pages
+## Harness Workflow
+
+Use the shared harness docs for retrofit, LT audit, and maintenance:
+
+- `tools/verso-harness/README.md`
+- `tools/verso-harness/references/retrofit.md`
+- `tools/verso-harness/references/maintenance.md`
+- `AGENTS.md`
+
+Common local checks:
 
 ```bash
-./scripts/ci-pages.sh
+python3 tools/verso-harness/scripts/check_harness.py --project-root .
+python3 tools/verso-harness/scripts/check_lt_source_pairs.py --project-root .
+python3 tools/verso-harness/scripts/check_lt_similarity.py --project-root .
+bash ./scripts/ci-pages.sh
 ```
 
-This matches the included GitHub Actions Pages workflow and checks the rendered
-site entry point plus the shared preview manifest under `_out/site/html-multi`.
+## Notes
 
-This repository keeps its committed `VersoBlueprint` dependency pointed at the
-current public `ejgallego/verso-blueprint` mirror. Local maintainers can
-override that dependency ephemerally during testing.
+- Root `lean-toolchain` follows the authoritative upstream formalization line.
+- `lakefile.lean` and `lake-manifest.json` are pinned to the matching
+  `VersoBlueprint` / mathlib dependency graph for that toolchain.
+- Treat `Noperthedron/` as vendored upstream content and prefer syncing from
+  upstream `main` over hand-editing it unless explicit downstream patching is
+  intended.
