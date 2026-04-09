@@ -10,6 +10,9 @@
 - Treat the in-tree `Noperthedron/` directory as a downstream fork that should
   be reconciled against upstream `main`, not as evidence for selecting a
   different upstream branch.
+- Do not hand-edit vendored upstream formalization files under `Noperthedron/`
+  unless the user explicitly asks for a local downstream patch; prefer syncing
+  from upstream `main` and keeping host-owned blueprint work outside that tree.
 - The canonical TeX blueprint source of truth is vendored under
   `./blueprint/src/chapters/*.tex`.
 - Before porting or maintaining blueprint files, read:
