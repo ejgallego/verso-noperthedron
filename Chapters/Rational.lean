@@ -326,10 +326,10 @@ Then:
 
 $$`
 \begin{align}
-| \langle M P, w\rangle - \langle M_{\Q} \widetilde{P}, w\rangle | & \leq 3\kappa, \label{eq:boundskappa1} \\
+| \langle M P, w\rangle - \langle M_{\Q} \widetilde{P}, w\rangle | & \leq 3\kappa \\
 | \langle M^\theta P, w\rangle - \langle M^\theta_{\Q} \widetilde{P}, w\rangle | & \leq 3\kappa,\\
 | \langle M^\phi P, w\rangle - \langle M^\phi_{\Q} \widetilde{P}, w\rangle | & \leq 3\kappa,\\
-| \langle R M P, w\rangle - \langle R_{\Q} M_{\Q} \widetilde{P}, w\rangle | & \leq 4\kappa,\label{eq:boundskappa4} \\
+| \langle R M P, w\rangle - \langle R_{\Q} M_{\Q} \widetilde{P}, w\rangle | & \leq 4\kappa \\
 | \langle R' M P, w\rangle - \langle R'_{\Q} M_{\Q} \widetilde{P}, w\rangle | & \leq 4\kappa,\\
 | \langle R M^\theta P, w\rangle - \langle R_{\Q} M^\theta_{\Q} \widetilde{P}, w\rangle | & \leq 4\kappa,\\
 | \langle R M^\phi P, w\rangle - \langle R_{\Q} M^\phi_{\Q} \widetilde{P}, w\rangle | & \leq 4\kappa.
@@ -577,7 +577,7 @@ See \cite{polyhedron.without.rupert}, Corollary 50.
 ```
 
 :::corollary "lem:boundskappa4" (lean := "RationalApprox.bounds_kappa4") (parent := "rational_local_approx")
-In the setting of Corollary $`\ref{lem:boundskappa3}`$, let $`\sqrt[+]{x}` be an upper square-root function, i.e.,
+In the setting of Lemma 49, let $`\sqrt[+]{x}` be an upper square-root function, i.e.,
 $`\sqrt{x} \leq \sqrt[+]{x}` for all real $`x \geq 0` with rational output on rational input.
 Set $`\|x\|_{+} \coloneqq \sqrt[+]{\|x\|^2}`.
 Set

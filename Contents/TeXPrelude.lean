@@ -5,8 +5,8 @@ import VersoBlueprint
 open Informal
 
 tex_prelude r#"
-% These are defined by KaTeX already
-% \newcommand{\Q}{\mathbb{Q}}
+% KaTeX in the current harness is missing this shorthand.
+\newcommand{\Q}{\mathbb{Q}}
 % \newcommand{\R}{\mathbb{R}}
 % \newcommand{\N}{\mathbb{N}}
 \newcommand{\hull}[1]{\mathsf{Co}(#1)}
