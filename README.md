@@ -5,7 +5,7 @@
 This repository is the Verso blueprint harness and integration repo for the
 Noperthedron Rupert-counterexample development.
 
-- Upstream formalization source of truth: `Noperthedron/`
+- Upstream formalization source of truth: submodule `Noperthedron/`
 - Shared harness: `tools/verso-harness/`
 - Harness config: `verso-harness.toml`
 - TeX blueprint source of truth: `blueprint/src/chapters/*.tex`
@@ -20,12 +20,14 @@ Noperthedron Rupert-counterexample development.
 ## Build
 
 ```bash
+git submodule update --init --recursive
 lake build
 ```
 
 ## Generate
 
 ```bash
+git submodule update --init --recursive
 lake exe blueprint-gen --output _out/site
 ```
 
@@ -52,6 +54,6 @@ bash ./scripts/ci-pages.sh
 - Root `lean-toolchain` follows the authoritative upstream formalization line.
 - `lakefile.lean` and `lake-manifest.json` are pinned to the matching
   `VersoBlueprint` / mathlib dependency graph for that toolchain.
-- Treat `Noperthedron/` as vendored upstream content and prefer syncing from
-  upstream `main` over hand-editing it unless explicit downstream patching is
-  intended.
+- Treat `Noperthedron/` as the upstream-tracking formalization submodule and
+  prefer syncing it from upstream `main` over hand-editing it unless explicit
+  downstream patching is intended.

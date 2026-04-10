@@ -1,5 +1,5 @@
-# Existing in-place retrofit: the blueprint root is `Contents.lean`, while the
-# imported formalization remains vendored directly in this repository.
+# Retrofit layout: the blueprint root is `Contents.lean`, while the imported
+# formalization is tracked as the upstream submodule at `./Noperthedron`.
 package_name = "Contents"
 blueprint_main = "Main"
 formalization_path = "Noperthedron"
@@ -21,6 +21,8 @@ default_chapters = [
 ]
 
 [harness]
+native_warnings = false
+strict_external_code = true
 non_port_chapters = [
   "Chapters/Compatibility.lean",
   "Chapters/Introduction.lean",

@@ -3,16 +3,16 @@
 - This repo uses the local helper at `tools/verso-harness`.
 - Keep a root `verso-harness.toml` checked in and treat it as the source of
   truth for package layout, LT chapter scope, and the TeX source path.
-- This retrofit keeps the formalization in-tree under `Noperthedron/`; unlike a
-  fresh helper consumer, there is no separate formalization submodule here.
+- This retrofit now tracks the formalization as the upstream submodule at
+  `Noperthedron/`.
 - The canonical upstream formalization source of truth is
   `https://github.com/jcreedcmu/Noperthedron` on branch `main`.
-- Treat the in-tree `Noperthedron/` directory as a downstream fork that should
-  be reconciled against upstream `main`, not as evidence for selecting a
-  different upstream branch.
-- Do not hand-edit vendored upstream formalization files under `Noperthedron/`
-  unless the user explicitly asks for a local downstream patch; prefer syncing
-  from upstream `main` and keeping host-owned blueprint work outside that tree.
+- Treat the `Noperthedron/` submodule as tracking upstream `main`, not as
+  evidence for selecting a different upstream branch.
+- Do not hand-edit upstream formalization files under `Noperthedron/` unless
+  the user explicitly asks for a local downstream patch; prefer syncing the
+  submodule from upstream `main` and keeping host-owned blueprint work outside
+  that tree.
 - The canonical TeX blueprint source of truth is vendored under
   `./blueprint/src/chapters/*.tex`.
 - Before porting or maintaining blueprint files, read:
