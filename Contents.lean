@@ -35,7 +35,7 @@ set_option verso.blueprint.trimTeXLabelPrefix true
 
 set_option pp.rawOnError true
 
-#doc (Manual) "Contents" =>
+#doc (Manual) "Noperthedron" =>
 
 %%%
 shortTitle := "Rupert Counterexample"
