@@ -2,7 +2,7 @@ import Lake
 open Lake DSL
 
 require Noperthedron from "./Noperthedron"
-require VersoBlueprint from git "https://github.com/ejgallego/verso-blueprint.git" @ "v4.29.0"
+require VersoBlueprint from git "git@github.com:leanprover/verso-blueprint.git" @ "v4.29.0"
 require mathlib from git "https://github.com/leanprover-community/mathlib4" @ "v4.29.0"
 
 package Contents where
