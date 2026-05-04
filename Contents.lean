@@ -14,8 +14,8 @@ import VersoBlueprint.Commands.Bibliography
 import Contents.TeXPrelude
 import Authors
 import Bibliography
-import Chapters.Introduction
-import Chapters.Compatibility
+import Contents.Introduction
+import Contents.Compatibility
 import Chapters.Noperthedron
 import Chapters.Bounding
 import Chapters.Prelims
@@ -42,7 +42,7 @@ shortTitle := "Rupert Counterexample"
 authors := ["David Renshaw", "Jason Reed"]
 %%%
 
-{include 0 Chapters.Introduction}
+{include 0 Contents.Introduction}
 {include 0 Chapters.Noperthedron}
 {include 0 Chapters.Bounding}
 {include 0 Chapters.Prelims}
