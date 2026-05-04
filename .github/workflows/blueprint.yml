@@ -14,8 +14,9 @@ permissions:
 
 jobs:
   pages:
-    uses: ejgallego/verso-blueprint/.github/workflows/blueprint-pages.yml@v4.29.0
+    uses: leanprover/verso-blueprint/.github/workflows/blueprint-pages.yml@v4.29.0
     with:
       checkout_submodules: true
       harness_enabled: true
       warm_dependency_cache: true
+    secrets: inherit
