@@ -17,6 +17,6 @@ set_option pp.rawOnError true
 Compatibility labels retained outside the direct-port chapter set.
 :::
 
-:::theorem "thm:polyhedron_radius_def" (lean := "polyhedron_radius_iff") (parent := "compat_labels")
+:::theorem "thm:polyhedron_radius_def" (lean := "Polyhedron.radius_iff") (parent := "compat_labels")
 Alias of {uses "thm:polyhedron_radius_iff"}[] used by source-aligned chapter references.
 :::

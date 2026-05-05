@@ -12,6 +12,7 @@ import Bibliography
 import Noperthedron.Final
 
 open Verso.Genre Manual Informal
+open Noperthedron
 
 set_option doc.verso true
 set_option verso.blueprint.trimTeXLabelPrefix true

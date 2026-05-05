@@ -26,6 +26,7 @@ import Bibliography
 open Verso.Genre
 open Verso.Genre.Manual hiding citep citet citehere
 open Informal
+open Noperthedron
 
 -- EJGA: Seems like a good idea for hybrid setups
 set_option doc.verso true
@@ -129,7 +130,7 @@ noncomputable
 def C3R : EuclideanSpace ℝ (Fin 3) := WithLp.toLp 2 (fun i => C3 i)
 ```
 
-:::lemma_ "c1_c2_c3_norms" (lean := "Nopert.c1_norm_one,Nopert.c2_norm_bound,Nopert.c3_norm_bound,Nopert.C15") (parent := "nopert_radius")
+:::lemma_ "c1_c2_c3_norms" (lean := "c1_norm_one,c2_norm_bound,c3_norm_bound") (parent := "nopert_radius")
 $`\| C_1 \| = 1`,
 $`{98 \over 100} < \| C_2 \| < {99 \over 100}`, and
 $`{98 \over 100} < \| C_3 \| < {99 \over 100}`.
@@ -138,7 +139,7 @@ $`{98 \over 100} < \| C_3 \| < {99 \over 100}`.
 ```tex
 \begin{lemma}
 \label{c1_c2_c3_norms}
-\lean{Nopert.c1_norm_one, Nopert.c2_norm_bound, Nopert.c3_norm_bound, Nopert.C15}
+\lean{c1_norm_one, c2_norm_bound, c3_norm_bound}
 \leanok
 $\| C_1 \| = 1$,
 ${98 \over 100} < \| C_2 \| < {99 \over 100}$, and
@@ -232,14 +233,14 @@ lemma C15_pres_norm (pt v : ℝ³) (hv : v ∈ C15 pt) : ‖v‖ = ‖pt‖ := b
 end NopertInline
 ```
 
-:::lemma_ "lem:radius_noperthedron_one" (lean := "Nopert.noperthedron_radius_one") (parent := "nopert_radius")
+:::lemma_ "lem:radius_noperthedron_one" (lean := "exactVertex_radius_one") (parent := "nopert_radius")
 The radius of the Noperthedron is one.
 :::
 
 ```tex
 \begin{lemma}
 \label{lem:radius_noperthedron_one}
-\lean{Nopert.noperthedron_radius_one}
+\lean{exactVertex_radius_one}
 \leanok
 The radius of the Noperthedron is one.
 \end{lemma}
@@ -262,164 +263,9 @@ and \cref{lemma:half_nopert_verts_norm_le_one}.
 ```
 
 ```lean "code:lem:radius_noperthedron_one"
-namespace NopertInline
-
-/--
-Half of the vertices of the noperthedron
--/
-noncomputable
-def halfNopertVerts : Finset ℝ³ :=
-    Nopert.C15 Nopert.C1R ∪
-    Nopert.C15 Nopert.C2R ∪
-    Nopert.C15 Nopert.C3R
-
-lemma half_nopert_verts_nonempty : halfNopertVerts.Nonempty := by
-  apply Finset.Nonempty.inl
-  apply Finset.Nonempty.inl
-  apply Nopert.C15_nonempty
-
-noncomputable
-def halfNopertNorms : Finset ℝ :=
-  halfNopertVerts.image (‖·‖)
-
-lemma half_nopert_norms_nonempty : halfNopertNorms.Nonempty := by
-  simp only [halfNopertNorms, Finset.image_nonempty]
-  exact half_nopert_verts_nonempty
-
-lemma half_nopert_verts_norm_le_one : ∀ v ∈ halfNopertVerts, ‖v‖ ≤ 1 := by
-  intro v hv
-  simp only [halfNopertVerts, Finset.union_assoc, Finset.mem_union] at hv
-  rcases hv with h | h | h
-  · rw [show ‖v‖ = ‖Nopert.C1R‖ from Nopert.C15_pres_norm Nopert.C1R v h, Nopert.c1_norm_one]
-  · rw [show ‖v‖ = ‖Nopert.C2R‖ from Nopert.C15_pres_norm Nopert.C2R v h]
-    exact Nopert.c2_norm_le_one
-  · rw [show ‖v‖ = ‖Nopert.C3R‖ from Nopert.C15_pres_norm Nopert.C3R v h]
-    exact Nopert.c3_norm_le_one
-
-@[simp]
-noncomputable
-def pointsymmetrize (vs : Finset ℝ³) : Finset ℝ³ := vs ∪ vs.image (-·)
-
-lemma pointsymmetrize_mem (vs : Finset ℝ³) (x : ℝ³)  :
-    (x ∈ pointsymmetrize vs) ↔ (x ∈ vs ∨ -x ∈ vs) := by
-  constructor
-  · intro hx
-    simp_all only [pointsymmetrize]
-    let z :=  Finset.mem_union.mp hx
-    simp only [Finset.mem_image] at z
-    match z with
-    | .inl h => left; assumption
-    | .inr ⟨y, ⟨hy, hy'⟩⟩  => rw [← hy']; right; simpa
-  · intro hq
-    simp only [pointsymmetrize, Finset.mem_union, Finset.mem_image]
-    match hq with
-    | .inl h => left; exact h
-    | .inr h => right; use -x; simpa
-
-noncomputable
-def nopertVerts : Finset ℝ³ :=
-  pointsymmetrize halfNopertVerts
-
-/--
-The noperthedron, given as a set of vertices.
--/
-noncomputable
-def nopertVertSet : Set ℝ³ := nopertVerts
-
-lemma nopert_verts_nonempty : nopertVerts.Nonempty := by
-  simp only [nopertVerts]
-  apply Finset.Nonempty.inl
-  apply half_nopert_verts_nonempty
-
-def half_nopert_verts_nontriv : ∀ v ∈ halfNopertVerts, 0 < ‖v‖ := by
-  intro v hv
-  simp_all only [halfNopertVerts, Finset.union_assoc, Finset.mem_union]
-  rcases hv with hv | hv | hv
-  all_goals rw [Nopert.C15_pres_norm _ _ hv]
-  · exact Nopert.c1_norm_one ▸ Real.zero_lt_one
-  · linarith [Nopert.c2_norm_bound.1]
-  · linarith [Nopert.c3_norm_bound.1]
-
-def nopert_verts_nontriv : ∀ v ∈ nopertVerts, 0 < ‖v‖ := by
-  simp only [nopertVerts, pointsymmetrize, Finset.mem_union, Finset.mem_image]
-  intro v hv
-  rcases hv with hv | ⟨a, ha₁, ha₂⟩
-  · exact half_nopert_verts_nontriv v hv
-  · rw [← ha₂]; simp only [norm_neg]; exact half_nopert_verts_nontriv a ha₁
-
-noncomputable
-def nopert : Shape where
-  vertices := nopertVerts
-
-lemma pointsymmetrize_is_pointsym (vs : Finset ℝ³) :
-    PointSym (pointsymmetrize vs : Set ℝ³) := by
-  intro a ha
-  simp only [SetLike.mem_coe]
-  have z :  a ∈ vs ∨ -a ∈ vs :=  pointsymmetrize_mem vs a |>.mp ha
-  have z' : -a ∈ vs ∨ -(-a) ∈ vs := cast (by rw [or_comm, neg_neg]) z
-  exact pointsymmetrize_mem vs (-a) |>.mpr z'
-
-theorem nopert_verts_pointsym : PointSym nopertVertSet :=
-  pointsymmetrize_is_pointsym halfNopertVerts
-
-/--
-The noperthedron is pointsymmetric.
--/
-theorem nopert_point_symmetric : PointSym nopert.hull := by
-  exact hull_preserves_pointsym nopert_verts_pointsym
-
-/--
-The point C1R is in the half-noperthedron
--/
-lemma c1r_in_half_nopert_verts : Nopert.C1R ∈ halfNopertVerts := by
-    simp only [halfNopertVerts]
-    apply Finset.mem_union_left
-    apply Finset.mem_union_left
-    simp only [Nopert.C15, Finset.mem_image, Finset.mem_range]
-    use 0
-    rw [show RzL = ⇑RzC by rfl]
-    simp
-
-/--
-The radius of the half-noperthedron is 1.
--/
-theorem half_nopert_radius_one : polyhedronRadius halfNopertVerts half_nopert_verts_nonempty = 1 := by
-  apply polyhedron_radius_iff halfNopertVerts half_nopert_verts_nonempty |>.mpr
-  exact ⟨Exists.intro Nopert.C1R ⟨c1r_in_half_nopert_verts, Nopert.c1_norm_one⟩, half_nopert_verts_norm_le_one⟩
-
-/--
-Pointsymmetrization preserves the radius of any set
--/
-theorem pointsymmetrize_pres_radius {vs : Finset ℝ³} (vsne : vs.Nonempty) :
-    polyhedronRadius (pointsymmetrize vs) (by simpa) = polyhedronRadius vs vsne := by
-  let r := polyhedronRadius vs vsne
-  let r' := polyhedronRadius (pointsymmetrize vs) (by simpa)
-  have start : (∃ v ∈ vs, ‖v‖ = r) ∧ ∀ v ∈ vs, ‖v‖ ≤ r :=
-    polyhedron_radius_iff vs vsne |>.mp rfl
-  let ⟨ ⟨ v, v_in_vs,  v_norm_r⟩ , rest_le_r⟩ := start
-  suffices finish : (∃ v ∈ (pointsymmetrize vs), ‖v‖ = r) ∧ ∀ v ∈ (pointsymmetrize vs), ‖v‖ ≤ r by
-    exact polyhedron_radius_iff (pointsymmetrize vs) (by simpa) |>.mpr finish
-  constructor
-  · use v;
-    refine ⟨?_, v_norm_r⟩
-    simp only [pointsymmetrize]; apply Finset.mem_union_left; exact v_in_vs
-  · intro v hv
-    rw [pointsymmetrize_mem] at hv
-    match hv with
-    | .inl v_in_vs => apply rest_le_r; assumption
-    | .inr mv_in_vs =>
-      specialize rest_le_r (-v) mv_in_vs
-      rw [norm_neg] at rest_le_r
-      exact rest_le_r
-
-/--
-The radius of the noperthedron is 1.
--/
-theorem Nopert.noperthedron_radius_one : polyhedronRadius nopertVerts nopert_verts_nonempty = 1 := by
-  simp only [nopertVerts, pointsymmetrize_pres_radius half_nopert_verts_nonempty]
-  exact half_nopert_radius_one
-
-end NopertInline
+#check exactVertex_radius_one
+#check exactVertex_norm_le_one
+#check exactPoly_point_symmetric
 ```
 
 Rotations about the $`x, y, z` axes $`R_x,R_y,R_z:`  $`\mathbb{R}\to \mathbb{R}^{3\times 3}`
@@ -490,7 +336,7 @@ Where Steininger and Yurkevich define a 30-element set $C_{30}$
 of rotations, we instead define
 ```
 
-:::definition "def:C15" (lean := "Nopert.C15") (parent := "nopert_construction")
+:::definition "def:C15" (parent := "nopert_construction")
 $$`
     \mathcal{C}_{15} \coloneqq \left\{ R_z\left(\frac{2\pi k}{15}\right) \colon k=0,\dots,14 \right\}.
 `
@@ -526,7 +372,7 @@ A set $S \subseteq \R^3$ is {\em point-symmetric} if $x \in S$ implies $-x \in S
 \end{definition}
 ```
 
-:::definition "def:pointsymmetrize" (lean := "pointsymmetrize") (parent := "nopert_construction")
+:::definition "def:pointsymmetrize" (parent := "nopert_construction")
 
 The _pointsymmetrization_ of a collection of vertices $`v_1, \ldots, v_n \in \R^3`
 is $`v_1, \ldots, v_n, -v_1, \ldots, -v_n`.
@@ -548,7 +394,7 @@ We write $`\mathcal{C}_{15} \cdot P = \{c P \,\text{ for } \, c \in \mathcal{C}_
 We write $\mathcal{C}_{15} \cdot P = \{c P \,\text{ for } \, c \in \mathcal{C}_{15}\}$ for the orbit of $P$ under the action of $\mathcal{C}_{15}$.
 ```
 
-:::definition "def:noperthedron" (lean := "halfNopertVerts, nopertVerts, nopert") (parent := "nopert_construction")
+:::definition "def:noperthedron" (lean := "exactVertex,exactPolyhedron") (parent := "nopert_construction")
 
 Using {uses "def:pointsymmetrize"}[] and {uses "def:C15"}[].
 
@@ -562,7 +408,7 @@ $$`
 ```tex
 \begin{definition}
 \label{def:noperthedron}
-\lean{halfNopertVerts, nopertVerts, nopert}
+\lean{exactVertex, exactPolyhedron}
 \uses{def:pointsymmetrize,def:C15}
 \leanok
 The Noperthedron is polyhedron given by the vertex set that is the
@@ -571,14 +417,14 @@ pointsymmetrization of
 \end{definition}
 ```
 
-:::lemma_ "lemma:half_nopert_verts_norm_le_one" (lean := "half_nopert_verts_norm_le_one") (parent := "nopert_radius")
+:::lemma_ "lemma:half_nopert_verts_norm_le_one" (lean := "exactVertex_norm_le_one") (parent := "nopert_radius")
 The norm of any vertex in the prepointsymmetrized version of the Noperthedron is no more than 1.
 :::
 
 ```tex
 \begin{lemma}
 \label{lemma:half_nopert_verts_norm_le_one}
-\lean{half_nopert_verts_norm_le_one}
+\lean{exactVertex_norm_le_one}
 \leanok
 The norm of any vertex in the prepointsymmetrized version of the Noperthedron is no more than 1.
 \end{lemma}
@@ -595,7 +441,7 @@ Evident from definitions.
 \end{proof}
 ```
 
-:::lemma_ "lemma:pointsymmetrization_is_pointsym" (lean := "pointsymmetrize_is_pointsym") (parent := "nopert_pointsymmetry")
+:::lemma_ "lemma:pointsymmetrization_is_pointsym" (parent := "nopert_pointsymmetry")
 The pointsymmetrization of any set is point-symmetric.
 :::
 
@@ -619,7 +465,7 @@ Evident from definitions.
 \end{proof}
 ```
 
-:::lemma_ "lemma:nopert_point_symmetric" (lean := "nopert_point_symmetric") (parent := "nopert_pointsymmetry")
+:::lemma_ "lemma:nopert_point_symmetric" (lean := "exactPoly_point_symmetric") (parent := "nopert_pointsymmetry")
 {uses "def:pointsymmetric"}[] {uses "def:noperthedron"}[]
 
 The noperthedron is point-symmetric.
@@ -628,7 +474,7 @@ The noperthedron is point-symmetric.
 ```tex
 \begin{lemma}
 \label{lemma:nopert_point_symmetric}
-\lean{nopert_point_symmetric}
+\lean{exactPoly_point_symmetric}
 \leanok
 \uses{def:pointsymmetric, def:noperthedron}
 The noperthedron is point-symmetric.

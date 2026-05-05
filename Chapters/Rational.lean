@@ -15,6 +15,7 @@ import Noperthedron.Local
 open Verso.Genre
 open Verso.Genre.Manual hiding citep citet citehere
 open Informal
+open Noperthedron
 
 set_option doc.verso true
 set_option verso.blueprint.trimTeXLabelPrefix true
