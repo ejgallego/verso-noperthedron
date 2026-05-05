@@ -114,7 +114,7 @@ If a local node in the solution tree is valid, then there is no Rupert solution 
 \end{proof}
 ```
 
-:::theorem "thm:row_valid_imp_not_rupert_ix" (lean := "Solution.Row.valid_imp_not_rupert_ix,Solution.valid_split_imp_no_rupert,Solution.valid_binary_split_imp_no_rupert,Solution.valid_full_split_imp_no_rupert,Solution.valid_param_split_imp_no_rupert") (parent := "computational_table_soundness")
+:::theorem "thm:row_valid_imp_not_rupert_ix" (lean := "Solution.Row.valid_imp_not_rupert_ix,Solution.valid_split_imp_no_rupert,Solution.valid_single_param_split_imp_no_rupert,Solution.valid_full_split_imp_no_rupert,Solution.valid_param_split_imp_no_rupert") (parent := "computational_table_soundness")
 {uses "def:noperthedron"}[]
 
 If we have a valid solution table, and in particular its $`i`th row is valid,
@@ -126,7 +126,7 @@ then there is no Rupert solution of the interval of its $`i`th row.
 \leanok
 \lean{Solution.Row.valid_imp_not_rupert_ix,
 Solution.valid_split_imp_no_rupert,
-Solution.valid_binary_split_imp_no_rupert,
+Solution.valid_single_param_split_imp_no_rupert,
 Solution.valid_full_split_imp_no_rupert,
 Solution.valid_param_split_imp_no_rupert
 }

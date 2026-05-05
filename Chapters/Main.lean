@@ -9,7 +9,7 @@ import VersoManual
 import VersoBlueprint
 import Macros
 import Bibliography
-import Noperthedron.Final
+import Noperthedron.ProofOfMainTheorem
 
 open Verso.Genre Manual Informal
 open Noperthedron
