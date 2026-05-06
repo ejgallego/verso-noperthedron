@@ -9,7 +9,7 @@ import VersoManual
 import VersoBlueprint
 import Macros
 import Bibliography
-import Noperthedron.Final
+import Noperthedron.NoperthedronIsNotRupert
 
 open Verso.Genre Manual Informal
 open Noperthedron

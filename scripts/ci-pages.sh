@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-lake build +Main:deps 2>&1 | python3 scripts/filter_docstring_warnings.py --project-root .
+lake build +Main 2>&1 | python3 scripts/filter_docstring_warnings.py --project-root .
 lake env lean --run Main.lean --output _out/site 2>&1 | python3 scripts/filter_docstring_warnings.py --project-root .
 
 test -f _out/site/html-multi/index.html
