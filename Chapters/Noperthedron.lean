@@ -336,7 +336,7 @@ Where Steininger and Yurkevich define a 30-element set $C_{30}$
 of rotations, we instead define
 ```
 
-:::definition "def:C15" (lean := "Nopert.C15") (parent := "nopert_construction")
+:::definition "def:C15" (lean := "NopertInline.C15") (parent := "nopert_construction")
 $$`
     \mathcal{C}_{15} \coloneqq \left\{ R_z\left(\frac{2\pi k}{15}\right) \colon k=0,\dots,14 \right\}.
 `
@@ -346,7 +346,7 @@ $$`
 \begin{definition}
   \label{def:C15}
   \leanok
-  \lean{Nopert.C15}
+  \lean{NopertInline.C15}
 \[
     \mathcal{C}_{15} \coloneqq \left\{ R_z\left(\frac{2\pi k}{15}\right) \colon k=0,\dots,14 \right\}.
 \]
@@ -372,7 +372,7 @@ A set $S \subseteq \R^3$ is {\em point-symmetric} if $x \in S$ implies $-x \in S
 \end{definition}
 ```
 
-:::definition "def:pointsymmetrize" (lean := "pointsymmetrize") (parent := "nopert_construction")
+:::definition "def:pointsymmetrize" (parent := "nopert_construction")
 
 The _pointsymmetrization_ of a collection of vertices $`v_1, \ldots, v_n \in \R^3`
 is $`v_1, \ldots, v_n, -v_1, \ldots, -v_n`.
@@ -381,7 +381,6 @@ is $`v_1, \ldots, v_n, -v_1, \ldots, -v_n`.
 ```tex
 \begin{definition}
 \label{def:pointsymmetrize}
-\lean{pointsymmetrize}
 \leanok
 The {\em pointsymmetrization} of a collection of vertices $v_1, \ldots, v_n \in \R^3$
 is $v_1, \ldots, v_n, -v_1, \ldots, -v_n$.
@@ -441,14 +440,13 @@ Evident from definitions.
 \end{proof}
 ```
 
-:::lemma_ "lemma:pointsymmetrization_is_pointsym" (lean := "pointsymmetrize_is_pointsym") (parent := "nopert_pointsymmetry")
+:::lemma_ "lemma:pointsymmetrization_is_pointsym" (parent := "nopert_pointsymmetry")
 The pointsymmetrization of any set is point-symmetric.
 :::
 
 ```tex
 \begin{lemma}
 \label{lemma:pointsymmetrization_is_pointsym}
-\lean{pointsymmetrize_is_pointsym}
 \leanok
 The pointsymmetrization of any set is point-symmetric.
 \end{lemma}

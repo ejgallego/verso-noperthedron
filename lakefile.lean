@@ -21,7 +21,7 @@ package Contents where
 
 @[default_target]
 lean_lib Contents where
-  roots := #[`Authors, `Contents, `Chapters, `Bibliography, `Macros, `InformalNames]
+  roots := #[`Authors, `Contents, `Chapters, `Bibliography, `Macros]
 
 @[default_target]
 lean_exe «blueprint-gen» where
