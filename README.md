@@ -2,13 +2,16 @@
 
 [![Blueprint Pages](https://github.com/ejgallego/verso-noperthedron/actions/workflows/blueprint.yml/badge.svg)](https://github.com/ejgallego/verso-noperthedron/actions/workflows/blueprint.yml)
 
-Verso Blueprint port of the Noperthedron Blueprint, with the upstream
-[`Noperthedron`](Noperthedron/) formalization carried locally as a submodule.
+Verso Blueprint port of the Noperthedron Blueprint. The upstream formalization
+is carried locally as the [`Noperthedron`](Noperthedron/) submodule.
 
 Blueprint: <https://ejgallego.github.io/verso-noperthedron/>
+Upstream blueprint repository:
+[jcreedcmu/Noperthedron](https://github.com/jcreedcmu/Noperthedron)
 
 This repo follows the upstream blueprint strictly and translates its source
-markup language to Verso with the help of AI.
+markup language to Verso with the help of AI. Credit for the original blueprint
+and formalization belongs to the upstream project.
 
 ## Build
 
