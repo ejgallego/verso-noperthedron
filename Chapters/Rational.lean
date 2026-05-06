@@ -433,7 +433,7 @@ $$
 \end{proof}
 ```
 
-:::definition "def:ekspanning" (parent := "rational_local_approx")
+:::definition "def:ekspanning" (lean := "Local.Triangle.κSpanning") (parent := "rational_local_approx")
 Let $`\theta, \phi \in \Q \cap [-4,4]` and $`M_{\Q} \coloneqq M_{\Q}(\theta, \phi)`.
 Three points $`\widetilde{P}_1, \widetilde{P}_2, \widetilde{P}_3 \in \Q^3`
 with $`\|\widetilde{P}_1\|, \|\widetilde{P}_2\|, \|\widetilde{P}_3\| \leq 1+\kappa`

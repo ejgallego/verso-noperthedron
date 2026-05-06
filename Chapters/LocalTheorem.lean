@@ -217,7 +217,7 @@ See \cite{polyhedron.without.rupert}, Lemma 26.
 \end{proof}
 ```
 
-:::definition "def:eps-spanning" (parent := "local_spanning") (owner := "david") (tags := "local, spanning, setup") (effort := "medium") (priority := "high")
+:::definition "def:eps-spanning" (lean := "Local.Triangle.Spanning") (parent := "local_spanning") (owner := "david") (tags := "local, spanning, setup") (effort := "medium") (priority := "high")
 Let $`\theta, \varphi \in \mathbb{R}`, $`\varepsilon > 0`, and set $`M := M(\theta, \varphi)`.
 Three points $`P_1, P_2, P_3 \in \mathbb{R}^3` with $`\|P_1\|, \|P_2\|, \|P_3\| \leq 1`
 are called $`\varepsilon`-spanning for $`(\theta, \varphi)` if:

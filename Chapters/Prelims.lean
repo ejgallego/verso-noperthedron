@@ -170,7 +170,7 @@ Immediate from definition.
 \end{proof}
 ```
 
-:::theorem "thm:pointsymmetrize_pres_radius" (parent := "prelims_radius_tools")
+:::theorem "thm:pointsymmetrize_pres_radius" (lean := "pointsymmetrize_pres_radius") (parent := "prelims_radius_tools")
 Pointsymmetrization preserves radius.
 :::
 
