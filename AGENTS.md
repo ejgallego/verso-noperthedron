@@ -37,10 +37,15 @@
   Lean code in blueprint modules.
 - Preserve TeX `\uses{...}` edges as Verso `{uses "..."}[]` references inside
   the relevant node or proof, not just in free prose.
+- Translate TeX `\ref{...}` references to blueprint nodes as `{bpref "..."}[]`
+  when the source is only pointing at the node and should not add a dependency
+  edge. Do not upgrade these to `{uses "..."}[]` unless the source has
+  `\uses{...}` or this repo explicitly wants a graph dependency.
 - When the source block still needs to stay visible, prefer a labeled local
   `tex` block over rewriting it into placeholder prose.
 - Treat metadata cleanup as a second phase of LT rather than as a substitute
-  for LT.
+  for LT. First localize the text with a `tex` witness, then tighten
+  `(lean := "...")`, `{uses "..."}[]`, and `{bpref "..."}[]`.
 - Port coherent chapter blocks rather than scattering small edits across
   unrelated chapters.
 - Keep shared TeX macros in one `TeXPrelude.lean` module.
