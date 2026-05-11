@@ -578,7 +578,7 @@ See \cite{polyhedron.without.rupert}, Corollary 50.
 ```
 
 :::corollary "lem:boundskappa4" (lean := "RationalApprox.bounds_kappa4") (parent := "rational_local_approx")
-In the setting of Lemma 49, let $`\sqrt[+]{x}` be an upper square-root function, i.e.,
+In the setting of {bpref "lem:boundskappa3"}[], let $`\sqrt[+]{x}` be an upper square-root function, i.e.,
 $`\sqrt{x} \leq \sqrt[+]{x}` for all real $`x \geq 0` with rational output on rational input.
 Set $`\|x\|_{+} \coloneqq \sqrt[+]{\|x\|^2}`.
 Set

@@ -247,10 +247,11 @@ The radius of the Noperthedron is one.
 ```
 
 :::proof "lem:radius_noperthedron_one"
-By {uses "c1_c2_c3_norms"}[], {uses "thm:pointsymmetrize_pres_radius"}[],
-{uses "thm:polyhedron_radius_def"}[], and {uses "lemma:half_nopert_verts_norm_le_one"}[],
-namely `c1_c2_c3_norms`, `thm:pointsymmetrize_pres_radius`,
-`thm:polyhedron_radius_def`, and `lemma:half_nopert_verts_norm_le_one`.
+{uses "c1_c2_c3_norms"}[] {uses "thm:pointsymmetrize_pres_radius"}[]
+{uses "thm:polyhedron_radius_def"}[] {uses "lemma:half_nopert_verts_norm_le_one"}[]
+
+By {bpref "c1_c2_c3_norms"}[], {bpref "thm:pointsymmetrize_pres_radius"}[],
+{bpref "thm:polyhedron_radius_def"}[], and {bpref "lemma:half_nopert_verts_norm_le_one"}[].
 :::
 
 ```tex

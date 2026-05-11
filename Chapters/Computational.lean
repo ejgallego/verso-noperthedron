@@ -176,7 +176,7 @@ If we have a valid solution table, then there is no Rupert solution of the inter
 :::proof "thm:row_valid_imp_not_rupert"
 {uses "thm:row_valid_imp_not_rupert_ix"}[]
 
-Immediate special case of {uses "thm:row_valid_imp_not_rupert_ix"}[this theorem].
+Immediate special case of {bpref "thm:row_valid_imp_not_rupert_ix"}[].
 :::
 
 ```tex
