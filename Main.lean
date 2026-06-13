@@ -119,7 +119,7 @@ private def checkInlinePreviewTemplateDedup : ExtraStep := fun mode logError cfg
   | .single => pure ()
 
 def main (args : List String) : IO UInt32 :=
-  Informal.PreviewManifest.manualMainWithSharedPreviewManifest
+  Informal.PreviewManifest.manualMainWithPreviewData
     (%doc Contents)
     args
     (extensionImpls := by exact extension_impls%)
