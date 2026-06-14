@@ -15,7 +15,7 @@
    "type": "git",
    "subDir": null,
    "scope": "",
-   "rev": "1fc02353d0bafe351f697c1dee10be60cae3e155",
+   "rev": "c01101612dfbccc3ab8785434d6ccd655f8f53dc",
    "name": "VersoBlueprint",
    "manifestFile": "lake-manifest.json",
    "inputRev": "v4.30.0",
