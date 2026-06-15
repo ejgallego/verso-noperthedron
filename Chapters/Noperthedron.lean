@@ -246,9 +246,7 @@ The radius of the Noperthedron is one.
 \end{lemma}
 ```
 
-:::proof "lem:radius_noperthedron_one"
-{uses "c1_c2_c3_norms"}[] {uses "thm:pointsymmetrize_pres_radius"}[]
-{uses "thm:polyhedron_radius_def"}[] {uses "lemma:half_nopert_verts_norm_le_one"}[]
+:::proof "lem:radius_noperthedron_one" (uses := "c1_c2_c3_norms, thm:pointsymmetrize_pres_radius, thm:polyhedron_radius_def, lemma:half_nopert_verts_norm_le_one")
 
 By {bpref "c1_c2_c3_norms"}[], {bpref "thm:pointsymmetrize_pres_radius"}[],
 {bpref "thm:polyhedron_radius_def"}[], and {bpref "lemma:half_nopert_verts_norm_le_one"}[].
@@ -394,9 +392,8 @@ We write $`\mathcal{C}_{15} \cdot P = \{c P \,\text{ for } \, c \in \mathcal{C}_
 We write $\mathcal{C}_{15} \cdot P = \{c P \,\text{ for } \, c \in \mathcal{C}_{15}\}$ for the orbit of $P$ under the action of $\mathcal{C}_{15}$.
 ```
 
-:::definition "def:noperthedron" (lean := "exactVertex,exactPolyhedron") (parent := "nopert_construction")
+:::definition "def:noperthedron" (lean := "exactVertex,exactPolyhedron") (parent := "nopert_construction") (uses := "def:pointsymmetrize, def:C15")
 
-Using {uses "def:pointsymmetrize"}[] and {uses "def:C15"}[].
 
 The Noperthedron is the polyhedron given by the vertex set that is the
 {uses "def:pointsymmetrize"}[pointsymmetrization] of
@@ -464,8 +461,7 @@ Evident from definitions.
 \end{proof}
 ```
 
-:::lemma_ "lemma:nopert_point_symmetric" (lean := "exactPoly_point_symmetric") (parent := "nopert_pointsymmetry")
-{uses "def:pointsymmetric"}[] {uses "def:noperthedron"}[]
+:::lemma_ "lemma:nopert_point_symmetric" (lean := "exactPoly_point_symmetric") (parent := "nopert_pointsymmetry") (uses := "def:pointsymmetric, def:noperthedron")
 
 The noperthedron is point-symmetric.
 :::
@@ -570,8 +566,7 @@ If the noperthedron is Rupert, then there exists a solution with
 \end{corollary}
 ```
 
-:::proof "cor:rupert_tightening"
-Using {uses "lem:symmetries"}[].
+:::proof "cor:rupert_tightening" (uses := "lem:symmetries")
 
 See polyhedron.without.rupert, Lemma 8.
 :::

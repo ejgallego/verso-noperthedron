@@ -177,8 +177,7 @@ with equality only for $\alpha = \beta = 0$.
 \end{lemma}
 ```
 
-:::proof "lem:RxRy_wlog"
-Using {uses "lem:jensen"}[] and {uses "lem:RaRa"}[].
+:::proof "lem:RxRy_wlog" (uses := "lem:jensen, lem:RaRa")
 See polyhedron.without.rupert, Lemma 12.
 :::
 
@@ -214,8 +213,7 @@ with equality only for $\alpha = \beta = 0$.
 \end{lemma}
 ```
 
-:::proof "lem:RxRy"
-Using {uses "lem:RxRy_wlog"}[].
+:::proof "lem:RxRy" (uses := "lem:RxRy_wlog")
 See polyhedron.without.rupert, Lemma 12.
 :::
 
@@ -251,8 +249,7 @@ $\|M(\theta, \phi)-M(\thetab,\phib)\|, \|X({\theta, \varphi})-X(\thetab,\phib)\|
 \end{lemma}
 ```
 
-:::proof "lem:sqrt2"
-Using {uses "lem:RxRy"}[].
+:::proof "lem:sqrt2" (uses := "lem:RxRy")
 See polyhedron.without.rupert, Lemma 13.
 :::
 
@@ -305,8 +302,7 @@ $`\langle X(\theta, \phi),P \rangle>0`.
 \end{lemma}
 ```
 
-:::proof "lem:XPgt0"
-Using {uses "lem:sqrt2"}[].
+:::proof "lem:XPgt0" (uses := "lem:sqrt2")
 See polyhedron.without.rupert, Lemma 14.
 :::
 
@@ -351,8 +347,7 @@ $`\| M(\theta,\phi) P \| > r`.
 \end{lemma}
 ```
 
-:::proof "lem:MPgtr"
-Using {uses "lem:sqrt2"}[].
+:::proof "lem:MPgtr" (uses := "lem:sqrt2")
 See polyhedron.without.rupert, Lemma 15.
 Corrigendum: the triangle inquality only implies greater than *or equal to*.
 :::
@@ -389,8 +384,7 @@ $`\|R(\alpha) M(\theta, \phi)-R(\alphab)M(\thetab,\phib)\| < \sqrt{5} \varepsilo
 \end{lemma}
 ```
 
-:::proof "lem:sqrt5"
-Using {uses "lem:sqrt2"}[] and {uses "lem:RxRy"}[].
+:::proof "lem:sqrt5" (uses := "lem:sqrt2, lem:RxRy")
 See polyhedron.without.rupert, Lemma 16.
 :::
 

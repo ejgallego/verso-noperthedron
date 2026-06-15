@@ -182,8 +182,7 @@ Pointsymmetrization preserves radius.
 \end{theorem}
 ```
 
-:::proof "thm:pointsymmetrize_pres_radius"
-{uses "thm:polyhedron_radius_iff"}[]
+:::proof "thm:pointsymmetrize_pres_radius" (uses := "thm:polyhedron_radius_iff")
 
 Because the reflection of a point about the origin preserves its norm.
 :::

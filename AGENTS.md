@@ -36,7 +36,7 @@
 - Prefer `(lean := "...")` links to real declarations rather than duplicating
   Lean code in blueprint modules.
 - Preserve TeX `\uses{...}` edges as Verso dependency metadata on the relevant
-  node or proof. Prefer block options such as `(uses := ["foo", "bar"])`; use
+  node or proof. Prefer block options such as `(uses := "foo, bar")`; use
   inline `{uses "foo"}[]` only when the source reference is naturally part of
   the translated prose.
 - Translate TeX `\ref{...}` references to blueprint nodes as inline

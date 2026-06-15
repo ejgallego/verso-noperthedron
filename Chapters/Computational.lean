@@ -81,8 +81,7 @@ If a global node in the solution tree is valid, then there is no Rupert solution
 \end{theorem}
 ```
 
-:::proof "thm:solution_global"
-{uses "thm:global_rational"}[]
+:::proof "thm:solution_global" (uses := "thm:global_rational")
 :::
 
 ```tex
@@ -104,8 +103,7 @@ If a local node in the solution tree is valid, then there is no Rupert solution 
 \end{theorem}
 ```
 
-:::proof "thm:solution_local"
-{uses "thm:local_rational"}[] {uses "lem:radius_noperthedron_one"}[] {uses "lem:congruent"}[]
+:::proof "thm:solution_local" (uses := "thm:local_rational, lem:radius_noperthedron_one, lem:congruent")
 :::
 
 ```tex
@@ -114,8 +112,7 @@ If a local node in the solution tree is valid, then there is no Rupert solution 
 \end{proof}
 ```
 
-:::theorem "thm:row_valid_imp_not_rupert_ix" (lean := "Solution.Row.valid_imp_not_rupert_ix,Solution.valid_split_imp_no_rupert,Solution.valid_single_param_split_imp_no_rupert,Solution.valid_full_split_imp_no_rupert,Solution.valid_param_split_imp_no_rupert") (parent := "computational_table_soundness")
-{uses "def:noperthedron"}[]
+:::theorem "thm:row_valid_imp_not_rupert_ix" (lean := "Solution.Row.valid_imp_not_rupert_ix,Solution.valid_split_imp_no_rupert,Solution.valid_single_param_split_imp_no_rupert,Solution.valid_full_split_imp_no_rupert,Solution.valid_param_split_imp_no_rupert") (parent := "computational_table_soundness") (uses := "def:noperthedron")
 
 If we have a valid solution table, and in particular its $`i`th row is valid,
 then there is no Rupert solution of the interval of its $`i`th row.
@@ -137,8 +134,7 @@ then there is no Rupert solution of the interval of its $i$th row.
 \end{theorem}
 ```
 
-:::proof "thm:row_valid_imp_not_rupert_ix"
-{uses "thm:solution_global"}[] {uses "thm:solution_local"}[]
+:::proof "thm:row_valid_imp_not_rupert_ix" (uses := "thm:solution_global, thm:solution_local")
 
 By a mutual induction on the number of rows left in the table following the $`i`th.
 This is because validity constrains each row to only refer to later entries.
@@ -157,8 +153,7 @@ the tree, or appeal to Theorem~\ref{thm:solution_global} or Theorem~\ref{thm:sol
 \end{proof}
 ```
 
-:::corollary "thm:row_valid_imp_not_rupert" (lean := "Solution.Row.valid_imp_not_rupert") (parent := "computational_table_soundness")
-{uses "def:noperthedron"}[]
+:::corollary "thm:row_valid_imp_not_rupert" (lean := "Solution.Row.valid_imp_not_rupert") (parent := "computational_table_soundness") (uses := "def:noperthedron")
 
 If we have a valid solution table, then there is no Rupert solution of the interval of its zeroth row.
 :::
@@ -173,8 +168,7 @@ If we have a valid solution table, then there is no Rupert solution of the inter
 \end{corollary}
 ```
 
-:::proof "thm:row_valid_imp_not_rupert"
-{uses "thm:row_valid_imp_not_rupert_ix"}[]
+:::proof "thm:row_valid_imp_not_rupert" (uses := "thm:row_valid_imp_not_rupert_ix")
 
 Immediate special case of {bpref "thm:row_valid_imp_not_rupert_ix"}[].
 :::

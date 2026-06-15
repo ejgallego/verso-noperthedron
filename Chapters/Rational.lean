@@ -70,8 +70,7 @@ $`R_\mathbb{Q}(\alpha), R'_\mathbb{Q}(\alpha), X_\mathbb{Q}(\theta,\phi), M_\mat
 \end{definition}
 ```
 
-:::lemma_ "lem:sin27cos26" (lean := "RationalApprox.sinℚ_approx,RationalApprox.cosℚ_approx") (parent := "rational_trig_approx")
-Using {uses "dfn:sin_cos_approx"}[].
+:::lemma_ "lem:sin27cos26" (lean := "RationalApprox.sinℚ_approx,RationalApprox.cosℚ_approx") (parent := "rational_trig_approx") (uses := "dfn:sin_cos_approx")
 
 $$`
 |\ssin(x)-\sin(x)|\leq \frac{|x|^{27}}{27!}
@@ -121,8 +120,7 @@ $`|\ssin(x)-\sin(x)| \leq \kappa/7` and $`|\scos(x)-\cos(x)|\leq \kappa/7`.
 \end{lemma}
 ```
 
-:::proof "lem:kappa7"
-Using {uses "lem:sin27cos26"}[].
+:::proof "lem:kappa7" (uses := "lem:sin27cos26")
 Straightforward numerical calculation from Lemma {uses "lem:sin27cos26"}[].
 :::
 
@@ -189,8 +187,7 @@ Then for $`x,y\in[-4,4]`, $`\|A(x,y)-A_{\mathbb{Q}}(x,y)\|\leq\kappa`.
 \end{lemma}
 ```
 
-:::proof "lem:dist_le_kappa"
-Using {uses "lem:kappa7"}[] and {uses "lem:A_le_deltamn"}[].
+:::proof "lem:dist_le_kappa" (uses := "lem:kappa7, lem:A_le_deltamn")
 We've replaced the assumption $`a_i(z)\in \{0,1,-1,\pm\sin(z),\pm\cos(z)\}` in
 {citet polyhedron.without.rupert}[]'s Lemma 40 with $`a_i(z)\in [-1,1]`.
 
@@ -269,8 +266,7 @@ RationalApprox.Mφℚ_norm_bounded }
 \end{corollary}
 ```
 
-:::proof "corr:kappa1kappa"
-Using {uses "lem:dist_le_kappa"}[] and {uses "lem:RaRalpha"}[].
+:::proof "corr:kappa1kappa" (uses := "lem:dist_le_kappa, lem:RaRalpha")
 
 The first statement is a direct application of {uses "lem:dist_le_kappa"}[] and the second statement follows immediately after using {uses "lem:RaRalpha"}[] and the triangle inequality.
 The derivative norm bounds follow similarly, using that the operator norms of $`R'`, $`M^\theta`, and $`M^\phi` are at most $`1`.
@@ -364,8 +360,7 @@ RationalApprox.bounds_kappa_RMφ
 \end{lemma}
 ```
 
-:::proof "lem:boundskappa"
-Using {uses "lem:A1AnB1Bn"}[] and {uses "corr:kappa1kappa"}[].
+:::proof "lem:boundskappa" (uses := "lem:A1AnB1Bn, corr:kappa1kappa")
 See polyhedron.without.rupert, Lemma 44.
 :::
 
@@ -422,8 +417,7 @@ $$
 \end{theorem}
 ```
 
-:::proof "thm:global_rational"
-{uses "thm:global"}[] {uses "lem:boundskappa"}[]
+:::proof "thm:global_rational" (uses := "thm:global, lem:boundskappa")
 :::
 
 ```tex
@@ -462,8 +456,7 @@ $$
 \end{definition}
 ```
 
-:::lemma_ "lem:ekspanningespanning" (lean := "RationalApprox.ek_spanning_imp_e_spanning") (parent := "rational_local_approx")
-Using {uses "def:ekspanning"}[].
+:::lemma_ "lem:ekspanningespanning" (lean := "RationalApprox.ek_spanning_imp_e_spanning") (parent := "rational_local_approx") (uses := "def:ekspanning")
 
 Let $`P_1, P_2, P_3 \in \R^3` with $`\|P_i\| \leq 1`
 and $`\widetilde{P}_1, \widetilde{P}_2, \widetilde{P}_3 \in \Q^3`
@@ -482,8 +475,7 @@ then $`P_1, P_2, P_3` are $`\epsilon`-spanning for $`\theta, \phi`.
 \end{lemma}
 ```
 
-:::proof "lem:ekspanningespanning"
-Using {uses "lem:A1AnB1Bn"}[], {uses "lem:eps-spanning"}[], and {uses "corr:kappa1kappa"}[].
+:::proof "lem:ekspanningespanning" (uses := "lem:A1AnB1Bn, lem:eps-spanning, corr:kappa1kappa")
 See polyhedron.without.rupert, Lemma 46.
 :::
 
@@ -522,8 +514,7 @@ RationalApprox.bounds_kappa3_MQ
 \end{lemma}
 ```
 
-:::proof "lem:boundskappa3"
-Using {uses "lem:A1AnB1Bn"}[].
+:::proof "lem:boundskappa3" (uses := "lem:A1AnB1Bn")
 See polyhedron.without.rupert, Lemma 49.
 :::
 
@@ -563,8 +554,7 @@ Note that the rational side uses $`P` directly (not a rational approximation $`\
 \end{corollary}
 ```
 
-:::proof "corr:deltakappa"
-{uses "corr:kappa1kappa"}[] {uses "lem:RaRalpha"}[]
+:::proof "corr:deltakappa" (uses := "corr:kappa1kappa, lem:RaRalpha")
 
 See polyhedron.without.rupert, Corollary 50.
 :::
@@ -615,8 +605,7 @@ Then $`A \geq A_{\mathbb{Q}}`.
 \end{corollary}
 ```
 
-:::proof "lem:boundskappa4"
-{uses "lem:boundskappa3"}[]
+:::proof "lem:boundskappa4" (uses := "lem:boundskappa3")
 
 See polyhedron.without.rupert, Corollary 51.
 :::
@@ -629,8 +618,7 @@ See \cite{polyhedron.without.rupert}, Corollary 51.
 \end{proof}
 ```
 
-:::theorem "thm:local_rational" (lean := "RationalApprox.LocalTheorem.rational_local") (parent := "rational_local_transfer")
-{uses "def:ekspanning"}[]
+:::theorem "thm:local_rational" (lean := "RationalApprox.LocalTheorem.rational_local") (parent := "rational_local_transfer") (uses := "def:ekspanning")
 
 Let $`\PPP` be a polyhedron with radius $`\rho=1` and $`\widetilde{P}_i` be a $`\kappa`-rational approximation of $`P_i \in \PPP`.
 Set $`\widetilde{\PPP} = \{\widetilde{P}_i \text{ for } P_i \in \PPP \}`.
@@ -700,8 +688,7 @@ $$
 \end{theorem}
 ```
 
-:::proof "thm:local_rational"
-{uses "thm:local"}[] {uses "lem:boundskappa3"}[] {uses "lem:boundskappa4"}[] {uses "corr:deltakappa"}[] {uses "lem:ekspanningespanning"}[]
+:::proof "thm:local_rational" (uses := "thm:local, lem:boundskappa3, lem:boundskappa4, corr:deltakappa, lem:ekspanningespanning")
 :::
 
 ```tex

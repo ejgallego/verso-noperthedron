@@ -260,8 +260,7 @@ $$`
 \end{theorem}
 ```
 
-:::proof "thm:global"
-Using {uses "lem:hullscalarprod"}[], {uses "lem:leq1"}[], {uses "lem:n2"}[], and {uses "lem:rotation_derivatives"}[].
+:::proof "thm:global" (uses := "lem:hullscalarprod, lem:leq1, lem:n2, lem:rotation_derivatives")
 See polyhedron.without.rupert, Section 4.2.
 :::
 

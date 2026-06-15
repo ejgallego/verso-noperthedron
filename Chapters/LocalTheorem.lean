@@ -243,8 +243,7 @@ are called $`\varepsilon`-spanning for $`(\theta, \varphi)` if:
 \end{definition}
 ```
 
-:::lemma_ "lem:eps-spanning" (lean := "Local.vecX_spanning") (parent := "local_spanning") (owner := "jason") (tags := "local, spanning, proof") (effort := "medium") (priority := "high")
-Using {uses "def:eps-spanning"}[] and {uses "def:spanp"}[].
+:::lemma_ "lem:eps-spanning" (lean := "Local.vecX_spanning") (parent := "local_spanning") (owner := "jason") (tags := "local, spanning, proof") (effort := "medium") (priority := "high") (uses := "def:eps-spanning, def:spanp")
 
 Let $`P_1, P_2, P_3 \in \mathbb{R}^3` with $`\|P_1\|,\|P_2\|,\|P_3\| \leq 1` be
 $`\epsilon`-spanning for $`(\bar\theta, \bar\phi)` and let
@@ -266,8 +265,7 @@ $`X(\theta, \phi) \in \spanp(P_1, P_2, P_3)`.
 \end{lemma}
 ```
 
-:::proof "lem:eps-spanning"
-Using {uses "lem:scalarprodbars"}[], {uses "lem:origintriangle"}[], and {uses "lem:sqrt2"}[].
+:::proof "lem:eps-spanning" (uses := "lem:scalarprodbars, lem:origintriangle, lem:sqrt2")
 See polyhedron.without.rupert, Lemma 28.
 :::
 
@@ -306,8 +304,7 @@ $`\mathrm{Circ}_{\delta + \sqrt{5} \epsilon}(T)`.
 \end{lemma}
 ```
 
-:::proof "lem:inCirc"
-Using {uses "lem:sqrt2"}[] and {uses "lem:sqrt5"}[].
+:::proof "lem:inCirc" (uses := "lem:sqrt2, lem:sqrt5")
 See polyhedron.without.rupert, Lemma 30.
 :::
 
@@ -342,8 +339,7 @@ it holds that $`\|Q\| > \|A\|`.
 \end{definition}
 ```
 
-:::lemma_ "lem:LMD" (lean := "Local.inner_ge_implies_LMD") (parent := "local_distance_sector")
-Using {uses "def:LMD"}[].
+:::lemma_ "lem:LMD" (lean := "Local.inner_ge_implies_LMD") (parent := "local_distance_sector") (uses := "def:LMD")
 
 Let $`\mathbf{P}` be a convex polygon and $`Q \in \mathbf{P}` a vertex.
 Let $`\overline{Q} \in \mathbb{R}^2` with $`\|Q - \overline{Q}\| < \delta` for some $`\delta>0`.
@@ -417,8 +413,7 @@ $$`
 \end{lemma}
 ```
 
-:::proof "lem:coss"
-Using {uses "lem:absscalar"}[] and {uses "lem:sqrt2"}[].
+:::proof "lem:coss" (uses := "lem:absscalar, lem:sqrt2")
 See polyhedron.without.rupert, Lemma 33.
 :::
 
@@ -545,9 +540,7 @@ $$`
 \end{theorem}
 ```
 
-:::proof "thm:local"
-Using {uses "lem:langles"}[], {uses "lem:XPgt0"}[], {uses "lem:eps-spanning"}[],
-{uses "lem:MPgtr"}[], {uses "lem:inCirc"}[], {uses "lem:coss"}[], {uses "lem:LMD"}[], and {uses "lem:pythagoras"}[].
+:::proof "thm:local" (uses := "lem:langles, lem:XPgt0, lem:eps-spanning, lem:MPgtr, lem:inCirc, lem:coss, lem:LMD, lem:pythagoras")
 See polyhedron.without.rupert, Theorem 36.
 :::
 
