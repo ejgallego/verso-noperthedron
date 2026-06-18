@@ -13,9 +13,9 @@ package Contents where
     ⟨`autoImplicit, false⟩,
     ⟨`relaxedAutoImplicit, false⟩,
     ⟨`maxSynthPendingDepth, .ofNat 3⟩,
-    ⟨`verso.blueprint.math.lint, true⟩,
-    ⟨`verso.blueprint.externalCode.strictResolve, true⟩,
-    ⟨`verso.code.warnLineLength, .ofNat 0⟩
+    ⟨`weak.verso.blueprint.math.lint, true⟩,
+    ⟨`weak.verso.blueprint.externalCode.strictResolve, true⟩,
+    ⟨`weak.verso.code.warnLineLength, .ofNat 0⟩
   ]
 
 @[default_target]

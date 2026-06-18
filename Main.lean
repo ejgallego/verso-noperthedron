@@ -79,16 +79,16 @@ private def isIndexHtml (path : System.FilePath) : Bool :=
   let s := path.toString
   s == "index.html" || s.endsWith "/index.html"
 
-private def checkSharedPreviewManifestMode : ExtraStep := fun mode logError cfg _st _text => do
+private def checkSharedPreviewManifestMode : ExtraStep := fun mode cfg _st _text => do
   match mode with
   | .multi =>
       let htmlRoot := cfg.destination / "html-multi"
       if !(← htmlRoot.pathExists) then
-        logError s!"Shared preview manifest check: output directory not found: {htmlRoot}"
+        Verso.reportError s!"Shared preview manifest check: output directory not found: {htmlRoot}"
       else
         let manifestFile := htmlRoot / "-verso-data" / Informal.PreviewManifest.manifestFilename
         if !(← manifestFile.pathExists) then
-          logError s!"Shared preview manifest check: manifest file not found: {manifestFile}"
+          Verso.reportError s!"Shared preview manifest check: manifest file not found: {manifestFile}"
         let files ← filesBelow htmlRoot
         for rel in files do
           if !isIndexHtml rel then
@@ -96,15 +96,15 @@ private def checkSharedPreviewManifestMode : ExtraStep := fun mode logError cfg 
           let full := htmlRoot / rel
           let html ← IO.FS.readFile full
           if hasSubstr html labelPreviewTemplatePrefix then
-            logError s!"Shared preview manifest mode should strip label preview templates from {rel}"
+            Verso.reportError s!"Shared preview manifest mode should strip label preview templates from {rel}"
   | .single => pure ()
 
-private def checkInlinePreviewTemplateDedup : ExtraStep := fun mode logError cfg _st _text => do
+private def checkInlinePreviewTemplateDedup : ExtraStep := fun mode cfg _st _text => do
   match mode with
   | .multi =>
       let htmlRoot := cfg.destination / "html-multi"
       if !(← htmlRoot.pathExists) then
-        logError s!"Inline preview dedupe check: output directory not found: {htmlRoot}"
+        Verso.reportError s!"Inline preview dedupe check: output directory not found: {htmlRoot}"
       else
         let files ← filesBelow htmlRoot
         for rel in files do
@@ -115,11 +115,11 @@ private def checkInlinePreviewTemplateDedup : ExtraStep := fun mode logError cfg
           let dup := duplicateInlinePreviewTemplateIds html
           if !dup.isEmpty then
             let sample := String.intercalate ", " <| (dup.take 5).map (fun (pid, n) => s!"{pid}×{n}")
-            logError s!"Inline preview template duplicates found in {rel}: {sample}"
+            Verso.reportError s!"Inline preview template duplicates found in {rel}: {sample}"
   | .single => pure ()
 
 def main (args : List String) : IO UInt32 :=
-  Informal.PreviewManifest.manualMainWithPreviewData
+  Informal.PreviewManifest.blueprintMainWithPreviewData
     (%doc Contents)
     args
     (extensionImpls := by exact extension_impls%)

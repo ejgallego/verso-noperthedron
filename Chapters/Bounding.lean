@@ -122,79 +122,6 @@ theorem bp_norm_RzL_sub_RzL_eq {α α_ : ℝ} :
   simpa using Bounding.norm_RzL_sub_RzL_eq (α := α) (α_ := α_)
 ```
 
-:::lemma_ "lem:jensen" (lean := "Bounding.one_plus_cos_mul_one_plus_cos_ge") (parent := "bounding_trig_ineq")
-For all $`a,b \in \mathbb{R}` with $`|a|,|b|\leq 2` the following inequality holds:
-$`(1+\cos(a))(1+\cos(b))\geq 2+2\cos\Big(\sqrt{a^2+b^2}\Big)`,
-with equality only for $`a=0` or $`b=0`.
-:::
-
-```tex
-\begin{lemma} \label{lem:jensen}
-\lean{Bounding.one_plus_cos_mul_one_plus_cos_ge}
-\leanok
-    For all $a,b \in \R$ with $|a|,|b|\leq 2$ the following inequality holds:
-    \[
-        (1+\cos(a))(1+\cos(b))\geq 2+2\cos\Big(\sqrt{a^2+b^2}\Big),
-    \]
-    with equality only for $a=0$ or $b=0$.
-\end{lemma}
-```
-
-:::proof "lem:jensen"
-Use the Jensen inequality. See polyhedron.without.rupert, Lemma 11.
-:::
-
-```tex
-\begin{proof}
-\leanok
-Use the Jensen inequality. See \cite{polyhedron.without.rupert}, Lemma 11.
-\end{proof}
-```
-
-```lean "code:lem:jensen"
-theorem bp_one_plus_cos_mul_one_plus_cos_ge {a b : ℝ} (ha : |a| ≤ 2) (hb : |b| ≤ 2) :
-    2 + 2 * Real.cos √(a ^ 2 + b ^ 2) ≤ (1 + Real.cos a) * (1 + Real.cos b) := by
-  simpa using Bounding.one_plus_cos_mul_one_plus_cos_ge ha hb
-```
-
-:::lemma_ "lem:RxRy_wlog" (lean := "Bounding.norm_RxRy_minus_id_le_wlog") (parent := "bounding_trig_ineq")
-For any $`|\alpha|,|\beta| \le 2` and any distinct coordinate axes
-$`d_1, d_2 \in \{x,y,z\}` one has
-$`\|R_{d_1}(\alpha)R_{d_2}(\beta)-\mathrm{id}\| \leq \sqrt{\alpha^2+\beta^2}`
-with equality only for $`\alpha = \beta = 0`.
-:::
-
-```tex
-\begin{lemma} \label{lem:RxRy_wlog}
-\lean{Bounding.norm_RxRy_minus_id_le_wlog}
-\leanok
-For any $|\alpha|,|\beta| \le 2$ and any distinct coordinate
-axes $d, d' \in \{x,y,z\}$ one has
-\[
-    \|R_d(\alpha)R_{d'}(\beta)-\id\| \leq  \sqrt{\alpha^2+\beta^2}
-\]
-with equality only for $\alpha = \beta = 0$.
-\end{lemma}
-```
-
-:::proof "lem:RxRy_wlog" (uses := "lem:jensen, lem:RaRa")
-See polyhedron.without.rupert, Lemma 12.
-:::
-
-```tex
-\begin{proof}
-\uses{lem:jensen, lem:RaRa}
-\leanok
-See \cite{polyhedron.without.rupert}, Lemma 12.
-\end{proof}
-```
-
-```lean "code:lem:RxRy_wlog"
-theorem bp_norm_RxRy_minus_id_le_wlog {d d' : Fin 3} {α β : ℝ} (hd : d ≠ d') (hα : |α| ≤ 2) (hβ : |β| ≤ 2) :
-    ‖rot3 d α ∘L rot3 d' β - 1‖ ≤ √(α ^ 2 + β ^ 2) := by
-  simpa using Bounding.norm_RxRy_minus_id_le_wlog hd hα hβ
-```
-
 :::lemma_ "lem:RxRy" (lean := "Bounding.lemma12,Bounding.lemma12_equality_iff") (parent := "bounding_trig_ineq")
 For any $`\alpha,\beta\in \mathbb{R}` one has
 $`\|R_x(\alpha)R_y(\beta)-\mathrm{id}\| \leq \sqrt{\alpha^2+\beta^2}`
@@ -213,15 +140,36 @@ with equality only for $\alpha = \beta = 0$.
 \end{lemma}
 ```
 
-:::proof "lem:RxRy" (uses := "lem:RxRy_wlog")
-See polyhedron.without.rupert, Lemma 12.
+:::proof "lem:RxRy"
+The composition $`R_d(\alpha)R_{d'}(\beta)` is a rotation, i.e. conjugate
+to some $`R_z(\gamma)` by an isometry, which gives
+$`\|R_d(\alpha)R_{d'}(\beta)-\mathrm{id}\|^2 = 2(1-\cos\gamma)
+= 3 - \mathrm{tr}(R_d(\alpha)R_{d'}(\beta))
+= 3 - (\cos\alpha + \cos\beta + \cos\alpha\cos\beta)`.
+Writing the right hand side as
+$`2(1-\cos\alpha) + 2(1-\cos\beta) - (1-\cos\alpha)(1-\cos\beta)`
+and using $`2(1-\cos x) \leq x^2` (with equality only at $`x = 0`)
+yields the bound and the equality condition.
+This is a direct route to polyhedron.without.rupert, Lemma 12,
+that avoids the Jensen-inequality argument of Lemma 11 and the
+doubling induction.
 :::
 
 ```tex
 \begin{proof}
 \leanok
-\uses{lem:RxRy_wlog}
-See \cite{polyhedron.without.rupert}, Lemma 12.
+The composition $R_d(\alpha)R_{d'}(\beta)$ is a rotation, i.e.\ conjugate
+to some $R_z(\gamma)$ by an isometry, which gives
+$\|R_d(\alpha)R_{d'}(\beta)-\id\|^2 = 2(1-\cos\gamma)
+= 3 - \tr(R_d(\alpha)R_{d'}(\beta))
+= 3 - (\cos\alpha + \cos\beta + \cos\alpha\cos\beta)$.
+Writing the right hand side as
+$2(1-\cos\alpha) + 2(1-\cos\beta) - (1-\cos\alpha)(1-\cos\beta)$
+and using $2(1-\cos x) \leq x^2$ (with equality only at $x = 0$)
+yields the bound and the equality condition.
+This is a direct route to \cite{polyhedron.without.rupert}, Lemma 12,
+that avoids the Jensen-inequality argument of Lemma 11 and the
+doubling induction.
 \end{proof}
 ```
 
