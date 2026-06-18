@@ -2,8 +2,8 @@ import Lake
 open Lake DSL
 
 require Noperthedron from "./Noperthedron"
-require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint.git" @ "v4.30.0"
-require mathlib from git "https://github.com/leanprover-community/mathlib4" @ "v4.30.0"
+require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint.git" @ "v4.31.0"
+require mathlib from git "https://github.com/leanprover-community/mathlib4" @ "v4.31.0"
 
 package Contents where
   precompileModules := false
@@ -13,10 +13,9 @@ package Contents where
     ⟨`autoImplicit, false⟩,
     ⟨`relaxedAutoImplicit, false⟩,
     ⟨`maxSynthPendingDepth, .ofNat 3⟩,
-    -- Registered from VersoBlueprint, so Lake must pass it weakly.
-    ⟨`weak.verso.blueprint.math.lint, true⟩,
-    ⟨`weak.verso.blueprint.externalCode.strictResolve, true⟩,
-    ⟨`weak.verso.code.warnLineLength, .ofNat 0⟩
+    ⟨`verso.blueprint.math.lint, true⟩,
+    ⟨`verso.blueprint.externalCode.strictResolve, true⟩,
+    ⟨`verso.code.warnLineLength, .ofNat 0⟩
   ]
 
 @[default_target]

@@ -6,6 +6,11 @@ step() {
   printf '\n[ci-pages] %s\n' "$*" >&2
 }
 
+if [ -x scripts/ci-pre-build.sh ]; then
+  step "running pre-build hook"
+  scripts/ci-pre-build.sh
+fi
+
 step "warming dependency cache"
 python3 tools/verso-harness/scripts/ensure_dependency_cache.py --project-root . --warm-cache
 
