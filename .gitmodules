@@ -1,6 +1,6 @@
 [submodule "tools/verso-harness"]
 	path = tools/verso-harness
-	url = git@github.com:ejgallego/leanblueprint-to-verso.git
+	url = https://github.com/ejgallego/leanblueprint-to-verso.git
 [submodule "Noperthedron"]
 	path = Noperthedron
 	url = https://github.com/jcreedcmu/Noperthedron.git
