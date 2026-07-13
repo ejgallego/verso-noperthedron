@@ -9,7 +9,6 @@ import VersoManual
 import VersoBlueprint
 import Bibliography
 import Macros
-import Noperthedron.ComputationalStep
 import Noperthedron.SolutionTable
 
 open Verso.Genre Manual Informal
@@ -30,7 +29,7 @@ Construction of the certified interval solution table.
 Soundness of table rows and propagated non-Rupert certificates.
 :::
 
-:::theorem "thm:exists_solution_table" (lean := "exists_solution_table") (parent := "computational_table_construction")
+:::theorem "thm:exists_solution_table" (parent := "computational_table_construction")
 There exists a valid solution table whose zeroth row covers
 
 $$`
@@ -45,8 +44,6 @@ $$`
 
 ```tex
 \begin{theorem}
-\lean{exists_solution_table}
-\leanok
 \label{thm:exists_solution_table}
 There exists a valid solution table whose zeroth row covers
 \begin{align*}
