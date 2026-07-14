@@ -138,7 +138,7 @@ TODO: informalize proof
 \end{proof}
 ```
 
-:::theorem "thm:polyhedron_radius_iff" (lean := "Polyhedron.radius_iff") (parent := "prelims_radius_tools")
+:::theorem "thm:polyhedron_radius_iff" (parent := "prelims_radius_tools")
 Suppose $`S` is a finite set of points in $`\R^n`.
 The radius of the polyhedron $`S` is $`r` iff
 - there is a vector $`v \in S` with $`\|v\| = r`
@@ -148,8 +148,6 @@ The radius of the polyhedron $`S` is $`r` iff
 ```tex
 \begin{theorem}
 \label{thm:polyhedron_radius_iff}
-\lean{Polyhedron.radius_iff}
-\leanok
 Suppose $S$ is a finite set of points in $\R^n$.
 The radius of the polyhedron $S$ is $r$ iff
 \begin{itemize}

@@ -526,7 +526,7 @@ See \cite{polyhedron.without.rupert}, Lemma 49.
 \end{proof}
 ```
 
-:::corollary "corr:deltakappa" (lean := "RationalApprox.delta_kappa") (parent := "rational_local_approx")
+:::corollary "corr:deltakappa" (parent := "rational_local_approx")
 Let $`P, Q \in \R^3` with $`\|P\|, \|Q\| \leq 1` and
 $`\widetilde{Q}` a $`\kappa`-rational approximation of $`Q`.
 Let $`\alpha, \theta, \phi, \thetab, \phib \in [-4,4]` and set
@@ -543,8 +543,6 @@ Note that the rational side uses $`P` directly (not a rational approximation $`\
 
 ```tex
 \begin{corollary} \label{corr:deltakappa}
-\leanok
-\lean{RationalApprox.delta_kappa}
     Let $P, Q \in \R^3$ with $\|P\|, \|Q\| \leq 1$ and $\widetilde{Q}$ a $\kappa$-rational approximation of $Q$.
     Let $\alpha, \theta, \phi, \thetab, \phib \in [-4,4]$ and set $M = M(\theta, \phi)$, $M_{\Q} = M_{\Q}(\theta, \phi)$, $\overline{M} = M(\thetab, \phib)$, $\overline{M}_{\Q} = M_{\Q}(\thetab, \phib)$. Then
      \[

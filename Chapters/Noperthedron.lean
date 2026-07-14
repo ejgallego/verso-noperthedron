@@ -233,15 +233,13 @@ lemma C15_pres_norm (pt v : ℝ³) (hv : v ∈ C15 pt) : ‖v‖ = ‖pt‖ := b
 end NopertInline
 ```
 
-:::lemma_ "lem:radius_noperthedron_one" (lean := "exactVertex_radius_one") (parent := "nopert_radius")
+:::lemma_ "lem:radius_noperthedron_one" (parent := "nopert_radius")
 The radius of the Noperthedron is one.
 :::
 
 ```tex
 \begin{lemma}
 \label{lem:radius_noperthedron_one}
-\lean{exactVertex_radius_one}
-\leanok
 The radius of the Noperthedron is one.
 \end{lemma}
 ```
@@ -262,7 +260,6 @@ and \cref{lemma:half_nopert_verts_norm_le_one}.
 ```
 
 ```lean "code:lem:radius_noperthedron_one"
-#check exactVertex_radius_one
 #check exactVertex_norm_le_one
 #check exactPoly_point_symmetric
 ```

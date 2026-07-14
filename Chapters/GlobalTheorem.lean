@@ -103,7 +103,7 @@ as required.
 \end{proof}
 ```
 
-:::lemma_ "lem:leq1" (lean := "GlobalTheorem.rotation_partials_bounded") (parent := "global_derivative_bounds")
+:::lemma_ "lem:leq1" (parent := "global_derivative_bounds")
 Let $`S \in \mathbb{R}^3` and $`w \in \mathbb{R}^2` be unit vectors, and set
 $`f(x_1,x_2,x_3) = \langle R(x_3) M(x_1,x_2)S,w \rangle`.
 Then for all $`x_1,x_2,x_3 \in \mathbb{R}` and any $`i,j \in \{1,2,3\}` it holds that
@@ -115,8 +115,6 @@ $$`
 
 ```tex
 \begin{lemma} \label{lem:leq1}
-\lean{GlobalTheorem.rotation_partials_bounded}
-\leanok
     Let $S \in \R^3$ and $w \in \R^2$ be unit vectors and set $f(x_1,x_2,x_3) = \langle R(x_3) M(x_1,x_2)S,w \rangle$. Then for all $x_1,x_2,x_3 \in \R$ and any $i,j \in \{1,2,3\}$ it holds that
     \[
         \left|\frac{\dd^2 f}{\dd x_i \dd x_j}(x_1,x_2,x_3)\right|\leq 1.
@@ -134,7 +132,7 @@ See \cite{polyhedron.without.rupert}, Lemma 19.
 \end{proof}
 ```
 
-:::lemma_ "lem:n2" (lean := "GlobalTheorem.bounded_partials_control_difference") (parent := "global_derivative_bounds")
+:::lemma_ "lem:n2" (parent := "global_derivative_bounds")
 Let $`f:\mathbb{R}^n\to \mathbb{R}` be a $`C^2`-function and
 $`x_1,\dots,x_n,y_1,\dots,y_n \in \mathbb{R}` such that
 $`|x_1-y_1|,\dots,|x_n-y_n|\leq \varepsilon`.
@@ -150,8 +148,6 @@ $$`
 
 ```tex
 \begin{lemma} \label{lem:n2}
-\lean{GlobalTheorem.bounded_partials_control_difference}
-\leanok
     Let $f:\R^n\to \R$ be a $C^2$-function and $x_1,\dots,x_n,y_1,\dots,y_n \in \R$ such that $|x_1-y_1|,\dots,|x_n-y_n|\leq \varepsilon$.
     If
     \(
