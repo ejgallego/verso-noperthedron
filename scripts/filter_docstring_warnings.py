@@ -66,7 +66,7 @@ def main() -> int:
     args = parse_args()
     if effective_docstring_warnings(args):
         for raw_line in sys.stdin:
-            print(raw_line, end="")
+            print(raw_line, end="", flush=True)
         return 0
 
     skip_next_hint = False
@@ -90,7 +90,7 @@ def main() -> int:
             continue
         skip_next_hint = False
         suppress_blank_run = False
-        print(line)
+        print(line, flush=True)
     return 0
 
 
