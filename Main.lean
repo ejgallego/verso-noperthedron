@@ -79,7 +79,8 @@ private def isIndexHtml (path : System.FilePath) : Bool :=
   let s := path.toString
   s == "index.html" || s.endsWith "/index.html"
 
-private def checkSharedPreviewManifestMode : ExtraStep := fun mode cfg _st _text => do
+private def checkSharedPreviewManifestMode : Informal.PreviewManifest.BlueprintExtraStep :=
+    fun mode cfg _st _text => do
   match mode with
   | .multi =>
       let htmlRoot := cfg.destination / "html-multi"
@@ -99,7 +100,8 @@ private def checkSharedPreviewManifestMode : ExtraStep := fun mode cfg _st _text
             Verso.reportError s!"Shared preview manifest mode should strip label preview templates from {rel}"
   | .single => pure ()
 
-private def checkInlinePreviewTemplateDedup : ExtraStep := fun mode cfg _st _text => do
+private def checkInlinePreviewTemplateDedup : Informal.PreviewManifest.BlueprintExtraStep :=
+    fun mode cfg _st _text => do
   match mode with
   | .multi =>
       let htmlRoot := cfg.destination / "html-multi"
