@@ -487,30 +487,26 @@ See \cite{polyhedron.without.rupert}, Lemma 46.
 \end{proof}
 ```
 
-:::lemma_ "lem:boundskappa3" (lean := "RationalApprox.bounds_kappa3_X,RationalApprox.bounds_kappa3_M,RationalApprox.bounds_kappa3_MQ") (parent := "rational_local_approx")
-Let $`P,Q \in \mathbb{R}^3` with $`\|P\|,\|Q\|\leq 1`,
-and let $`\widetilde{P},\widetilde{Q}` be $`\kappa`-approximations.
-Then, for parameters in $`[-4,4]`,
+:::lemma_ "lem:boundskappa3" (lean := "RationalApprox.bounds_kappa3_X") (parent := "rational_local_approx")
+Let $`P \in \mathbb{R}^3` with $`\|P\| \leq 1` and let $`\widetilde{P}` be a
+$`\kappa`-rational approximation of $`P`. For $`\theta, \phi \in [-4,4]`, set
+$`X = X(\theta, \phi)` and $`X_{\mathbb{Q}} = X_{\mathbb{Q}}(\theta, \phi)`. Then
+$`|\langle X, P \rangle - \langle X_{\mathbb{Q}}, \widetilde{P} \rangle| \leq 3\kappa`.
 
-- $`|\langle X, P \rangle - \langle X_{\mathbb{Q}}, \widetilde{P} \rangle| \leq 3\kappa`
-- $`|\langle MP, MQ \rangle - \langle M_{\mathbb{Q}}\widetilde{P}, M_{\mathbb{Q}}\widetilde{Q} \rangle| \leq 5\kappa`
-- $`|\| M Q \| - \| M_{\mathbb{Q}}\widetilde{Q} \| | \leq 3\kappa`
+The inner-product and norm bounds for $`M` and $`M_{\mathbb{Q}}` from Lemma 49
+of polyhedron.without.rupert are formalized only in the generalized forms used
+by {bpref "lem:boundskappa4"}[].
 :::
 
 ```tex
 \begin{lemma} \label{lem:boundskappa3}
 \leanok
-\lean{
-RationalApprox.bounds_kappa3_X,
-RationalApprox.bounds_kappa3_M,
-RationalApprox.bounds_kappa3_MQ
-}
-    Let $P,Q \in \R^3$ with $\|P\|,\|Q\|\leq 1$ and $\widetilde{P},\widetilde{Q}$ some respective $\kappa$-rational approximations. Moreover, let $\alpha, \theta, \phi \in \R \in [-4,4]$ and set $X = X(\theta, \phi)$, $X_{\Q} = X_{\Q}(\theta, \phi)$ as well as $M = M(\theta, \phi)$, $M_{\Q} = M_{\Q}(\theta, \phi)$. Then
+\lean{RationalApprox.bounds_kappa3_X}
+    Let $P \in \R^3$ with $\|P\|\leq 1$ and $\widetilde{P}$ a $\kappa$-rational approximation of $P$. Moreover, let $\theta, \phi \in [-4,4]$ and set $X = X(\theta, \phi)$, $X_{\Q} = X_{\Q}(\theta, \phi)$. Then
     \begin{align}
-        |\langle X, P \rangle - \langle X_{\Q}, \widetilde{P} \rangle| & \leq 3 \kappa, \label{eq:boundskappa3.1}\\
-        |\langle MP, MQ \rangle - \langle M_{\Q} \widetilde{P}, M_{\Q}\widetilde{Q} \rangle| & \leq 5 \kappa, \label{eq:boundskappa3.3}\\
-        |\| M Q \| - \| M_{\Q}\widetilde{Q} \| | & \leq 3 \kappa.\label{eq:boundskappa3.2}
+        |\langle X, P \rangle - \langle X_{\Q}, \widetilde{P} \rangle| & \leq 3 \kappa. \label{eq:boundskappa3.1}
     \end{align}
+    (The inner-product and norm bounds for $M$, $M_{\Q}$ from Lemma~49 of \cite{polyhedron.without.rupert} are formalized only in the generalized forms used by \cref{lem:boundskappa4}.)
 \end{lemma}
 ```
 
