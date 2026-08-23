@@ -42,10 +42,6 @@ Pose normalization and reduction lemmas.
 Pointsymmetry reduction to rotational Rupert poses.
 :::
 
-:::group "prelims_radius_tools"
-Radius characterization and preservation tools.
-:::
-
 # Rupert Sets
 
 :::theorem "thm:rupert_iff_rupert_set" (lean := "rupert_iff_rupert_set") (parent := "prelims_rupert_equiv")
@@ -135,60 +131,5 @@ TODO: informalize proof
 \begin{proof}
 \leanok
 TODO: informalize proof
-\end{proof}
-```
-
-:::theorem "thm:polyhedron_radius_iff" (parent := "prelims_radius_tools")
-Suppose $`S` is a finite set of points in $`\R^n`.
-The radius of the polyhedron $`S` is $`r` iff
-- there is a vector $`v \in S` with $`\|v\| = r`
-- all vectors $`v \in S` have $`\|v\| \le r`
-:::
-
-```tex
-\begin{theorem}
-\label{thm:polyhedron_radius_iff}
-Suppose $S$ is a finite set of points in $\R^n$.
-The radius of the polyhedron $S$ is $r$ iff
-\begin{itemize}
-\item there is a vector $v \in S$ with $\|v\| = r$
-\item all vectors $v \in S$ have $\|v\| \le r$
-\end{itemize}
-\end{theorem}
-```
-
-:::proof "thm:polyhedron_radius_iff"
-Immediate from definition.
-:::
-
-```tex
-\begin{proof}
-\leanok
-Immediate from definition.
-\end{proof}
-```
-
-:::theorem "thm:pointsymmetrize_pres_radius" (parent := "prelims_radius_tools")
-Pointsymmetrization preserves radius.
-:::
-
-```tex
-\begin{theorem}
-\label{thm:pointsymmetrize_pres_radius}
-\leanok
-Pointsymmetrization preserves radius.
-\end{theorem}
-```
-
-:::proof "thm:pointsymmetrize_pres_radius" (uses := "thm:polyhedron_radius_iff")
-
-Because the reflection of a point about the origin preserves its norm.
-:::
-
-```tex
-\begin{proof}
-\uses{thm:polyhedron_radius_iff}
-\leanok
-Because the reflection of a point about the origin preserves its norm.
 \end{proof}
 ```

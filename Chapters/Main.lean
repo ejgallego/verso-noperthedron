@@ -33,7 +33,7 @@ Reductions from general poses to certified subcases.
 Final non-Rupert conclusions for the noperthedron.
 :::
 
-:::theorem "thm:no_nopert_tight_pose" (lean := "no_nopert_tight_pose") (parent := "main_tight_interval") (uses := "def:noperthedron")
+:::theorem "thm:no_nopert_tight_pose" (lean := "Noperthedron.no_nopert_tight_pose") (parent := "main_tight_interval") (uses := "def:noperthedron")
 
 There does not in fact exist a noperthedron Rupert solution with
 
@@ -50,7 +50,7 @@ $$`
 ```tex
 \begin{theorem}
 \label{thm:no_nopert_tight_pose}
-\lean{no_nopert_tight_pose}
+\lean{Noperthedron.no_nopert_tight_pose}
 \uses{def:noperthedron}
 \leanok
 There does not in fact exist a noperthedron Rupert solution with
@@ -82,14 +82,14 @@ there is no Rupert solution in that interval.
 \end{proof}
 ```
 
-:::theorem "thm:no_nopert_pose" (lean := "no_nopert_pose") (parent := "main_pose_reductions")
+:::theorem "thm:no_nopert_pose" (lean := "Noperthedron.no_nopert_pose") (parent := "main_pose_reductions")
 There is no 5-parameter pose that makes the noperthedron have the Rupert property.
 :::
 
 ```tex
 \begin{theorem}
 \label{thm:no_nopert_pose}
-\lean{no_nopert_pose}
+\lean{Noperthedron.no_nopert_pose}
 \leanok
 There is no 5-parameter pose that makes the noperthedron have the Rupert property.
 \end{theorem}
@@ -112,14 +112,14 @@ says that this suffices for the general case.
 \end{proof}
 ```
 
-:::theorem "thm:no_nopert_rot_pose" (lean := "no_nopert_rot_pose") (parent := "main_pose_reductions")
+:::theorem "thm:no_nopert_rot_pose" (lean := "Noperthedron.no_nopert_rot_pose") (parent := "main_pose_reductions")
 There is no purely rotational pose that makes the noperthedron have the Rupert property.
 :::
 
 ```tex
 \begin{theorem}
 \label{thm:no_nopert_rot_pose}
-\lean{no_nopert_rot_pose}
+\lean{Noperthedron.no_nopert_rot_pose}
 \leanok
 There is no purely rotational pose that makes the noperthedron have the Rupert property.
 \end{theorem}
@@ -142,14 +142,14 @@ appeal to Theorem~\ref{thm:no_nopert_pose}.
 \end{proof}
 ```
 
-:::theorem "thm:no_nopert_matrix_pose" (lean := "no_nopert_matrix_pose") (parent := "main_pose_reductions")
+:::theorem "thm:no_nopert_matrix_pose" (lean := "Noperthedron.no_nopert_matrix_pose") (parent := "main_pose_reductions")
 There is no pose that makes the noperthedron have the Rupert property.
 :::
 
 ```tex
 \begin{theorem}
 \label{thm:no_nopert_matrix_pose}
-\lean{no_nopert_matrix_pose}
+\lean{Noperthedron.no_nopert_matrix_pose}
 \leanok
 There is no pose that makes the noperthedron have the Rupert property.
 \end{theorem}
@@ -176,7 +176,7 @@ a contradiction, hence the noperthedron has no pose that makes it Rupert.
 \end{proof}
 ```
 
-:::theorem "thm:nopert_not_rupert_set" (lean := "nopert_not_rupert_set") (parent := "main_final_nonrupert") (uses := "def:noperthedron")
+:::theorem "thm:nopert_not_rupert_set" (lean := "Noperthedron.nopert_not_rupert_set") (parent := "main_final_nonrupert") (uses := "def:noperthedron")
 
 The noperthedron is not a Rupert set.
 :::
@@ -185,7 +185,7 @@ The noperthedron is not a Rupert set.
 \begin{theorem}
 \uses{def:noperthedron}
 \label{thm:nopert_not_rupert_set}
-\lean{nopert_not_rupert_set}
+\lean{Noperthedron.nopert_not_rupert_set}
 \leanok
 The noperthedron is not a Rupert set.
 \end{theorem}
@@ -204,14 +204,14 @@ By Theorem~\ref{thm:no_nopert_matrix_pose}, there is no pose that makes the nope
 \end{proof}
 ```
 
-:::theorem "thm:nopert_not_rupert" (lean := "nopert_not_rupert") (parent := "main_final_nonrupert")
+:::theorem "thm:nopert_not_rupert" (lean := "Noperthedron.nopert_not_rupert") (parent := "main_final_nonrupert")
 The noperthedron is not a Rupert polyhedron.
 :::
 
 ```tex
 \begin{theorem}
 \label{thm:nopert_not_rupert}
-\lean{nopert_not_rupert}
+\lean{Noperthedron.nopert_not_rupert}
 \leanok
 The noperthedron is not a Rupert polyhedron.
 \end{theorem}

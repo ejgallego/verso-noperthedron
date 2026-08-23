@@ -13,8 +13,8 @@
   the user explicitly asks for a local downstream patch; prefer syncing the
   submodule from upstream `main` and keeping host-owned blueprint work outside
   that tree.
-- The canonical TeX blueprint source of truth is vendored under
-  `./blueprint/src/chapters/*.tex`.
+- The canonical TeX blueprint source of truth is tracked with the formalization
+  under `./Noperthedron/blueprint/src/chapters/*.tex`.
 - Before porting or maintaining blueprint files, read:
   - `tools/verso-harness/references/layout.md`
   - `tools/verso-harness/references/lt-method.md`
@@ -26,7 +26,7 @@
   to audit the local harness.
 - Treat the legacy TeX or `leanblueprint` source as the prose source of truth.
 - Record the real TeX chapter source path for this repo. For this repo it is
-  `./blueprint/src/chapters/*.tex`.
+  `./Noperthedron/blueprint/src/chapters/*.tex`.
 - The default deliverable for direct-port chapters is an LT pass. Do not trust
   older LT labels by themselves; every translated informal block now needs an
   adjacent local `tex` witness.

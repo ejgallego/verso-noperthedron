@@ -5,8 +5,8 @@ blueprint_main = "Main"
 formalization_path = "Noperthedron"
 chapter_root = "Chapters"
 
-# Canonical TeX source of truth, vendored from jcreed upstream main.
-tex_source_glob = "./blueprint/src/chapters/*.tex"
+# Canonical TeX source of truth from the pinned upstream formalization.
+tex_source_glob = "Noperthedron/blueprint/src/chapters/*.tex"
 
 [lt]
 default_chapters = [
@@ -19,6 +19,16 @@ default_chapters = [
   "Chapters/Computational.lean",
   "Chapters/Main.lean",
 ]
+
+[lt.source_files]
+"Chapters/Noperthedron.lean" = ["Noperthedron/blueprint/src/chapters/noperthedron.tex"]
+"Chapters/Bounding.lean" = ["Noperthedron/blueprint/src/chapters/bounding.tex"]
+"Chapters/Prelims.lean" = ["Noperthedron/blueprint/src/chapters/prelims.tex"]
+"Chapters/GlobalTheorem.lean" = ["Noperthedron/blueprint/src/chapters/global_theorem.tex"]
+"Chapters/LocalTheorem.lean" = ["Noperthedron/blueprint/src/chapters/local_theorem.tex"]
+"Chapters/Rational.lean" = ["Noperthedron/blueprint/src/chapters/rational.tex"]
+"Chapters/Computational.lean" = ["Noperthedron/blueprint/src/chapters/computational.tex"]
+"Chapters/Main.lean" = ["Noperthedron/blueprint/src/chapters/main.tex"]
 
 [harness]
 native_warnings = false

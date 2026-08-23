@@ -1,0 +1,6 @@
+version = 1
+
+[[witness]]
+chapter = "Chapters/Noperthedron.lean"
+fingerprint = "9214056ba7aa32049f61956ee7ab1e6ae90ab9464bdd2c4dcaa634d7e8bd52f8"
+reason = "Upstream's proof still depends on removed label lemma:pointsymmetrization_is_pointsym; the maintained witness and prose state the direct exact-vertex-set argument without a dangling graph edge."
