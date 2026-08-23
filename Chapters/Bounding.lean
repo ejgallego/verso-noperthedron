@@ -332,13 +332,13 @@ $`\|R(\alpha) M(\theta, \phi)-R(\alphab)M(\thetab,\phib)\| < \sqrt{5} \varepsilo
 \end{lemma}
 ```
 
-:::proof "lem:sqrt5" (uses := "lem:sqrt2, lem:RxRy")
+:::proof "lem:sqrt5" (uses := "lem:sqrt2, lem:RxRy, lem:RaRa")
 See polyhedron.without.rupert, Lemma 16.
 :::
 
 ```tex
 \begin{proof}
-\uses{lem:sqrt2, lem:RxRy}
+\uses{lem:sqrt2, lem:RxRy, lem:RaRa}
 \leanok
 See \cite{polyhedron.without.rupert}, Lemma 16.
 \end{proof}

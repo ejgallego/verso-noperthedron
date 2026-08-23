@@ -25,9 +25,47 @@ set_option verso.code.warnLineLength 0
 Construction of the certified interval solution table.
 :::
 
+:::group "computational_rational_vertices"
+Certified rational approximations of the noperthedron vertices.
+:::
+
 :::group "computational_table_soundness"
 Soundness of table rows and propagated non-Rupert certificates.
 :::
+
+:::definition "def:nopertQ" (parent := "computational_rational_vertices")
+We define rational approximations of the 90 noperthedron vertices by
+$`\lfloor x \cdot 10^{16} \rfloor/10^{16}`.
+:::
+
+```tex
+\begin{definition}\label{def:nopertQ}\leanok
+  We define rational approximations of the 90 noperthedron vertices
+  by $\lfloor x \cdot 10^{16} \rfloor/10^{16}$.
+\end{definition}
+```
+
+:::theorem "thm:nopertQ_approximate" (lean := "Noperthedron.KappaApprox.exact_κApprox_python") (parent := "computational_rational_vertices") (uses := "def:nopertQ")
+The rational vertex set $`\mathtt{nopertQ}` is a $`\kappa`-rational approximation
+of the Noperthedron.
+:::
+
+```tex
+\begin{theorem}
+  \label{thm:nopertQ_approximate}
+  \lean{Noperthedron.KappaApprox.exact_κApprox_python}\leanok
+\uses{def:nopertQ}
+\tt{nopertQ} is a $\kappa$-rational approximation of the Noperthedron.
+\end{theorem}
+```
+
+:::proof "thm:nopertQ_approximate"
+:::
+
+```tex
+\begin{proof}\leanok
+\end{proof}
+```
 
 :::theorem "thm:exists_solution_table" (parent := "computational_table_construction")
 There exists a valid solution table whose zeroth row covers
@@ -45,6 +83,7 @@ $$`
 ```tex
 \begin{theorem}
 \label{thm:exists_solution_table}
+\leanok
 There exists a valid solution table whose zeroth row covers
 \begin{align*}
 \theta_1,\theta_2&\in[0,2\pi/15] \subset [0,0.42], \\
@@ -55,17 +94,30 @@ There exists a valid solution table whose zeroth row covers
 \end{theorem}
 ```
 
-:::proof "thm:exists_solution_table"
+:::proof "thm:exists_solution_table" (uses := "def:nopertQ")
 By exhibiting the table and running the validity checking algorithm.
+Formalized as $`\mathtt{Noperthedron.NativeCaseAnalysis.solutionTable}` in the
+build-on-demand $`\mathtt{NativeCaseAnalysis}` library (checked with
+$`\mathtt{native\_decide}`) and independently in the kernel-only
+$`\mathtt{KernelCaseAnalysis}` library (checked with $`\mathtt{decide +kernel}`,
+using only the standard axioms); both are kept out of the default build targets
+so that CI runs stay fast.
 :::
 
 ```tex
-\begin{proof}
+\begin{proof}\leanok
+\uses{def:nopertQ}
 By exhibiting the table and running the validity checking algorithm.
+Formalized as \texttt{Noperthedron.NativeCaseAnalysis.solutionTable}
+in the build-on-demand \texttt{NativeCaseAnalysis} library (checked with
+\texttt{native\_decide}) and independently in the kernel-only
+\texttt{KernelCaseAnalysis} library (checked with \texttt{decide +kernel},
+using only the standard axioms); both are kept out of the default build
+targets so that CI runs stay fast.
 \end{proof}
 ```
 
-:::theorem "thm:solution_global" (lean := "Solution.valid_global_imp_no_rupert") (parent := "computational_table_soundness")
+:::theorem "thm:solution_global" (lean := "Noperthedron.Solution.valid_global_imp_no_rupert") (parent := "computational_table_soundness")
 If a global node in the solution tree is valid, then there is no Rupert solution for its interval.
 :::
 
@@ -74,20 +126,20 @@ If a global node in the solution tree is valid, then there is no Rupert solution
 \label{thm:solution_global}
 If a global node in the solution tree is valid, then there is no Rupert solution for its interval.
 \leanok
-\lean{Solution.valid_global_imp_no_rupert}
+\lean{Noperthedron.Solution.valid_global_imp_no_rupert}
 \end{theorem}
 ```
 
-:::proof "thm:solution_global" (uses := "thm:global_rational")
+:::proof "thm:solution_global" (uses := "thm:global_rational, thm:nopertQ_approximate")
 :::
 
 ```tex
-\begin{proof}
-\uses{thm:global_rational}
+\begin{proof}\leanok
+\uses{thm:global_rational,thm:nopertQ_approximate}
 \end{proof}
 ```
 
-:::theorem "thm:solution_local" (lean := "Solution.valid_local_imp_no_rupert") (parent := "computational_table_soundness")
+:::theorem "thm:solution_local" (lean := "Noperthedron.Solution.valid_local_imp_no_rupert") (parent := "computational_table_soundness")
 If a local node in the solution tree is valid, then there is no Rupert solution for its interval.
 :::
 
@@ -96,20 +148,20 @@ If a local node in the solution tree is valid, then there is no Rupert solution 
 \label{thm:solution_local}
 If a local node in the solution tree is valid, then there is no Rupert solution for its interval.
 \leanok
-\lean{Solution.valid_local_imp_no_rupert}
+\lean{Noperthedron.Solution.valid_local_imp_no_rupert}
 \end{theorem}
 ```
 
-:::proof "thm:solution_local" (uses := "thm:local_rational, lem:radius_noperthedron_one, lem:congruent")
+:::proof "thm:solution_local" (uses := "thm:local_rational, lemma:nopert_verts_norm_le_one, lem:congruent, thm:nopertQ_approximate, c1_c2_c3_norms")
 :::
 
 ```tex
-\begin{proof}
-\uses{thm:local_rational,lem:radius_noperthedron_one,lem:congruent}
+\begin{proof}\leanok
+\uses{thm:local_rational,lemma:nopert_verts_norm_le_one,lem:congruent,thm:nopertQ_approximate,c1_c2_c3_norms}
 \end{proof}
 ```
 
-:::theorem "thm:row_valid_imp_not_rupert_ix" (lean := "Solution.Row.valid_imp_not_rupert_ix,Solution.valid_split_imp_no_rupert,Solution.valid_single_param_split_imp_no_rupert,Solution.valid_full_split_imp_no_rupert,Solution.valid_param_split_imp_no_rupert") (parent := "computational_table_soundness") (uses := "def:noperthedron")
+:::theorem "thm:row_valid_imp_not_rupert_ix" (lean := "Noperthedron.Solution.Row.valid_imp_not_rupert_ix,Noperthedron.Solution.valid_split_imp_no_rupert,Noperthedron.Solution.valid_single_param_split_imp_no_rupert,Noperthedron.Solution.valid_full_split_imp_no_rupert,Noperthedron.Solution.valid_param_split_imp_no_rupert") (parent := "computational_table_soundness") (uses := "def:noperthedron")
 
 If we have a valid solution table, and in particular its $`i`th row is valid,
 then there is no Rupert solution of the interval of its $`i`th row.
@@ -118,11 +170,11 @@ then there is no Rupert solution of the interval of its $`i`th row.
 ```tex
 \begin{theorem}
 \leanok
-\lean{Solution.Row.valid_imp_not_rupert_ix,
-Solution.valid_split_imp_no_rupert,
-Solution.valid_single_param_split_imp_no_rupert,
-Solution.valid_full_split_imp_no_rupert,
-Solution.valid_param_split_imp_no_rupert
+\lean{Noperthedron.Solution.Row.valid_imp_not_rupert_ix,
+Noperthedron.Solution.valid_split_imp_no_rupert,
+Noperthedron.Solution.valid_single_param_split_imp_no_rupert,
+Noperthedron.Solution.valid_full_split_imp_no_rupert,
+Noperthedron.Solution.valid_param_split_imp_no_rupert
 }
 \label{thm:row_valid_imp_not_rupert_ix}
 \uses{def:noperthedron}
@@ -150,7 +202,7 @@ the tree, or appeal to Theorem~\ref{thm:solution_global} or Theorem~\ref{thm:sol
 \end{proof}
 ```
 
-:::corollary "thm:row_valid_imp_not_rupert" (lean := "Solution.Row.valid_imp_not_rupert") (parent := "computational_table_soundness") (uses := "def:noperthedron")
+:::corollary "thm:row_valid_imp_not_rupert" (lean := "Noperthedron.Solution.Row.valid_imp_not_rupert") (parent := "computational_table_soundness") (uses := "def:noperthedron")
 
 If we have a valid solution table, then there is no Rupert solution of the interval of its zeroth row.
 :::
@@ -158,7 +210,7 @@ If we have a valid solution table, then there is no Rupert solution of the inter
 ```tex
 \begin{corollary}
 \leanok
-\lean{Solution.Row.valid_imp_not_rupert}
+\lean{Noperthedron.Solution.Row.valid_imp_not_rupert}
 \label{thm:row_valid_imp_not_rupert}
 \uses{def:noperthedron}
 If we have a valid solution table, then there is no Rupert solution of the interval of its zeroth row.

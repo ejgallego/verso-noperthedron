@@ -96,23 +96,18 @@ which is the natural restriction of $`\mathrm{span}(v_1,\dots,v_n)` to positive 
 :::lemma_ "lem:langles" (lean := "Local.langles") (parent := "local_linear_algebra")
 Let $`V_1,V_2,V_3,Y,Z \in \mathbb{R}^3` with $`\|Y \|=\| Z \|` and
 $`Y,Z \in \mathrm{span}^+(V_1,V_2,V_3)`.
-Then at least one of the following inequalities fails:
-
-- $`\langle V_1, Y \rangle > \langle V_1, Z \rangle`
-- $`\langle V_2, Y \rangle > \langle V_2, Z \rangle`
-- $`\langle V_3, Y \rangle > \langle V_3, Z \rangle`
+Then there exists an $`i` with
+$`\langle V_i, Y \rangle \leq \langle V_i, Z \rangle`.
 :::
 
 ```tex
 \begin{lemma} \label{lem:langles}
   \lean{Local.langles}
   \leanok
-Let $V_1,V_2,V_3,Y,Z \in \R^3$ with $\|Y \|=\| Z \|$ and $Y,Z \in \mathrm{span}^+(V_1,V_2,V_3)$. Then at least one of the following inequalities does not hold:
-\begin{align*}
-    \langle V_1, Y \rangle > \langle V_1, Z \rangle,\\
-    \langle V_2, Y \rangle > \langle V_2, Z \rangle,\\
-    \langle V_3, Y \rangle > \langle V_3, Z \rangle.
-\end{align*}
+Let $V_1,V_2,V_3,Y,Z \in \R^3$ with $\|Y \|=\| Z \|$ and $Y,Z \in \mathrm{span}^+(V_1,V_2,V_3)$. Then there exists an $i$ with
+\[
+    \langle V_i, Y \rangle \leq \langle V_i, Z \rangle.
+\]
 \end{lemma}
 ```
 
@@ -128,7 +123,7 @@ See \cite{polyhedron.without.rupert}, Lemma 23.
 ```
 
 :::lemma_ "lem:scalarprodbars" (lean := "Local.abs_sub_inner_bars_le") (parent := "local_linear_algebra")
-For $`A,\overline{A},B,\overline{B}\in \mathbb{R}^{n\times n}` and $`P_1,P_2\in \mathbb{R}^n` it holds that
+For $`A,\overline{A},B,\overline{B}\in \mathbb{R}^{m\times n}` and $`P_1,P_2\in \mathbb{R}^n` it holds that
 
 $$`
 |\langle AP_1,BP_2\rangle-\langle \overline{A}P_1,\overline{B}P_2\rangle|
@@ -140,7 +135,7 @@ $$`
 \begin{lemma} \label{lem:scalarprodbars}
 \lean{Local.abs_sub_inner_bars_le}
 \leanok
-    For $A,\overline{A},B,\overline{B}\in \R^{n\times n}$ and $P_1,P_2\in \R^n$ it holds that
+    For $A,\overline{A},B,\overline{B}\in \R^{m\times n}$ and $P_1,P_2\in \R^n$ it holds that
     \[
         |\langle AP_1,BP_2\rangle-\langle \overline{A}P_1,\overline{B}P_2\rangle|\leq \|P_1\|\cdot \|P_2\|\cdot \Big( \|A-\overline{A}\|\cdot \|\overline{B}\| +  \|\overline{A}\|\cdot \|B-\overline{B}\|+\|A-\overline{A}\|\cdot \|B-\overline{B}\|\Big).
     \]
@@ -159,7 +154,7 @@ See \cite{polyhedron.without.rupert}, Lemma 24.
 ```
 
 :::lemma_ "lem:absscalar" (lean := "Local.abs_sub_inner_le") (parent := "local_linear_algebra")
-For $`A,B\in \mathbb{R}^{n\times n}` and $`P_1,P_2\in \mathbb{R}^n` one has
+For $`A,B\in \mathbb{R}^{m\times n}` and $`P_1,P_2\in \mathbb{R}^n` one has
 
 $$`
 |\langle AP_1,AP_2\rangle-\langle BP_1,BP_2\rangle|
@@ -171,7 +166,7 @@ $$`
 \begin{lemma} \label{lem:absscalar}
 \lean{Local.abs_sub_inner_le}
 \leanok
-    For $A,B\in \R^{n\times n}$ and $P_1,P_2\in \R^n$ one has
+    For $A,B\in \R^{m\times n}$ and $P_1,P_2\in \R^n$ one has
     $$|\langle AP_1,AP_2\rangle-\langle BP_1,BP_2\rangle|\leq \|P_1\|\cdot \|P_2\|\cdot \|A-B\|\cdot \bigg(\|A\|+\|B\| + \|A-B\|\bigg).$$
 \end{lemma}
 ```
@@ -236,9 +231,9 @@ are called $`\varepsilon`-spanning for $`(\theta, \varphi)` if:
   Three points $P_1, P_2, P_3 \in \mathbb{R}^3$ with $\|P_1\|, \|P_2\|, \|P_3\| \leq 1$ are
   called $\varepsilon$-spanning for $(\theta, \varphi)$ if it holds that:
 \begin{align*}
-    \langle R(\pi/2) M P_1,M P_{2}\rangle > 2 \epsilon(\sqrt{2} + \epsilon),\\
-    \langle R(\pi/2) M P_2,M P_{3}\rangle > 2 \epsilon(\sqrt{2} + \epsilon),\\
-    \langle R(\pi/2) M P_3,M P_{1}\rangle > 2 \epsilon(\sqrt{2} + \epsilon).
+    \langle R(\pi/2) M P_1,M P_{2}\rangle > 2 \epsilon(\sqrt{2} + \varepsilon),\\
+    \langle R(\pi/2) M P_2,M P_{3}\rangle > 2 \epsilon(\sqrt{2} + \varepsilon),\\
+    \langle R(\pi/2) M P_3,M P_{1}\rangle > 2 \epsilon(\sqrt{2} + \varepsilon).
 \end{align*}
 \end{definition}
 ```
@@ -278,54 +273,58 @@ See \cite{polyhedron.without.rupert}, Lemma 28.
 ```
 
 :::lemma_ "lem:inCirc" (lean := "Local.inCirc") (parent := "local_distance_sector")
-Let $`P, Q \in \mathbb{R}^3` with $`\|P\|, \|Q\| \leq 1`, and let
-$`\epsilon>0`, $`\bar\theta_1,\bar\phi_1,\bar\theta_2,\bar\phi_2,\bar\alpha \in \mathbb{R}`.
-Set
+Let $`P, Q \in \mathbb{R}^3` with $`\|P\|, \|Q\| \leq 1`. Let
+$`\epsilon>0` and $`\bar\theta_1,\bar\phi_1,\bar\theta_2,\bar\phi_2,\bar\alpha \in \mathbb{R}` satisfy
 
 $$`
-T := \left(R(\bar\alpha) M(\bar\theta_1, \bar\phi_1) P + M(\bar\theta_2, \bar\phi_2) Q\right)/2 \in \mathbb{R}^2,
+\|R(\bar\alpha) M(\bar\theta_1, \bar\phi_1) P - M(\bar\theta_2, \bar\phi_2) Q\| \leq 2\delta.
 `
 
-and assume $`\delta \geq \|T - M(\bar\theta_2, \bar\phi_2) Q\|`.
 If $`|\bar\theta_1-\theta_1|, |\bar\phi_1-\phi_1|, |\bar\theta_2-\theta_2|, |\bar\phi_2-\phi_2|, |\bar\alpha - \alpha| \leq \epsilon`,
-then $`R(\alpha)M(\theta_1, \phi_1) P` and $`M(\theta_2, \phi_2) Q` lie in
-$`\mathrm{Circ}_{\delta + \sqrt{5} \epsilon}(T)`.
+then
+$`\|R(\alpha)M(\theta_1, \phi_1) P - M(\theta_2, \phi_2) Q\| < 2(\delta + \sqrt{5} \epsilon)`.
 :::
 
 ```tex
 \begin{lemma} \label{lem:inCirc}
   \lean{Local.inCirc}
   \leanok
-    Let $P, Q \in \R^3$ with $\|P\|, \|Q\| \leq 1$. Let $\epsilon>0$ and $\thetab_1,\phib_1,\thetab_2,\phib_2,\alphab \in \R$, then set
+    Let $P, Q \in \R^3$ with $\|P\|, \|Q\| \leq 1$. Let $\epsilon>0$ and $\thetab_1,\phib_1,\thetab_2,\phib_2,\alphab \in \R$ with
     \[
-        T \coloneqq \left(R(\alphab) M(\thetab_1, \phib_1) P + M(\thetab_2, \phib_2) Q\right)/2 \in \R^2,
+        \|R(\alphab) M(\thetab_1, \phib_1) P - M(\thetab_2, \phib_2) Q\| \leq 2\delta.
     \]
-    and $\delta \geq \|T - M(\thetab_2, \phib_2) Q\|$. Finally, let $\theta_1, \phi_1, \theta_2, \phi_2, \alpha \in \R$ with $|\thetab_1-\theta_1|, |\phib_1 - \phi_1|, |\thetab_2-\theta_2|, |\phib_2-\phi_2|, |\alphab - \alpha| \leq \epsilon$. Then $R(\alpha)M(\theta_1, \phi_1) P, M(\theta_2, \phi_2) Q \in \Circ_{\delta + \sqrt{5} \epsilon}(T)$.
+    Finally, let $\theta_1, \phi_1, \theta_2, \phi_2, \alpha \in \R$ with $|\thetab_1-\theta_1|, |\phib_1 - \phi_1|, |\thetab_2-\theta_2|, |\phib_2-\phi_2|, |\alphab - \alpha| \leq \epsilon$. Then
+    \[
+        \|R(\alpha)M(\theta_1, \phi_1) P - M(\theta_2, \phi_2) Q\| < 2(\delta + \sqrt{5} \epsilon).
+    \]
 \end{lemma}
 ```
 
 :::proof "lem:inCirc" (uses := "lem:sqrt2, lem:sqrt5")
-See polyhedron.without.rupert, Lemma 30.
+See polyhedron.without.rupert, Lemma 30, which states that both points lie in
+the disc of radius $`\delta + \sqrt{5}\epsilon` around their midpoint at the
+reference pose; here the two memberships are combined into a single bound on
+the distance between the two points.
 :::
 
 ```tex
 \begin{proof}
 \uses{lem:sqrt2, lem:sqrt5}
 \leanok
-See \cite{polyhedron.without.rupert}, Lemma 30.
+See \cite{polyhedron.without.rupert}, Lemma 30, which states that both points lie in the disc of radius $\delta + \sqrt{5}\epsilon$ around their midpoint at the reference pose; here the two memberships are combined into a single bound on the distance between the two points.
 \end{proof}
 ```
 
 :::definition "def:LMD" (lean := "Local.LocallyMaximallyDistant") (parent := "local_distance_sector")
 Let $`\PP \subset \R^2` be a convex polygon and $`Q \in \PP` one of its vertices.
-Assume that for some $`\overline{Q} \in \R^2` it holds that
-$`Q \in \Circ_{\delta}(\overline{Q})`, i.e. $`\|Q - \overline{Q}\| < \delta`.
-Define $`\Sect_\delta(\overline{Q}) \coloneqq \Circ_{\delta}(\overline{Q}) \cap \PP^\circ`
-as the intersection between $`\Circ_{\delta}(\overline{Q})` and the interior of the convex hull of $`\PP`.
+Define $`\Sect_\delta(Q) \coloneqq \Circ_{\delta}(Q) \cap \PP^\circ`
+as the intersection between $`\Circ_{\delta}(Q)` and the interior of the convex hull of $`\PP`.
 
-Moreover, $`Q \in \PP` is called $`\delta`-locally maximally distant with respect to
-$`\overline{Q}` ($`\delta`-LMD$`(\overline{Q})`) if for all $`A \in \Sect_\delta(\overline{Q})`
+Moreover, $`Q \in \PP` is called $`\delta`-locally maximally distant ($`\delta`-LMD) if for all $`A \in \Sect_\delta(Q)`
 it holds that $`\|Q\| > \|A\|`.
+
+This centers the disc at $`Q` itself; its radius plays the role of twice the
+radius in Definition 31 of polyhedron.without.rupert.
 :::
 
 ```tex
@@ -333,16 +332,17 @@ it holds that $`\|Q\| > \|A\|`.
   \label{def:LMD}
   \lean{Local.LocallyMaximallyDistant}
   \leanok
-    Let $\PP \subset \R^2$ be a convex polygon and $Q \in \PP$ one of its vertices. Assume that for some $\overline{Q} \in \R^2$ it holds that $Q \in \Circ_{\delta}(\overline{Q})$, i.e. $\|Q - \overline{Q}\| < \delta$. Define $\Sect_\delta(\overline{Q}) \coloneqq \Circ_{\delta}(\overline{Q}) \cap \PP^\circ$ as the intersection between $\Circ_{\delta}(\overline{Q})$ and the interior of the convex hull of $\PP$.
+    Let $\PP \subset \R^2$ be a convex polygon and $Q \in \PP$ one of its vertices. Define $\Sect_\delta(Q) \coloneqq \Circ_{\delta}(Q) \cap \PP^\circ$ as the intersection between $\Circ_{\delta}(Q)$ and the interior of the convex hull of $\PP$.
 
-    Moreover, $Q \in \PP$ is called \emph{$\delta$-locally maximally distant with respect to $\overline{Q}$ ($\delta$-LMD$(\overline{Q})$)} if for all $A \in \Sect_\delta(\overline{Q})$ it holds that $\|Q\| > \|A\|$.
+    Moreover, $Q \in \PP$ is called \emph{$\delta$-locally maximally distant ($\delta$-LMD)} if for all $A \in \Sect_\delta(Q)$ it holds that $\|Q\| > \|A\|$.
+
+    (This simplifies Definition 31 of \cite{polyhedron.without.rupert}, which centers the disc at an auxiliary point $\overline{Q}$ with $\|Q - \overline{Q}\| < \delta$; the only role of $\overline{Q}$ is to bound $\|A - Q\| < 2\delta$, so we center the disc at $Q$ itself, with the radius playing the role of the paper's $2\delta$.)
 \end{definition}
 ```
 
 :::lemma_ "lem:LMD" (lean := "Local.inner_ge_implies_LMD") (parent := "local_distance_sector") (uses := "def:LMD")
 
-Let $`\mathbf{P}` be a convex polygon and $`Q \in \mathbf{P}` a vertex.
-Let $`\overline{Q} \in \mathbb{R}^2` with $`\|Q - \overline{Q}\| < \delta` for some $`\delta>0`.
+Let $`\mathbf{P}` be a convex polygon and $`Q \in \mathbf{P}` a vertex, and let $`\delta>0`.
 Assume there exists $`r > 0` with $`\|Q\| > r` such that
 
 $$`
@@ -350,7 +350,7 @@ $$`
 `
 
 for all other vertices $`P_j \in \mathbf{P} \setminus Q`.
-Then $`Q` is $`\delta`-locally maximally distant with respect to $`\overline{Q}`.
+Then $`Q` is $`2\delta`-locally maximally distant.
 :::
 
 ```tex
@@ -358,21 +358,23 @@ Then $`Q` is $`\delta`-locally maximally distant with respect to $`\overline{Q}`
   \uses{def:LMD}
   \lean{Local.inner_ge_implies_LMD}
   \leanok
-    Let $\PP$ be a convex polygon and $Q \in \PP$ be one of its vertices. Let $\overline{Q} \in \R^2$ with $\|Q - \overline{Q}\| < \delta$ for some $\delta>0$. Assume that for some $r > 0 $ such that $\|Q\| > r$ it holds that
+    Let $\PP$ be a convex polygon and $Q \in \PP$ be one of its vertices. Let $\delta > 0$. Assume that for some $r > 0 $ such that $\|Q\| > r$ it holds that
     \[
         \frac{\langle Q, Q - P_j \rangle}{\|Q\|\|Q - P_j\|} \geq \delta/r,
     \]
-    for all other vertices $P_j \in \PP \setminus Q$. Then $Q \in \PP$ is $\delta$-locally maximally distant with respect to $\overline{Q}$.
+    for all other vertices $P_j \in \PP \setminus Q$. Then $Q \in \PP$ is $2\delta$-locally maximally distant.
 \end{lemma}
 ```
 
 :::proof "lem:LMD"
-See polyhedron.without.rupert, Lemma 32.
+See polyhedron.without.rupert, Lemma 32: the disc of radius $`2\delta` around
+$`Q` contains the paper's disc of radius $`\delta` around any $`\overline Q` with
+$`\|Q-\overline Q\|<\delta` (cf. {bpref "def:LMD"}[Definition]).
 :::
 
 ```tex
 \begin{proof}\leanok
-See \cite{polyhedron.without.rupert}, Lemma 32.
+See \cite{polyhedron.without.rupert}, Lemma 32: the disc of radius $2\delta$ around $Q$ contains the paper's disc of radius $\delta$ around any $\overline{Q}$ with $\|Q - \overline{Q}\| < \delta$ (cf.\ Definition~\ref{def:LMD}).
 \end{proof}
 ```
 

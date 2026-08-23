@@ -225,7 +225,7 @@ $`\|A(x,y)-A_{\Q}(x,y)\|<\kappa/3\cdot \sqrt{3\cdot 3}=\kappa`.
 \end{proof}
 ```
 
-:::corollary "corr:kappa1kappa" (lean := "RationalApprox.R_difference_norm_bounded,RationalApprox.R'_difference_norm_bounded,RationalApprox.M_difference_norm_bounded,RationalApprox.Mθ_difference_norm_bounded,RationalApprox.Mφ_difference_norm_bounded,RationalApprox.X_difference_norm_bounded,RationalApprox.Rℚ_norm_bounded,RationalApprox.Mℚ_norm_bounded,RationalApprox.R'ℚ_norm_bounded,RationalApprox.Mθℚ_norm_bounded,RationalApprox.Mφℚ_norm_bounded") (parent := "rational_matrix_error")
+:::corollary "corr:kappa1kappa" (lean := "RationalApprox.R_difference_norm_bounded,RationalApprox.R'_difference_norm_bounded,RationalApprox.M_difference_norm_bounded,RationalApprox.Mθ_difference_norm_bounded,RationalApprox.Mφ_difference_norm_bounded,RationalApprox.Mθθ_difference_norm_bounded,RationalApprox.Mθφ_difference_norm_bounded,RationalApprox.Mφφ_difference_norm_bounded,RationalApprox.X_difference_norm_bounded,RationalApprox.Rℚ_norm_bounded,RationalApprox.Mℚ_norm_bounded,RationalApprox.R'ℚ_norm_bounded,RationalApprox.Mθℚ_norm_bounded,RationalApprox.Mφℚ_norm_bounded,RationalApprox.Mθθℚ_norm_bounded,RationalApprox.Mθφℚ_norm_bounded,RationalApprox.Mφφℚ_norm_bounded") (parent := "rational_matrix_error")
 Let $`\alpha,\theta,\phi\in[-4,4]`.
 Then
 $`\|R(\alpha)-R_\mathbb{Q}(\alpha)\|`,
@@ -233,9 +233,15 @@ $`\|R'(\alpha)-R'_\mathbb{Q}(\alpha)\|`,
 $`\|X(\theta,\phi)-X_\mathbb{Q}(\theta,\phi)\|`,
 $`\|M(\theta,\phi)-M_\mathbb{Q}(\theta,\phi)\|`,
 $`\|M^\theta(\theta,\phi)-M^\theta_\mathbb{Q}(\theta,\phi)\|`,
-$`\|M^\phi(\theta,\phi)-M^\phi_\mathbb{Q}(\theta,\phi)\|`
+$`\|M^\phi(\theta,\phi)-M^\phi_\mathbb{Q}(\theta,\phi)\|`,
+$`\|M^{\theta\theta}(\theta,\phi)-M^{\theta\theta}_\mathbb{Q}(\theta,\phi)\|`,
+$`\|M^{\theta\phi}(\theta,\phi)-M^{\theta\phi}_\mathbb{Q}(\theta,\phi)\|`, and
+$`\|M^{\phi\phi}(\theta,\phi)-M^{\phi\phi}_\mathbb{Q}(\theta,\phi)\|`
 are all at most $`\kappa`.
-Moreover $`\|R_\mathbb{Q}(\alpha)\|, \|R'_\mathbb{Q}(\alpha)\|, \|M_\mathbb{Q}(\theta, \phi)\|, \|M_{\Q}^{\theta}(\theta,\varphi)\|, \|M_{\Q}^{\phi}(\theta,\varphi)\| \leq 1+\kappa`.
+Moreover the corresponding rational matrices $`R_\mathbb{Q}`, $`R'_\mathbb{Q}`,
+$`M_\mathbb{Q}`, $`M^\theta_\mathbb{Q}`, $`M^\phi_\mathbb{Q}`,
+$`M^{\theta\theta}_\mathbb{Q}`, $`M^{\theta\phi}_\mathbb{Q}`, and
+$`M^{\phi\phi}_\mathbb{Q}` have norm at most $`1+\kappa`.
 :::
 
 ```tex
@@ -247,21 +253,31 @@ RationalApprox.R'_difference_norm_bounded,
 RationalApprox.M_difference_norm_bounded,
 RationalApprox.Mθ_difference_norm_bounded,
 RationalApprox.Mφ_difference_norm_bounded,
+RationalApprox.Mθθ_difference_norm_bounded,
+RationalApprox.Mθφ_difference_norm_bounded,
+RationalApprox.Mφφ_difference_norm_bounded,
 RationalApprox.X_difference_norm_bounded,
 RationalApprox.Rℚ_norm_bounded,
 RationalApprox.Mℚ_norm_bounded,
 RationalApprox.R'ℚ_norm_bounded,
 RationalApprox.Mθℚ_norm_bounded,
-RationalApprox.Mφℚ_norm_bounded }
+RationalApprox.Mφℚ_norm_bounded,
+RationalApprox.Mθθℚ_norm_bounded,
+RationalApprox.Mθφℚ_norm_bounded,
+RationalApprox.Mφφℚ_norm_bounded }
     Let $\alpha,\theta,\phi\in [-4,4]$. Then it holds that
     \begin{align*}
         \|R(\alpha)-R_{\Q}(\alpha)\|, \|R'(\alpha)-R_{\Q}'(\alpha)\|,\|X(\theta,\phi)-X_{\Q}(\theta, \phi)\|, \|M(\theta, \phi)-M_{\Q}(\theta, \phi)\|, \\
         \|M^\theta(\theta,\phi)-M_{\Q}^\theta(\theta,\phi)\|,
-        \|M^\phi(\theta,\phi) - M_{\Q}^\phi(\theta,\phi)\|\leq \kappa.
+        \|M^\phi(\theta,\phi) - M_{\Q}^\phi(\theta,\phi)\|,
+        \|M^{\theta\theta}(\theta,\phi)-M_{\Q}^{\theta\theta}(\theta,\phi)\|,
+        \|M^{\theta\phi}(\theta,\phi)-M_{\Q}^{\theta\phi}(\theta,\phi)\|,
+        \|M^{\phi\phi}(\theta,\phi)-M_{\Q}^{\phi\phi}(\theta,\phi)\|\leq \kappa.
     \end{align*}
     Moreover,
     \[
-        \|R_{\Q}(\alpha)\|, \|R'_{\Q}(\alpha)\|, \|M_{\Q}(\theta, \phi)\|, \|M_{\Q}^{\theta}(\theta,\varphi)\|, \|M_{\Q}^{\phi}(\theta,\varphi)\| \leq 1+\kappa
+        \|R_{\Q}(\alpha)\|, \|R'_{\Q}(\alpha)\|, \|M_{\Q}(\theta, \phi)\|, \|M_{\Q}^{\theta}(\theta,\varphi)\|, \|M_{\Q}^{\phi}(\theta,\varphi)\|,
+        \|M_{\Q}^{\theta\theta}(\theta,\varphi)\|, \|M_{\Q}^{\theta\phi}(\theta,\varphi)\|, \|M_{\Q}^{\phi\phi}(\theta,\varphi)\| \leq 1+\kappa
     \]
 \end{corollary}
 ```
@@ -310,7 +326,7 @@ See \cite{polyhedron.without.rupert}, Lemma 42.
 \end{proof}
 ```
 
-:::lemma_ "lem:boundskappa" (lean := "RationalApprox.bounds_kappa_M,RationalApprox.bounds_kappa_Mθ,RationalApprox.bounds_kappa_Mφ,RationalApprox.bounds_kappa_RM,RationalApprox.bounds_kappa_R'M,RationalApprox.bounds_kappa_RMθ,RationalApprox.bounds_kappa_RMφ") (parent := "rational_matrix_error")
+:::lemma_ "lem:boundskappa" (lean := "RationalApprox.bounds_kappa_M,RationalApprox.bounds_kappa_Mθ,RationalApprox.bounds_kappa_Mφ,RationalApprox.bounds_kappa_RM,RationalApprox.bounds_kappa_R'M,RationalApprox.bounds_kappa_RMθ,RationalApprox.bounds_kappa_RMφ,RationalApprox.bounds_kappa_Mθθ,RationalApprox.bounds_kappa_Mθφ,RationalApprox.bounds_kappa_Mφφ,RationalApprox.bounds_kappa_R'Mθ,RationalApprox.bounds_kappa_R'Mφ,RationalApprox.bounds_kappa_RMθθ,RationalApprox.bounds_kappa_RMθφ,RationalApprox.bounds_kappa_RMφφ") (parent := "rational_matrix_error")
 Let $`\alpha, \theta, \phi \in [-4,4]`, $`P\in \R^3` with $`\|P\| \leq 1`
 and let $`\widetilde{P}` be a $`\kappa`-rational approximation of $`P`.
 Set $`M = M(\theta, \phi)` and $`M_{\Q} = M_{\Q}(\theta, \phi)`,
@@ -333,6 +349,11 @@ $$`
 \end{align}
 `
 $$
+
+The same bounds hold with $`M` replaced by any of the second-derivative
+matrices $`M^{\theta\theta}`, $`M^{\theta\phi}`, or $`M^{\phi\phi}` (at
+$`3\kappa` without a rotation factor and $`4\kappa` with $`R` in front), and
+with $`R'` in place of $`R` in front of $`M^\theta` and $`M^\phi`.
 :::
 
 ```tex
@@ -345,7 +366,15 @@ RationalApprox.bounds_kappa_Mφ,
 RationalApprox.bounds_kappa_RM,
 RationalApprox.bounds_kappa_R'M,
 RationalApprox.bounds_kappa_RMθ,
-RationalApprox.bounds_kappa_RMφ
+RationalApprox.bounds_kappa_RMφ,
+RationalApprox.bounds_kappa_Mθθ,
+RationalApprox.bounds_kappa_Mθφ,
+RationalApprox.bounds_kappa_Mφφ,
+RationalApprox.bounds_kappa_R'Mθ,
+RationalApprox.bounds_kappa_R'Mφ,
+RationalApprox.bounds_kappa_RMθθ,
+RationalApprox.bounds_kappa_RMθφ,
+RationalApprox.bounds_kappa_RMφφ
 }
     Let $\alpha, \theta, \phi \in [-4,4]$, $P\in \R^3$ with $\|P\| \leq 1$ and let $\widetilde{P}$ be a $\kappa$-rational approximation of $P$. Set $M = M(\theta, \phi)$ and $M_{\Q} = M_{\Q}(\theta, \phi)$, $M^\theta = M^\theta(\theta, \phi)$, $M^\theta_{\Q} = M^\theta_{\Q}(\theta, \phi)$, $M^\phi = M^\phi(\theta, \phi)$, $M^\phi_{\Q} = M^\phi_{\Q}(\theta, \phi)$ as well as $R = R(\alpha)$, $R_{\Q} = R_{\Q}(\alpha)$, $R' = R'(\alpha)$, $R'_{\Q} = R'_{\Q}(\alpha)$. Finally let $w \in \R^2$ with $\|w\| = 1$. Then:
     \begin{align}
@@ -355,8 +384,12 @@ RationalApprox.bounds_kappa_RMφ
         | \langle R M P, w\rangle - \langle R_{\Q} M_{\Q} \widetilde{P}, w\rangle | & \leq 4\kappa,\label{eq:boundskappa4} \\
         | \langle R' M P, w\rangle - \langle R'_{\Q} M_{\Q} \widetilde{P}, w\rangle | & \leq 4\kappa,\\
         | \langle R M^\theta P, w\rangle - \langle R_{\Q} M^\theta_{\Q} \widetilde{P}, w\rangle | & \leq 4\kappa,\\
-        | \langle R M^\phi P, w\rangle - \langle R_{\Q} M^\phi_{\Q} \widetilde{P}, w\rangle | & \leq 4\kappa.
+        | \langle R M^\phi P, w\rangle - \langle R_{\Q} M^\phi_{\Q} \widetilde{P}, w\rangle | & \leq 4\kappa,
     \end{align}
+    and the same bounds hold with $M$ replaced by any of the second-derivative
+    matrices $M^{\theta\theta}, M^{\theta\phi}, M^{\phi\phi}$ (at $3\kappa$
+    without a rotation factor, at $4\kappa$ with $R$ in front) and with $R'$ in
+    place of $R$ in front of $M^\theta$ and $M^\phi$ (at $4\kappa$).
 \end{lemma}
 ```
 
@@ -375,18 +408,26 @@ See \cite{polyhedron.without.rupert}, Lemma 44.
 :::theorem "thm:global_rational" (lean := "RationalApprox.GlobalTheorem.rational_global") (parent := "rational_global_transfer")
 Let $`\PPP` be a pointsymmetric convex polyhedron with radius $`\rho =1` and
 $`\widetilde{\PPP}` a $`\kappa`-rational approximation. Let $`\widetilde{S} \in \widetilde{\PPP}`.
-Further let $`\epsilon>0` and $`\thetab_1,\phib_1,\thetab_2,\phib_2,\alphab \in \Q \cap [-4,4]`.
+Further let
+$`\epsilon_\alpha, \epsilon_{\theta_1}, \epsilon_{\phi_1}, \epsilon_{\theta_2}, \epsilon_{\phi_2} \in \Q_{\geq 0}`
+be per-axis radii and let $`\thetab_1,\phib_1,\thetab_2,\phib_2,\alphab \in \Q \cap [-4,4]`.
 Let $`w\in\Q^2` be a unit vector. Denote $`\Mib \coloneqq M_{\Q}(\thetab_1, \phib_1)`,
 $`\Miib \coloneqq M_{\Q}(\thetab_2, \phib_2)` as well as
 $`\Mib^{\theta} \coloneqq M_{\Q}^\theta(\thetab_1, \phib_1)`,
 $`\Mib^{\phi} \coloneqq M_{\Q}^\phi(\thetab_1, \phib_1)` and analogously for
-$`\Miib^{\theta}, \Miib^{\phi}`. Finally set
+$`\Miib^{\theta}, \Miib^{\phi}`. Write
+$`E_1 \coloneqq \epsilon_\alpha + \epsilon_{\theta_1} + \epsilon_{\phi_1}` and
+$`E_2 \coloneqq \epsilon_{\theta_2} + \epsilon_{\phi_2}`, and set
 
 $$`
 \begin{align*}
-G^{\Q}& \coloneqq \langle R_{\Q}(\alphab) \Mib \widetilde{S},w \rangle - \epsilon\cdot\big(|\langle R_{\Q}'(\alphab)  \Mib \widetilde{S},w \rangle|+|\langle R_{\Q}(\alphab) \Mib^\theta \widetilde{S},w \rangle|+|\langle R_{\Q}(\alphab) \Mib^\phi \widetilde{S},w \rangle|\big) \\
-& \hspace{11cm}- 9\epsilon^2/2 - 4\kappa ( 1 + 3 \epsilon),\\
-H^{\Q}_P & \coloneqq \langle \Miib P,w \rangle + \epsilon\cdot\big(|\langle \Miib^\theta P,w \rangle|+|\langle  \Miib^\varphi P,w \rangle|\big) + 2\epsilon^2 + 3\kappa( 1+2\epsilon).
+G^{\Q} \coloneqq{}& \langle R_{\Q}(\alphab) \Mib \widetilde{S},w \rangle - \epsilon_\alpha|\langle R_{\Q}'(\alphab)  \Mib \widetilde{S},w \rangle| - \epsilon_{\theta_1}|\langle R_{\Q}(\alphab) \Mib^\theta \widetilde{S},w \rangle| - \epsilon_{\phi_1}|\langle R_{\Q}(\alphab) \Mib^\phi \widetilde{S},w \rangle| \\
+&- \frac{1}{2}\big(\epsilon_\alpha^2|\langle R_{\Q}(\alphab) \Mib \widetilde{S},w \rangle|
+  + 2\epsilon_\alpha\epsilon_{\theta_1}|\langle R_{\Q}'(\alphab) \Mib^\theta \widetilde{S},w \rangle| + 2\epsilon_\alpha\epsilon_{\phi_1}|\langle R_{\Q}'(\alphab) \Mib^\phi \widetilde{S},w \rangle|\\
+&\qquad\quad + \epsilon_{\theta_1}^2|\langle R_{\Q}(\alphab) \Mib^{\theta\theta} \widetilde{S},w \rangle| + 2\epsilon_{\theta_1}\epsilon_{\phi_1}|\langle R_{\Q}(\alphab) \Mib^{\theta\phi} \widetilde{S},w \rangle| + \epsilon_{\phi_1}^2|\langle R_{\Q}(\alphab) \Mib^{\phi\phi} \widetilde{S},w \rangle|\big)\\
+& \hspace{9cm}- \frac{E_1^3}{6} - 4\kappa \big( 1 + E_1 + \tfrac12 E_1^2\big),\\
+H^{\Q}_P \coloneqq{}& \langle \Miib P,w \rangle + \epsilon_{\theta_2}|\langle \Miib^\theta P,w \rangle|+\epsilon_{\phi_2}|\langle  \Miib^\varphi P,w \rangle|\\
+&+ \frac{1}{2}\big(\epsilon_{\theta_2}^2|\langle \Miib^{\theta\theta} P,w \rangle| + 2\epsilon_{\theta_2}\epsilon_{\phi_2}|\langle \Miib^{\theta\phi} P,w \rangle| + \epsilon_{\phi_2}^2|\langle \Miib^{\phi\phi} P,w \rangle|\big) + \frac{E_2^3}{6} + 3\kappa\big( 1+E_2+\tfrac12 E_2^2\big).
 \end{align*}
 `
 $$
@@ -394,26 +435,41 @@ $$
 If $`G^{\Q}>\max_{P\in \widetilde{\PPP}} H^{\Q}_P` then there does not exist a solution to Rupert's condition to $`\PPP` with
 
 $$`
-(\theta_1,\varphi_1,\theta_2,\varphi_2,\alpha) \in [\thetab_1\pm\epsilon,\phib_1\pm\epsilon,\thetab_2\pm\epsilon,\phib_2\pm\epsilon,\alphab\pm\epsilon].
+(\theta_1,\varphi_1,\theta_2,\varphi_2,\alpha) \in [\thetab_1\pm\epsilon_{\theta_1}]\times[\phib_1\pm\epsilon_{\phi_1}]\times[\thetab_2\pm\epsilon_{\theta_2}]\times[\phib_2\pm\epsilon_{\phi_2}]\times[\alphab\pm\epsilon_\alpha].
 `
 $$
+
+On the diagonal $`\epsilon_\alpha = \dots = \epsilon`, the rational slack
+terms become $`4\kappa(1+3\epsilon+\tfrac92\epsilon^2)` and
+$`3\kappa(1+2\epsilon+2\epsilon^2)`.
 :::
 
 ```tex
 \begin{theorem}[Rational Global Theorem] \label{thm:global_rational}
 \leanok
 \lean{RationalApprox.GlobalTheorem.rational_global}
-    Let $\PPP$ be a pointsymmetric convex polyhedron with radius $\rho =1$ and $\widetilde{\PPP}$ a $\kappa$-rational approximation. Let $\widetilde{S} \in \widetilde{\PPP}$. Further let $\epsilon>0$ and $\thetab_1,\phib_1,\thetab_2,\phib_2,\alphab \in \Q \cap [-4,4]$.
-    Let $w\in\Q^2$ be a unit vector. Denote $\Mib \coloneqq M_{\Q}(\thetab_1, \phib_1)$, $ \Miib \coloneqq M_{\Q}(\thetab_2, \phib_2)$ as well as $\Mib^{\theta} \coloneqq M_{\Q}^\theta(\thetab_1, \phib_1)$, $\Mib^{\phi} \coloneqq M_{\Q}^\phi(\thetab_1, \phib_1)$ and analogously for $\Miib^{\theta}, \Miib^{\phi}$. Finally set
+    Let $\PPP$ be a pointsymmetric convex polyhedron with radius $\rho =1$ and $\widetilde{\PPP}$ a $\kappa$-rational approximation. Let $\widetilde{S} \in \widetilde{\PPP}$. Further let
+    $\epsilon_\alpha, \epsilon_{\theta_1}, \epsilon_{\phi_1}, \epsilon_{\theta_2}, \epsilon_{\phi_2} \in \Q_{\geq 0}$
+    be per-axis radii and $\thetab_1,\phib_1,\thetab_2,\phib_2,\alphab \in \Q \cap [-4,4]$.
+    Let $w\in\Q^2$ be a unit vector. Denote $\Mib \coloneqq M_{\Q}(\thetab_1, \phib_1)$, $ \Miib \coloneqq M_{\Q}(\thetab_2, \phib_2)$ as well as $\Mib^{\theta} \coloneqq M_{\Q}^\theta(\thetab_1, \phib_1)$, $\Mib^{\phi} \coloneqq M_{\Q}^\phi(\thetab_1, \phib_1)$ and analogously for $\Miib^{\theta}, \Miib^{\phi}$. Write
+    $E_1 \coloneqq \epsilon_\alpha + \epsilon_{\theta_1} + \epsilon_{\phi_1}$ and
+    $E_2 \coloneqq \epsilon_{\theta_2} + \epsilon_{\phi_2}$, and set
     \begin{align*}
-        G^{\Q}& \coloneqq \langle R_{\Q}(\alphab) \Mib \widetilde{S},w \rangle - \epsilon\cdot\big(|\langle R_{\Q}'(\alphab)  \Mib \widetilde{S},w \rangle|+|\langle R_{\Q}(\alphab) \Mib^\theta \widetilde{S},w \rangle|+|\langle R_{\Q}(\alphab) \Mib^\phi \widetilde{S},w \rangle|\big) \\
-        & \hspace{11cm}- 9\epsilon^2/2 - 4\kappa ( 1 + 3 \epsilon),\\
-        H^{\Q}_P & \coloneqq \langle \Miib P,w \rangle + \epsilon\cdot\big(|\langle \Miib^\theta P,w \rangle|+|\langle  \Miib^\varphi P,w \rangle|\big) + 2\epsilon^2 + 3\kappa( 1+2\epsilon).
+        G^{\Q} \coloneqq{}& \langle R_{\Q}(\alphab) \Mib \widetilde{S},w \rangle - \epsilon_\alpha|\langle R_{\Q}'(\alphab)  \Mib \widetilde{S},w \rangle| - \epsilon_{\theta_1}|\langle R_{\Q}(\alphab) \Mib^\theta \widetilde{S},w \rangle| - \epsilon_{\phi_1}|\langle R_{\Q}(\alphab) \Mib^\phi \widetilde{S},w \rangle| \\
+        &- \frac{1}{2}\big(\epsilon_\alpha^2|\langle R_{\Q}(\alphab) \Mib \widetilde{S},w \rangle|
+          + 2\epsilon_\alpha\epsilon_{\theta_1}|\langle R_{\Q}'(\alphab) \Mib^\theta \widetilde{S},w \rangle| + 2\epsilon_\alpha\epsilon_{\phi_1}|\langle R_{\Q}'(\alphab) \Mib^\phi \widetilde{S},w \rangle|\\
+        &\qquad\quad + \epsilon_{\theta_1}^2|\langle R_{\Q}(\alphab) \Mib^{\theta\theta} \widetilde{S},w \rangle| + 2\epsilon_{\theta_1}\epsilon_{\phi_1}|\langle R_{\Q}(\alphab) \Mib^{\theta\phi} \widetilde{S},w \rangle| + \epsilon_{\phi_1}^2|\langle R_{\Q}(\alphab) \Mib^{\phi\phi} \widetilde{S},w \rangle|\big)\\
+        & \hspace{9cm}- \frac{E_1^3}{6} - 4\kappa \big( 1 + E_1 + \tfrac12 E_1^2\big),\\
+        H^{\Q}_P \coloneqq{}& \langle \Miib P,w \rangle + \epsilon_{\theta_2}|\langle \Miib^\theta P,w \rangle|+\epsilon_{\phi_2}|\langle  \Miib^\varphi P,w \rangle|\\
+        &+ \frac{1}{2}\big(\epsilon_{\theta_2}^2|\langle \Miib^{\theta\theta} P,w \rangle| + 2\epsilon_{\theta_2}\epsilon_{\phi_2}|\langle \Miib^{\theta\phi} P,w \rangle| + \epsilon_{\phi_2}^2|\langle \Miib^{\phi\phi} P,w \rangle|\big) + \frac{E_2^3}{6} + 3\kappa\big( 1+E_2+\tfrac12 E_2^2\big).
     \end{align*}
     If $G^{\Q}>\max_{P\in \widetilde{\PPP}} H^{\Q}_P$ then there does not exist a solution to Rupert's condition to $\PPP$ with
     \[
-    (\theta_1,\varphi_1,\theta_2,\varphi_2,\alpha) \in [\thetab_1\pm\epsilon,\phib_1\pm\epsilon,\thetab_2\pm\epsilon,\phib_2\pm\epsilon,\alphab\pm\epsilon].
+    (\theta_1,\varphi_1,\theta_2,\varphi_2,\alpha) \in [\thetab_1\pm\epsilon_{\theta_1}]\times[\phib_1\pm\epsilon_{\phi_1}]\times[\thetab_2\pm\epsilon_{\theta_2}]\times[\phib_2\pm\epsilon_{\phi_2}]\times[\alphab\pm\epsilon_\alpha].
     \]
+    (On the diagonal $\epsilon_\alpha = \dots = \epsilon$ the slack terms are
+    $4\kappa(1+3\epsilon+\tfrac92\epsilon^2)$ and
+    $3\kappa(1+2\epsilon+2\epsilon^2)$.)
 \end{theorem}
 ```
 
@@ -522,45 +578,6 @@ See \cite{polyhedron.without.rupert}, Lemma 49.
 \end{proof}
 ```
 
-:::corollary "corr:deltakappa" (parent := "rational_local_approx")
-Let $`P, Q \in \R^3` with $`\|P\|, \|Q\| \leq 1` and
-$`\widetilde{Q}` a $`\kappa`-rational approximation of $`Q`.
-Let $`\alpha, \theta, \phi, \thetab, \phib \in [-4,4]` and set
-$`M = M(\theta, \phi)`, $`M_{\Q} = M_{\Q}(\theta, \phi)`,
-$`\overline{M} = M(\thetab, \phib)`, $`\overline{M}_{\Q} = M_{\Q}(\thetab, \phib)`.
-Then
-
-$$`
-\big|\|R(\alpha) M P - \overline{M} Q\|- \| R_{\Q}(\alpha) M_{\Q} P - \overline{M}_{\Q} \widetilde{Q}\| \big| \leq 6 \kappa
-`
-
-Note that the rational side uses $`P` directly (not a rational approximation $`\widetilde{P}`).
-:::
-
-```tex
-\begin{corollary} \label{corr:deltakappa}
-    Let $P, Q \in \R^3$ with $\|P\|, \|Q\| \leq 1$ and $\widetilde{Q}$ a $\kappa$-rational approximation of $Q$.
-    Let $\alpha, \theta, \phi, \thetab, \phib \in [-4,4]$ and set $M = M(\theta, \phi)$, $M_{\Q} = M_{\Q}(\theta, \phi)$, $\overline{M} = M(\thetab, \phib)$, $\overline{M}_{\Q} = M_{\Q}(\thetab, \phib)$. Then
-     \[
-|\|R(\alpha) M P - \overline{M} Q\|- \| R_{\Q}(\alpha) M_{\Q} P - \overline{M}_{\Q} \widetilde{Q}\| | \leq 6 \kappa
-     \]
-    Note that the rational side uses $P$ directly (not a rational approximation $\widetilde{P}$).
-\end{corollary}
-```
-
-:::proof "corr:deltakappa" (uses := "corr:kappa1kappa, lem:RaRalpha")
-
-See polyhedron.without.rupert, Corollary 50.
-:::
-
-```tex
-\begin{proof}
-\leanok
-See \cite{polyhedron.without.rupert}, Corollary 50.
-\uses{corr:kappa1kappa,lem:RaRalpha}
-\end{proof}
-```
-
 :::corollary "lem:boundskappa4" (lean := "RationalApprox.bounds_kappa4") (parent := "rational_local_approx")
 In the setting of {bpref "lem:boundskappa3"}[], let $`\sqrt[+]{x}` be an upper square-root function, i.e.,
 $`\sqrt{x} \leq \sqrt[+]{x}` for all real $`x \geq 0` with rational output on rational input.
@@ -581,6 +598,11 @@ $$
 
 Assume that $`A \geq 0`.
 Then $`A \geq A_{\mathbb{Q}}`.
+
+In the Lean formalization, each applied vector $`M_{\Q}\widetilde{x}` in
+$`A_{\Q}` is additionally rounded down componentwise to a multiple of
+$`10^{-13}` so that the checker's dot products and norms use small denominators;
+the resulting perturbation is absorbed into the existing slack terms.
 :::
 
 ```tex
@@ -596,6 +618,13 @@ Then $`A \geq A_{\mathbb{Q}}`.
         A_{\Q} =         \frac{\langle M_{\Q} \widetilde{P}, M_{\Q} (\widetilde{P}-\widetilde{Q})\rangle - 10\kappa - 2 \epsilon ( \|\widetilde{P}-\widetilde{Q}\| + 2 \kappa ) \cdot  (\sqrt{2}+\varepsilon)}{ \big(\| M_{\Q} \widetilde{P}\|_{+}+\sqrt{2} \varepsilon + 3\kappa \big) \cdot \big(\|M_{\Q}(\widetilde{P}-\widetilde{Q})\|_{+}+2 \sqrt{2} \varepsilon + 6\kappa\big)}.
     \]
     Assume that $A \geq 0$. Then it holds that $A \geq A_{\Q}$.
+
+    (In the Lean formalization, each applied vector $M_{\Q} \widetilde{x}$ appearing in
+    $A_{\Q}$ is additionally rounded down componentwise to a multiple of $10^{-13}$
+    --- \texttt{Pose.rotM₂Rℚ} --- so that the checker's dot products and norms run on
+    small denominators; the resulting perturbation, at most $2 \cdot 10^{-12}$ in the
+    numerator and $2 \cdot 10^{-13}$ in each norm, is absorbed into the
+    $10\kappa$, $3\kappa$ and $6\kappa$ terms.)
 \end{corollary}
 ```
 
@@ -649,6 +678,10 @@ $$`
 (\theta_1, \phi_1, \theta_2, \phi_2, \alpha) \in [\thetab_1\pm\epsilon,\phib_1\pm\epsilon,\thetab_2\pm\epsilon,\phib_2\pm\epsilon,\alphab\pm\epsilon] \subseteq \R^5.
 `
 $$
+
+In the Lean formalization, the applied vector $`\Miib\widetilde Q_i` in the
+$`r`-condition is additionally rounded down componentwise to a multiple of
+$`10^{-13}`; the resulting perturbation is absorbed into the $`3\kappa` term.
 :::
 
 ```tex
@@ -679,15 +712,22 @@ $$
     \[
         (\theta_1, \phi_1, \theta_2, \phi_2, \alpha) \in [\thetab_1\pm\epsilon,\phib_1\pm\epsilon,\thetab_2\pm\epsilon,\phib_2\pm\epsilon,\alphab\pm\epsilon] \subseteq \R^5.
     \]
+
+    (In the Lean formalization, the applied vector $\Miib \widetilde{Q}_i$ in the
+    $r$-condition $\| \Miib \widetilde{Q}_i \|_{-} > r + \sqrt{2} \epsilon + 3\kappa$
+    is additionally rounded down componentwise to a multiple of $10^{-13}$ ---
+    \texttt{Pose.rotM₂Rℚ}, as in condition B$^{\Q}_\epsilon$ --- so that the
+    checker's lower norm runs on small denominators; the resulting perturbation of
+    at most $2 \cdot 10^{-13}$ is absorbed into the $3\kappa$ term.)
 \end{theorem}
 ```
 
-:::proof "thm:local_rational" (uses := "thm:local, lem:boundskappa3, lem:boundskappa4, corr:deltakappa, lem:ekspanningespanning")
+:::proof "thm:local_rational" (uses := "thm:local, lem:boundskappa3, lem:boundskappa4, lem:ekspanningespanning")
 :::
 
 ```tex
 \begin{proof}
 \leanok
-\uses{thm:local,lem:boundskappa3,lem:boundskappa4,corr:deltakappa,lem:ekspanningespanning},
+\uses{thm:local,lem:boundskappa3,lem:boundskappa4,lem:ekspanningespanning},
 \end{proof}
 ```
