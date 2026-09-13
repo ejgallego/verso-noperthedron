@@ -80,10 +80,10 @@ private def isIndexHtml (path : System.FilePath) : Bool :=
   s == "index.html" || s.endsWith "/index.html"
 
 private def checkSharedPreviewManifestMode : Informal.PreviewManifest.BlueprintExtraStep :=
-    fun mode cfg _st _text => do
-  match mode with
+    fun prepared => do
+  match prepared.mode with
   | .multi =>
-      let htmlRoot := cfg.destination / "html-multi"
+      let htmlRoot := prepared.config.destination / "html-multi"
       if !(← htmlRoot.pathExists) then
         Verso.reportError s!"Shared preview manifest check: output directory not found: {htmlRoot}"
       else
@@ -101,10 +101,10 @@ private def checkSharedPreviewManifestMode : Informal.PreviewManifest.BlueprintE
   | .single => pure ()
 
 private def checkInlinePreviewTemplateDedup : Informal.PreviewManifest.BlueprintExtraStep :=
-    fun mode cfg _st _text => do
-  match mode with
+    fun prepared => do
+  match prepared.mode with
   | .multi =>
-      let htmlRoot := cfg.destination / "html-multi"
+      let htmlRoot := prepared.config.destination / "html-multi"
       if !(← htmlRoot.pathExists) then
         Verso.reportError s!"Inline preview dedupe check: output directory not found: {htmlRoot}"
       else
