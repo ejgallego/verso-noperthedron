@@ -95,7 +95,7 @@ which is the natural restriction of $`\mathrm{span}(v_1,\dots,v_n)` to positive 
 
 :::lemma_ "lem:langles" (lean := "Local.langles") (parent := "local_linear_algebra")
 Let $`V_1,V_2,V_3,Y,Z \in \mathbb{R}^3` with $`\|Y \|=\| Z \|` and
-$`Y,Z \in \mathrm{span}^+(V_1,V_2,V_3)`.
+$`Z \in \mathrm{span}^+(V_1,V_2,V_3)`.
 Then there exists an $`i` with
 $`\langle V_i, Y \rangle \leq \langle V_i, Z \rangle`.
 :::
@@ -104,7 +104,7 @@ $`\langle V_i, Y \rangle \leq \langle V_i, Z \rangle`.
 \begin{lemma} \label{lem:langles}
   \lean{Local.langles}
   \leanok
-Let $V_1,V_2,V_3,Y,Z \in \R^3$ with $\|Y \|=\| Z \|$ and $Y,Z \in \mathrm{span}^+(V_1,V_2,V_3)$. Then there exists an $i$ with
+Let $V_1,V_2,V_3,Y,Z \in \R^3$ with $\|Y \|=\| Z \|$ and $Z \in \mathrm{span}^+(V_1,V_2,V_3)$. Then there exists an $i$ with
 \[
     \langle V_i, Y \rangle \leq \langle V_i, Z \rangle.
 \]
@@ -112,13 +112,23 @@ Let $V_1,V_2,V_3,Y,Z \in \R^3$ with $\|Y \|=\| Z \|$ and $Y,Z \in \mathrm{span}^
 ```
 
 :::proof "lem:langles"
-See polyhedron.without.rupert, Lemma 23.
+Write $`Z=\sum_i c_iV_i` with all $`c_i>0`. If every claimed inequality
+failed, then $`\langle Z,Z\rangle<\langle Z,Y\rangle` by taking the positive
+weighted sum. But Cauchy--Schwarz gives
+$`\langle Z,Y\rangle\leq\|Z\|\|Y\|=\|Z\|^2`, a contradiction. Thus the
+assumption that $`Y` also lies in the positive cone in Lemma 23 of
+polyhedron.without.rupert is unnecessary.
 :::
 
 ```tex
 \begin{proof}
 \leanok
-See \cite{polyhedron.without.rupert}, Lemma 23.
+Write $Z=\sum_i c_iV_i$ with all $c_i>0$. If every claimed inequality failed,
+then $\langle Z,Z\rangle<\langle Z,Y\rangle$ by taking the positive weighted sum.
+But Cauchy--Schwarz gives
+$\langle Z,Y\rangle\leq\|Z\|\|Y\|=\|Z\|^2$, a contradiction.
+Thus the assumption that $Y$ also lies in the positive cone in
+\cite{polyhedron.without.rupert}, Lemma 23, is unnecessary.
 \end{proof}
 ```
 
@@ -443,26 +453,29 @@ Then $`P_1, P_2, P_3` and $`Q_1, Q_2, Q_3` are congruent iff $`P^t P = Q^t Q`.
 ```
 
 :::proof "lem:congruent"
-From polyhedron.without.rupert, Lemma 35.
-Note that $`P^t P = Q^t Q` is equivalent to saying that
-$`\langle P_i,P_j\rangle = \langle Q_i,Q_j\rangle` for all $`1 \leq i,j \leq 3`.
-Moreover, the condition on invertibility of $`Q` can be dropped, however then
-the proof becomes somewhat less straightforward.
+An isometry preserves inner products, so congruence implies equality of the
+Gram matrices. Conversely, since the $`Q_i` form a basis, define a linear map
+$`L` by $`L(Q_i)=P_i`. The equality $`P^t P=Q^t Q` says that
+$`\langle L(Q_i),L(Q_j)\rangle=\langle Q_i,Q_j\rangle` for every $`i,j`.
+Expanding arbitrary vectors in this basis shows that $`L` preserves all inner
+products, and hence is the required linear isometry.
 
-If $`P_1, P_2, P_3` and $`Q_1, Q_2, Q_3` are congruent then
-$`\langle P_i,P_j\rangle = \langle LQ_i,LQ_j\rangle = \langle Q_i,Q_j\rangle`,
-thus $`P^t P = Q^t Q`.
-For the other direction, we claim that $`L \coloneqq PQ^{-1}` is orthonormal and
-satisfies that $`P_i = LQ_i` for all $`i=1,2,3`.
-Indeed,  $`L^t L = (PQ^{-1})^t (PQ^{-1}) = (Q^t)^{-1} P^t P Q^{-1} = \mathrm{Id}` and
-it holds that $`LQ=PQ^{-1}Q=P`, thus $`LQ_i = P_i`.
+For the same construction in matrix form, if a congruence $`L` is given then
+$`\langle P_i,P_j\rangle=\langle LQ_i,LQ_j\rangle=\langle Q_i,Q_j\rangle`,
+so $`P^tP=Q^tQ`. Conversely, with $`L\coloneqq PQ^{-1}`, we have
+$`L^tL=(PQ^{-1})^t(PQ^{-1})=(Q^t)^{-1}P^tPQ^{-1}=\mathrm{Id}` and
+$`LQ=PQ^{-1}Q=P`, so $`LQ_i=P_i` for each $`i`.
 :::
 
 ```tex
 \begin{proof}
 \leanok
-From \cite{polyhedron.without.rupert}, Lemma 35.
-Note that $P^t P = Q^t Q$ is equivalent to saying that $\langle P_i,P_j\rangle = \langle Q_i,Q_j\rangle$ for all $1 \leq i,j \leq 3$. Moreover, the condition on invertibility of $Q$ can be dropped, however then the proof becomes somewhat less straightforward.
+An isometry preserves inner products, so congruence implies equality of the Gram matrices.
+Conversely, since the $Q_i$ form a basis, define a linear map $L$ by $L(Q_i)=P_i$.
+The equality $P^t P = Q^t Q$ says that
+$\langle L(Q_i),L(Q_j)\rangle=\langle Q_i,Q_j\rangle$ for every $i,j$.
+Expanding arbitrary vectors in this basis shows that $L$ preserves all inner products,
+and hence is the required linear isometry.
 
     If $P_1, P_2, P_3$ and $Q_1, Q_2, Q_3$ are congruent then $\langle P_i,P_j\rangle = \langle LQ_i,LQ_j\rangle = \langle Q_i,Q_j\rangle$, thus $P^t P = Q^t Q$.
     For the other direction, we claim that $L \coloneqq PQ^{-1}$ is orthonormal and satisfies that $P_i = LQ_i$ for all $i=1,2,3$.
