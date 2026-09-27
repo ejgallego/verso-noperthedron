@@ -161,7 +161,7 @@ If a local node in the solution tree is valid, then there is no Rupert solution 
 \end{proof}
 ```
 
-:::theorem "thm:row_valid_imp_not_rupert_ix" (lean := "Noperthedron.Solution.Row.valid_imp_not_rupert_ix,Noperthedron.Solution.valid_split_imp_no_rupert,Noperthedron.Solution.valid_single_param_split_imp_no_rupert,Noperthedron.Solution.valid_full_split_imp_no_rupert,Noperthedron.Solution.valid_param_split_imp_no_rupert") (parent := "computational_table_soundness") (uses := "def:noperthedron")
+:::theorem "thm:row_valid_imp_not_rupert_ix" (lean := "Noperthedron.Solution.Row.valid_imp_not_rupert_ix,Noperthedron.Solution.valid_split_imp_no_rupert") (parent := "computational_table_soundness") (uses := "def:noperthedron")
 
 If we have a valid solution table, and in particular its $`i`th row is valid,
 then there is no Rupert solution of the interval of its $`i`th row.
@@ -171,10 +171,7 @@ then there is no Rupert solution of the interval of its $`i`th row.
 \begin{theorem}
 \leanok
 \lean{Noperthedron.Solution.Row.valid_imp_not_rupert_ix,
-Noperthedron.Solution.valid_split_imp_no_rupert,
-Noperthedron.Solution.valid_single_param_split_imp_no_rupert,
-Noperthedron.Solution.valid_full_split_imp_no_rupert,
-Noperthedron.Solution.valid_param_split_imp_no_rupert
+Noperthedron.Solution.valid_split_imp_no_rupert
 }
 \label{thm:row_valid_imp_not_rupert_ix}
 \uses{def:noperthedron}
@@ -185,20 +182,23 @@ then there is no Rupert solution of the interval of its $i$th row.
 
 :::proof "thm:row_valid_imp_not_rupert_ix" (uses := "thm:solution_global, thm:solution_local")
 
-By a mutual induction on the number of rows left in the table following the $`i`th.
+By strong induction on the number of rows left in the table following the $`i`th.
 This is because validity constrains each row to only refer to later entries.
-Appeal inductively to this same theorem if the row splits into other nodes in
-the tree, or appeal to {uses "thm:solution_global"}[Theorem] or {uses "thm:solution_local"}[Theorem] at the leaves.
+For a split row, every point in its interval belongs to a child interval at a
+larger index, so the induction hypothesis excludes a Rupert solution there.
+At a leaf, apply {uses "thm:solution_global"}[Theorem] or
+{uses "thm:solution_local"}[Theorem].
 :::
 
 ```tex
 \begin{proof}
 \leanok
 \uses{thm:solution_global, thm:solution_local}
-By a mutual induction on the number of rows left in the table following the $i$th. This
+By strong induction on the number of rows left in the table following the $i$th. This
 is because validity constrains each row to only refer to later entries.
-Appeal inductively to this same theorem if the row splits into other nodes in
-the tree, or appeal to Theorem~\ref{thm:solution_global} or Theorem~\ref{thm:solution_local}) at the leaves.
+For a split row, every point in its interval belongs to a child interval at a
+larger index, so the induction hypothesis excludes a Rupert solution there.
+At a leaf, apply Theorem~\ref{thm:solution_global} or Theorem~\ref{thm:solution_local}.
 \end{proof}
 ```
 

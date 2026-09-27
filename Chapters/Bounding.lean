@@ -122,21 +122,21 @@ theorem bp_norm_RzL_sub_RzL_eq {α α_ : ℝ} :
   simpa using Bounding.norm_RzL_sub_RzL_eq (α := α) (α_ := α_)
 ```
 
-:::lemma_ "lem:RxRy" (lean := "Bounding.lemma12,Bounding.lemma12_equality_iff") (parent := "bounding_trig_ineq")
+:::lemma_ "lem:RxRy" (lean := "Bounding.lemma12,Bounding.lemma12_lt_of_ne") (parent := "bounding_trig_ineq")
 For any $`\alpha,\beta\in \mathbb{R}` one has
 $`\|R_x(\alpha)R_y(\beta)-\mathrm{id}\| \leq \sqrt{\alpha^2+\beta^2}`
-with equality only for $`\alpha = \beta = 0`.
+with strict inequality unless $`\alpha = \beta = 0`.
 :::
 
 ```tex
 \begin{lemma} \label{lem:RxRy}
-\lean{Bounding.lemma12, Bounding.lemma12_equality_iff}
+\lean{Bounding.lemma12, Bounding.lemma12_lt_of_ne}
 \leanok
 For any $\alpha,\beta\in \mathbb{R}$ one has
 \[
     \|R_x(\alpha)R_y(\beta)-\id\| \leq  \sqrt{\alpha^2+\beta^2}
 \]
-with equality only for $\alpha = \beta = 0$.
+with strict inequality unless $\alpha = \beta = 0$.
 \end{lemma}
 ```
 
@@ -178,9 +178,10 @@ theorem bp_lemma12 {d d' : Fin 3} {α β : ℝ} (hd : d ≠ d') :
     ‖rot3 d α ∘L rot3 d' β - 1‖ ≤ √(α ^ 2 + β ^ 2) := by
   simpa using Bounding.lemma12 (d := d) (d' := d') (α := α) (β := β) hd
 
-theorem bp_lemma12_equality_iff {d d' : Fin 3} {α β : ℝ} (hd : d ≠ d') :
-    ‖rot3 d α ∘L rot3 d' β - 1‖ = √(α ^ 2 + β ^ 2) ↔ (α = 0 ∧ β = 0) := by
-  simpa using Bounding.lemma12_equality_iff (d := d) (d' := d') (α := α) (β := β) hd
+theorem bp_lemma12_lt_of_ne {d d' : Fin 3} {α β : ℝ} (hd : d ≠ d')
+    (h : ¬ (α = 0 ∧ β = 0)) :
+    ‖rot3 d α ∘L rot3 d' β - 1‖ < √(α ^ 2 + β ^ 2) := by
+  simpa using Bounding.lemma12_lt_of_ne hd h
 ```
 
 :::lemma_ "lem:sqrt2" (lean := "Bounding.norm_M_sub_lt,Bounding.norm_X_sub_lt") (parent := "bounding_perturbation")
@@ -210,12 +211,6 @@ See \cite{polyhedron.without.rupert}, Lemma 13.
 ```
 
 ```lean "code:lem:sqrt2"
-theorem bp_RyL_neg_compose_RyL (α : ℝ) : RyL (-α) ∘L RyL α = ContinuousLinearMap.id _ _ := by
-  simpa using Bounding.RyL_neg_compose_RyL (α := α)
-
-theorem bp_RzL_neg_compose_RzL (α : ℝ) : RzL (-α) ∘L RzL α = ContinuousLinearMap.id _ _ := by
-  simpa using Bounding.RzL_neg_compose_RzL (α := α)
-
 theorem bp_norm_M_sub_lt {ε θ θ_ φ φ_ : ℝ} (hε : 0 < ε) (hθ : |θ - θ_| ≤ ε) (hφ : |φ - φ_| ≤ ε) :
     ‖rotM θ φ - rotM θ_ φ_‖ < √2 * ε := by
   simpa using Bounding.norm_M_sub_lt hε hθ hφ
@@ -332,25 +327,47 @@ $`\|R(\alpha) M(\theta, \phi)-R(\alphab)M(\thetab,\phib)\| < \sqrt{5} \varepsilo
 \end{lemma}
 ```
 
-:::proof "lem:sqrt5" (uses := "lem:sqrt2, lem:RxRy, lem:RaRa")
-See polyhedron.without.rupert, Lemma 16.
+:::proof "lem:sqrt5" (uses := "lem:RxRy")
+Write $`R_z` and $`R_y` for rotations about the third and second axes. After
+dropping the norm-one projection and canceling common rotations, it suffices
+to bound
+$$`\|R_z(\alpha-\alphab)R_y(\phi)-R_y(\phib)R_z(\theta-\thetab)\|.`
+Insert the ordinary midpoint $`\Phi=(\phi+\phib)/2`. On each side, the two
+angle changes are bounded by $`\varepsilon` and $`\varepsilon/2`.
+{bpref "lem:RxRy"}[], applied after canceling common rotations, bounds each
+difference strictly by
+$`\sqrt{\varepsilon^2+(\varepsilon/2)^2}=\sqrt{5}\varepsilon/2`.
+If both angle changes vanish, strictness follows from $`\varepsilon>0`;
+otherwise it follows from the strictness condition in that lemma. The triangle
+inequality gives the result. The weighted intermediate angle used in
+polyhedron.without.rupert, Lemma 16, is not needed for this uniform bound.
 :::
 
 ```tex
 \begin{proof}
-\uses{lem:sqrt2, lem:RxRy, lem:RaRa}
+\uses{lem:RxRy}
 \leanok
-See \cite{polyhedron.without.rupert}, Lemma 16.
+Write $R_z$ and $R_y$ for rotations about the third and second axes.
+After dropping the norm-one projection and canceling the common rotations,
+it suffices to bound
+\[
+  \|R_z(\alpha-\alphab)R_y(\phi)
+       -R_y(\phib)R_z(\theta-\thetab)\|.
+\]
+Insert $R_y(\Phi)$ with the ordinary midpoint $\Phi=(\phi+\phib)/2$.
+On each side, the two angle changes are bounded by $\varepsilon$ and
+$\varepsilon/2$. Lemma~\ref{lem:RxRy}, applied after canceling the common
+rotations, bounds each difference strictly by
+$\sqrt{\varepsilon^2+(\varepsilon/2)^2}=\sqrt{5}\varepsilon/2$.
+If both angle changes vanish, strictness follows from $\varepsilon>0$;
+otherwise it follows from the equality condition in that lemma.
+The triangle inequality gives the result. The weighted intermediate angle
+used in \cite{polyhedron.without.rupert}, Lemma 16, is not needed for this
+uniform bound.
 \end{proof}
 ```
 
 ```lean "code:lem:sqrt5"
-theorem bp_RyL_neg_compose_RyL' (α : ℝ) : RyL (-α) ∘L RyL α = ContinuousLinearMap.id _ _ := by
-  simpa using Bounding.RyL_neg_compose_RyL (α := α)
-
-theorem bp_RzL_neg_compose_RzL' (α : ℝ) : RzL (-α) ∘L RzL α = ContinuousLinearMap.id _ _ := by
-  simpa using Bounding.RzL_neg_compose_RzL (α := α)
-
 theorem bp_norm_RM_sub_RM_le {ε θ θ_ φ φ_ α α_ : ℝ} (hε : 0 < ε) (hθ : |θ - θ_| ≤ ε) (hφ : |φ - φ_| ≤ ε)
     (hα : |α - α_| ≤ ε) :
     ‖rotprojRM θ φ α - rotprojRM θ_ φ_ α_‖ < √5 * ε := by
