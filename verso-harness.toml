@@ -31,5 +31,6 @@ default_chapters = [
 "Chapters/Main.lean" = ["Noperthedron/blueprint/src/chapters/main.tex"]
 
 [harness]
+max_missing_mathlib_modules = 2
 native_warnings = false
 strict_external_code = true
