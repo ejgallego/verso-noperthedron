@@ -1,0 +1,388 @@
+import Macros
+import Bibliography
+import Cayley
+
+open Verso.Genre
+open Verso.Genre.Manual hiding citep citet citehere
+open Informal
+
+set_option doc.verso true
+set_option verso.blueprint.trimTeXLabelPrefix true
+
+#doc (Manual) "Lower bounds of polynomials" =>
+
+%%%
+tag := "chap:polybounds"
+%%%
+
+Every leaf test reduces to a statement of the form “the polynomial $`p` is at least $`m`
+on $`[-1,1]^5`”, where $`p` has integer coefficients and degree at most $`2` in each
+variable (degree at most $`4` in $`t_0, t_1` for one family of orbit tests). This chapter
+gives the two lower bounds that are used, and the integer encoding that lets the kernel
+compute them quickly.
+
+```tex
+Every leaf test reduces to a statement of the form ``the polynomial $p$ is at least $m$
+on $[-1,1]^5$'', where $p$ has integer coefficients and degree at most $2$ in each
+variable (degree at most $4$ in $t_0, t_1$ for one family of orbit tests). This chapter
+gives the two lower bounds that are used, and the integer encoding that lets the kernel
+compute them quickly.
+```
+
+:::definition "def:pe" (lean := "Cayley.Pack.PE, Cayley.Pack.PE.ev, Cayley.Pack.PE.nrm")
+A *polynomial expression* is a term built from integer constants, the variables
+$`t_0, \dots, t_4`, addition, subtraction and multiplication. It can be evaluated in any
+commutative ring. Its *norm* is computed by replacing every constant by its
+absolute value and evaluating at $`t = (1, \dots, 1)`; it bounds the sum of the absolute
+values of the coefficients of the polynomial.
+:::
+
+```tex
+\begin{definition}
+\label{def:pe}
+\lean{Cayley.Pack.PE, Cayley.Pack.PE.ev, Cayley.Pack.PE.nrm}
+\leanok
+A \emph{polynomial expression} is a term built from integer constants, the variables
+$t_0, \dots, t_4$, addition, subtraction and multiplication. It can be evaluated in any
+commutative ring. Its \emph{norm} is computed by replacing every constant by its
+absolute value and evaluating at $t = (1, \dots, 1)$; it bounds the sum of the absolute
+values of the coefficients of the polynomial.
+\end{definition}
+```
+
+The leaf tests are written once, generically in the arithmetic: the same definition,
+instantiated with integers, is the checker; instantiated with polynomial expressions it
+produces $`p`; instantiated with reals it gives the geometric quantity. Maps that commute
+with the ring operations commute with the generic definitions, which relates the three
+instances.
+
+```tex
+The leaf tests are written once, generically in the arithmetic: the same definition,
+instantiated with integers, is the checker; instantiated with polynomial expressions it
+produces $p$; instantiated with reals it gives the geometric quantity. Maps that commute
+with the ring operations commute with the generic definitions, which relates the three
+instances.
+```
+
+# The coefficient bound
+
+:::theorem "thm:coef_bound" (lean := "Cayley.Pack.lower_le_ev, Cayley.Pack.pLower_le, Cayley.Pack.pStats_sound") (uses := "def:pe")
+*Coefficient bound.*
+
+Let $`p = \sum_m c_m t^m`. For $`t \in [-1,1]^5`,
+
+$$`
+p(t) \ge c_0 - \sum_{m \text{ with an odd exponent}} |c_m| - \sum_{\substack{m \ne 0 \text{ all exponents even}\\ c_m < 0}} |c_m|,
+  \qquad
+  |p(t) - c_0| \le \sum_{m \ne 0} |c_m|.
+`
+:::
+
+```tex
+\begin{theorem}[Coefficient bound]
+\label{thm:coef_bound}
+\lean{Cayley.Pack.lower_le_ev, Cayley.Pack.pLower_le, Cayley.Pack.pStats_sound}
+\leanok
+\uses{def:pe}
+Let $p = \sum_m c_m t^m$. For $t \in [-1,1]^5$,
+\[
+  p(t) \ge c_0 - \sum_{m \text{ with an odd exponent}} |c_m| - \sum_{\substack{m \ne 0 \text{ all exponents even}\\ c_m < 0}} |c_m|,
+  \qquad
+  |p(t) - c_0| \le \sum_{m \ne 0} |c_m|.
+\]
+\end{theorem}
+```
+
+:::proof "thm:coef_bound"
+For $`|t_i| \le 1` every monomial lies in $`[-1, 1]`, and a monomial with only even
+exponents lies in $`[0, 1]`.
+:::
+
+```tex
+\begin{proof}
+\leanok
+For $|t_i| \le 1$ every monomial lies in $[-1, 1]$, and a monomial with only even
+exponents lies in $[0, 1]$.
+\end{proof}
+```
+
+# The Bernstein bound
+
+On $`[-1, 1]` a quadratic $`a_0 + a_1 t + a_2 t^2` equals
+$`b_0 \beta_0(t) + b_1 \beta_1(t) + b_2 \beta_2(t)` with
+
+```tex
+On $[-1, 1]$ a quadratic $a_0 + a_1 t + a_2 t^2$ equals
+$b_0 \beta_0(t) + b_1 \beta_1(t) + b_2 \beta_2(t)$ with
+```
+
+$$`
+(b_0, b_1, b_2) = (a_0 - a_1 + a_2,\ a_0 - a_2,\ a_0 + a_1 + a_2),\qquad
+  \beta_0 = \Bigl(\frac{1 - t}{2}\Bigr)^2,\ \beta_1 = \frac{1 - t^2}{2},\ \beta_2 = \Bigl(\frac{1 + t}{2}\Bigr)^2.
+`
+
+```tex
+\[
+  (b_0, b_1, b_2) = (a_0 - a_1 + a_2,\ a_0 - a_2,\ a_0 + a_1 + a_2),\qquad
+  \beta_0 = \Bigl(\frac{1 - t}{2}\Bigr)^2,\ \beta_1 = \frac{1 - t^2}{2},\ \beta_2 = \Bigl(\frac{1 + t}{2}\Bigr)^2.
+\]
+```
+
+The $`\beta_\kappa` are nonnegative on $`[-1, 1]` and sum to $`1`.
+
+```tex
+The $\beta_\kappa$ are nonnegative on $[-1, 1]$ and sum to $1$.
+```
+
+:::definition "def:bernstein" (lean := "Cayley.Pack.bT, Cayley.K.bern3") (uses := "def:pe")
+The *Bernstein coefficients* of a polynomial of degree at most $`2` in each of five
+variables are obtained by applying the transformation $`(a_0, a_1, a_2) \mapsto (b_0, b_1, b_2)`
+along each variable in turn. There are $`3^5 = 243` of them.
+:::
+
+```tex
+\begin{definition}
+\label{def:bernstein}
+\lean{Cayley.Pack.bT, Cayley.K.bern3}
+\leanok
+\uses{def:pe}
+The \emph{Bernstein coefficients} of a polynomial of degree at most $2$ in each of five
+variables are obtained by applying the transformation $(a_0, a_1, a_2) \mapsto (b_0, b_1, b_2)$
+along each variable in turn. There are $3^5 = 243$ of them.
+\end{definition}
+```
+
+:::theorem "thm:bern_bound" (lean := "Cayley.Pack.bern_real, Cayley.Pack.bernGE_le") (uses := "def:bernstein")
+*Bernstein bound.*
+
+If every Bernstein coefficient of $`p` is at least $`m`, then $`p(t) \ge m` for all
+$`t \in [-1,1]^5`.
+:::
+
+```tex
+\begin{theorem}[Bernstein bound]
+\label{thm:bern_bound}
+\lean{Cayley.Pack.bern_real, Cayley.Pack.bernGE_le}
+\leanok
+\uses{def:bernstein}
+If every Bernstein coefficient of $p$ is at least $m$, then $p(t) \ge m$ for all
+$t \in [-1,1]^5$.
+\end{theorem}
+```
+
+:::proof "thm:bern_bound"
+$`p(t) = \sum_\kappa b_\kappa \prod_i \beta_{\kappa_i}(t_i)`, a convex combination of the
+Bernstein coefficients.
+:::
+
+```tex
+\begin{proof}
+\leanok
+$p(t) = \sum_\kappa b_\kappa \prod_i \beta_{\kappa_i}(t_i)$, a convex combination of the
+Bernstein coefficients.
+\end{proof}
+```
+
+Neither bound dominates the other (for $`p = t^2` the coefficient bound is $`0` and the
+Bernstein bound is $`-1`), but on the gap polynomials the Bernstein bound is usually much
+sharper; using it in addition halved the number of leaves in the certificate. It costs
+more to compute, so the checker tries the coefficient bound first.
+
+```tex
+Neither bound dominates the other (for $p = t^2$ the coefficient bound is $0$ and the
+Bernstein bound is $-1$), but on the gap polynomials the Bernstein bound is usually much
+sharper; using it in addition halved the number of leaves in the certificate. It costs
+more to compute, so the checker tries the coefficient bound first.
+```
+
+# Kronecker packing
+
+The kernel evaluates arithmetic on natural numbers with GMP, but each step of a
+recursive function is comparatively expensive. The checker therefore represents a
+polynomial by a single large integer.
+
+```tex
+The kernel evaluates arithmetic on natural numbers with GMP, but each step of a
+recursive function is comparatively expensive. The checker therefore represents a
+polynomial by a single large integer.
+```
+
+:::definition "def:layout" (lean := "Cayley.Pack.Layout, Cayley.Pack.Layout.idx, Cayley.Pack.kron") (uses := "def:pe")
+A *layout* assigns to every exponent vector $`m` with $`m_i < r_i` the slot
+$`\mathrm{idx}(m) = \sum_i m_i s_i`, where $`s_i = \prod_{i' < i} r_{i'}`. For a slot width
+$`W`, the *Kronecker point* is $`t_i = 2^{W s_i}`.
+:::
+
+```tex
+\begin{definition}
+\label{def:layout}
+\lean{Cayley.Pack.Layout, Cayley.Pack.Layout.idx, Cayley.Pack.kron}
+\leanok
+\uses{def:pe}
+A \emph{layout} assigns to every exponent vector $m$ with $m_i < r_i$ the slot
+$\mathrm{idx}(m) = \sum_i m_i s_i$, where $s_i = \prod_{i' < i} r_{i'}$. For a slot width
+$W$, the \emph{Kronecker point} is $t_i = 2^{W s_i}$.
+\end{definition}
+```
+
+:::lemma_ "lem:kronecker" (lean := "Cayley.Pack.Layout.ev_kron, Cayley.Pack.enc_eq") (uses := "def:layout")
+If the exponents of $`p` fit the layout, then $`p` evaluated at the Kronecker point is
+$`\sum_j c_j 2^{W j}`, where $`c_j` is the coefficient in slot $`j`. If moreover
+$`|c_j| < 2^{W-1}` for all $`j`, then adding $`2^{W-1}` to every slot gives a natural number
+whose $`j`-th base-$`2^W` digit is $`c_j + 2^{W-1}`.
+:::
+
+```tex
+\begin{lemma}
+\label{lem:kronecker}
+\lean{Cayley.Pack.Layout.ev_kron, Cayley.Pack.enc_eq}
+\leanok
+\uses{def:layout}
+If the exponents of $p$ fit the layout, then $p$ evaluated at the Kronecker point is
+$\sum_j c_j 2^{W j}$, where $c_j$ is the coefficient in slot $j$. If moreover
+$|c_j| < 2^{W-1}$ for all $j$, then adding $2^{W-1}$ to every slot gives a natural number
+whose $j$-th base-$2^W$ digit is $c_j + 2^{W-1}$.
+\end{lemma}
+```
+
+:::proof "lem:kronecker"
+Evaluation at the Kronecker point is a ring homomorphism, and the mixed-radix indexing
+is injective on the exponents that fit.
+:::
+
+```tex
+\begin{proof}
+\leanok
+Evaluation at the Kronecker point is a ring homomorphism, and the mixed-radix indexing
+is injective on the exponents that fit.
+\end{proof}
+```
+
+Since evaluation is a ring homomorphism, the checker computes $`p` at the Kronecker
+point with a handful of big-integer additions and multiplications. Every coefficient
+is then available as a digit: the top bit of each offset digit is its sign, a bitwise
+*and* with a mask selects a set of slots, and the sum of a set of digits is a
+remainder modulo $`2^W - 1`.
+
+```tex
+Since evaluation is a ring homomorphism, the checker computes $p$ at the Kronecker
+point with a handful of big-integer additions and multiplications. Every coefficient
+is then available as a digit: the top bit of each offset digit is its sign, a bitwise
+\emph{and} with a mask selects a set of slots, and the sum of a set of digits is a
+remainder modulo $2^W - 1$.
+```
+
+:::lemma_ "lem:packed_bounds" (lean := "Cayley.Pack.pLowerL_eq, Cayley.Pack.pStatsL_eq, Cayley.Pack.bern3_pv, Cayley.Pack.bernGE_spec") (uses := "lem:kronecker, thm:coef_bound, def:bernstein")
+If the coefficient norm of $`p` is below the bound fixed by the slot width, then the
+checker's mask computations applied to $`p` at the Kronecker point return exactly the
+coefficient bound of Theorem {bpref "thm:coef_bound"}[], and its packed Bernstein transform
+returns the packed Bernstein coefficients. A Bernstein test that passes therefore
+certifies that every Bernstein coefficient is at least $`m`.
+:::
+
+```tex
+\begin{lemma}
+\label{lem:packed_bounds}
+\lean{Cayley.Pack.pLowerL_eq, Cayley.Pack.pStatsL_eq, Cayley.Pack.bern3_pv, Cayley.Pack.bernGE_spec}
+\leanok
+\uses{lem:kronecker, thm:coef_bound, def:bernstein}
+If the coefficient norm of $p$ is below the bound fixed by the slot width, then the
+checker's mask computations applied to $p$ at the Kronecker point return exactly the
+coefficient bound of Theorem~\ref{thm:coef_bound}, and its packed Bernstein transform
+returns the packed Bernstein coefficients. A Bernstein test that passes therefore
+certifies that every Bernstein coefficient is at least $m$.
+\end{lemma}
+```
+
+:::proof "lem:packed_bounds" (uses := "lem:packN")
+Digit-by-digit arithmetic on packed numbers (Lemma {bpref "lem:packN"}[]). The Bernstein
+transform along variable $`i` separates the slots by their digit $`i` with masks, shifts
+them to a common position, and recombines them.
+:::
+
+```tex
+\begin{proof}
+\leanok
+\uses{lem:packN}
+Digit-by-digit arithmetic on packed numbers (Lemma~\ref{lem:packN}). The Bernstein
+transform along variable $i$ separates the slots by their digit $i$ with masks, shifts
+them to a common position, and recombines them.
+\end{proof}
+```
+
+:::lemma_ "lem:packN" (lean := "Cayley.Pack.packN, Cayley.Pack.packN_land, Cayley.Pack.packN_add, Cayley.Pack.packN_signs, Cayley.Pack.packN_mod")
+Let $`\mathrm{pack}(d) = \sum_{j < n} d_j 2^{W j}` with every digit $`d_j < 2^W`. Bitwise
+*and*, digit-wise sums and differences (when no digit over- or underflows), the
+extraction of the top bit of every digit, and the sum of all digits (via the remainder
+modulo $`2^W - 1`, when that sum is below $`2^W - 1`) all act digit by digit.
+:::
+
+```tex
+\begin{lemma}
+\label{lem:packN}
+\lean{Cayley.Pack.packN, Cayley.Pack.packN_land, Cayley.Pack.packN_add, Cayley.Pack.packN_signs, Cayley.Pack.packN_mod}
+\leanok
+Let $\mathrm{pack}(d) = \sum_{j < n} d_j 2^{W j}$ with every digit $d_j < 2^W$. Bitwise
+\emph{and}, digit-wise sums and differences (when no digit over- or underflows), the
+extraction of the top bit of every digit, and the sum of all digits (via the remainder
+modulo $2^W - 1$, when that sum is below $2^W - 1$) all act digit by digit.
+\end{lemma}
+```
+
+:::proof "lem:packN"
+Induction on $`n`.
+:::
+
+```tex
+\begin{proof}
+\leanok
+Induction on $n$.
+\end{proof}
+```
+
+The checker uses slot width $`W = 400` and requires coefficient norms below $`2^{390}`,
+which leaves room for the Bernstein transform.
+
+```tex
+The checker uses slot width $W = 400$ and requires coefficient norms below $2^{390}$,
+which leaves room for the Bernstein transform.
+```
+
+:::lemma_ "lem:norm_guard" (lean := "Cayley.Pack.gapNrm_mono, Cayley.Pack.gapNrmOK_worst, Cayley.Pack.gapNrmOK_box") (uses := "lem:packed_bounds")
+*Norm guard.*
+
+If a gap leaf's box has scale $`2^K` with $`K \le 16` and its direction has
+$`|w_0|, |w_1| \le 1024`, then every polynomial the leaf decodes has coefficient norm below
+$`2^{390}`.
+:::
+
+```tex
+\begin{lemma}[Norm guard]
+\label{lem:norm_guard}
+\lean{Cayley.Pack.gapNrm_mono, Cayley.Pack.gapNrmOK_worst, Cayley.Pack.gapNrmOK_box}
+\leanok
+\uses{lem:packed_bounds}
+If a gap leaf's box has scale $2^K$ with $K \le 16$ and its direction has
+$|w_0|, |w_1| \le 1024$, then every polynomial the leaf decodes has coefficient norm below
+$2^{390}$.
+\end{lemma}
+```
+
+:::proof "lem:norm_guard"
+The norm bounds are computed by the same formulas as the polynomials, with each operation
+acting on norms; this only adds and multiplies, so it is monotone in the magnitudes of the
+inputs. Every box of the walk has $`|c_i| + |h_i| \le 2 \cdot 2^K` and the vertex coordinates
+are below $`2^{161}`, so the norms are at most those of the worst box (scale $`2^{16}`, all centres
+and radii $`2^{17}`), which are below $`2^{390}` by direct computation.
+:::
+
+```tex
+\begin{proof}
+\leanok
+The norm bounds are computed by the same formulas as the polynomials, with each operation
+acting on norms; this only adds and multiplies, so it is monotone in the magnitudes of the
+inputs. Every box of the walk has $|c_i| + |h_i| \le 2 \cdot 2^K$ and the vertex coordinates
+are below $2^{161}$, so the norms are at most those of the worst box (scale $2^{16}$, all centres
+and radii $2^{17}$), which are below $2^{390}$ by direct computation.
+\end{proof}
+```

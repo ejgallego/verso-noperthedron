@@ -1,53 +1,74 @@
-/-
-Copyright (c) 2025 Lean FRO LLC. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Author: David Renshaw, Jason Reed, Adaptation to Verso by Emilio J. Gallego Arias
--/
-
-import Verso
-import VersoManual
-import VersoBlueprint
 import Macros
-import Noperthedron.Rupert.Equivalences.RupertEquivRupertSet
-import Noperthedron.ConvertPose
-import Noperthedron.CommonCenter
-import Noperthedron.Vertices.Exact
+import Bibliography
+import Cayley
 
-open Verso.Genre Manual Informal
-open Noperthedron
+open Verso.Genre
+open Verso.Genre.Manual hiding citep citet citehere
+open Informal
 
--- EJGA: Seems like a good idea for hybrid setups
 set_option doc.verso true
 set_option verso.blueprint.trimTeXLabelPrefix true
 
-set_option pp.rawOnError true
+#doc (Manual) "Rupert pairs" =>
 
-#doc (Manual) "Preliminaries" =>
+%%%
+tag := "chap:prelims"
+%%%
 
-TODO: This whole chapter needs organization, it's just a grab bag of miscellaneous results for now.
+Write $`\pi \colon \R^3 \to \R^2` for the projection $`(x_0, x_1, x_2) \mapsto (x_0, x_1)`
+onto the screen.
 
 ```tex
-TODO: This whole chapter needs organization, it's just a grab bag of miscellaneous results for now.
+Write $\pi \colon \R^3 \to \R^2$ for the projection $(x_0, x_1, x_2) \mapsto (x_0, x_1)$
+onto the screen.
 ```
 
-:::group "prelims_rupert_equiv"
-Equivalence between Rupert polyhedra and Rupert sets.
+:::definition "def:rupert" (lean := "IsRupert")
+A convex polyhedron with vertex set $`V` is *Rupert* if there are rotations
+$`R_i, R_o \in SO(3)` and an offset $`o \in \R^2` such that
+
+$$`
+o + \pi(R_i \hull{V}) \subseteq \operatorname{int} \pi(R_o \hull{V}).
+`
 :::
 
-:::group "prelims_pose_reduction"
-Pose normalization and reduction lemmas.
+```tex
+\begin{definition}
+\label{def:rupert}
+\lean{IsRupert}
+\leanok
+A convex polyhedron with vertex set $V$ is \emph{Rupert} if there are rotations
+$R_i, R_o \in SO(3)$ and an offset $o \in \R^2$ such that
+\[
+  o + \pi(R_i \hull{V}) \subseteq \operatorname{int} \pi(R_o \hull{V}).
+\]
+\end{definition}
+```
+
+:::definition "def:exists_non_rupert" (lean := "ExistsNonRupertPolyhedron") (uses := "def:rupert")
+The main statement: there is a finite set $`V \subseteq \R^3` whose convex hull has
+nonempty interior and which is not Rupert.
 :::
 
-:::group "prelims_pointsymmetry_reduction"
-Pointsymmetry reduction to rotational Rupert poses.
-:::
+```tex
+\begin{definition}
+\label{def:exists_non_rupert}
+\lean{ExistsNonRupertPolyhedron}
+\leanok
+\uses{def:rupert}
+The main statement: there is a finite set $V \subseteq \R^3$ whose convex hull has
+nonempty interior and which is not Rupert.
+\end{definition}
+```
 
-# Rupert Sets
+# Rupert sets
 
-:::theorem "thm:rupert_iff_rupert_set" (lean := "rupert_iff_rupert_set") (parent := "prelims_rupert_equiv")
-The following are equivalent:
-- The convex polyhedron with vertex set $`v` is Rupert.
-- The convex closure of $`v` is a Rupert set.
+:::theorem "thm:rupert_iff_rupert_set" (lean := "rupert_iff_rupert_set") (uses := "def:rupert")
+*Rupert Polyhedron iff Rupert Set.*
+
+The convex polyhedron with vertex set $`V` is Rupert if and only if the convex hull of
+$`V` is a Rupert set, i.e. there is a pose (two rotations and an offset) under which
+the closure of the inner shadow lies in the interior of the outer shadow.
 :::
 
 ```tex
@@ -55,62 +76,27 @@ The following are equivalent:
 \label{thm:rupert_iff_rupert_set}
 \lean{rupert_iff_rupert_set}
 \leanok
-The following are equivalent:
-\begin{itemize}
-\item The convex polyhedron with vertex set $v$ is Rupert.
-\item The convex closure of $v$ is a Rupert set.
-\end{itemize}
+\uses{def:rupert}
+The convex polyhedron with vertex set $V$ is Rupert if and only if the convex hull of
+$V$ is a Rupert set, i.e.\ there is a pose (two rotations and an offset) under which
+the closure of the inner shadow lies in the interior of the outer shadow.
 \end{theorem}
 ```
 
 :::proof "thm:rupert_iff_rupert_set"
-TODO: import this from the other repo
+The convex hull of a finite set is compact, so its shadow is closed.
 :::
 
 ```tex
 \begin{proof}
 \leanok
-TODO: import this from the other repo
+The convex hull of a finite set is compact, so its shadow is closed.
 \end{proof}
 ```
 
-# Poses
-
-TODO
-
-```tex
-TODO
-```
-
-:::theorem "thm:pose_of_matrix_pose" (lean := "pose_of_matrix_pose,converted_pose_rupert_iff") (parent := "prelims_pose_reduction")
-Given a pose with zero offset, there exists a 5-parameter pose that is equivalent to it.
-:::
-
-```tex
-\begin{theorem}
-\label{thm:pose_of_matrix_pose}
-\lean{pose_of_matrix_pose, converted_pose_rupert_iff}
-\leanok
-Given a pose with zero offset, there exists a 5-parameter pose that is equivalent to it.
-\end{theorem}
-```
-
-:::proof "thm:pose_of_matrix_pose"
-By putting the pose into a canonical form as a Z rotation followed by a Y followed by a Z.
-:::
-
-```tex
-\begin{proof}
-By putting the pose into a canonical form as a Z rotation followed by a Y followed by a Z.
-\leanok
-\end{proof}
-```
-
-# Pointsymmetry and Rupertness
-
-:::theorem "thm:rupert_implies_rot_rupert" (lean := "rupert_implies_rot_rupert") (parent := "prelims_pointsymmetry_reduction")
-If a set is point symmetric and convex, then it being Rupert implies
-it being purely rotationally Rupert.
+:::theorem "thm:rupert_implies_rot_rupert" (lean := "rupert_implies_rot_rupert") (uses := "def:pointsymmetric")
+Let $`S \subseteq \R^3` be point-symmetric and convex. If a pose with offset $`o`
+passes $`S` through itself, then so does the same pose with offset $`0`.
 :::
 
 ```tex
@@ -118,18 +104,141 @@ it being purely rotationally Rupert.
 \label{thm:rupert_implies_rot_rupert}
 \lean{rupert_implies_rot_rupert}
 \leanok
-If a set is point symmetric and convex, then it being Rupert implies
-it being purely rotationally Rupert.
+\uses{def:pointsymmetric}
+Let $S \subseteq \R^3$ be point-symmetric and convex. If a pose with offset $o$
+passes $S$ through itself, then so does the same pose with offset $0$.
 \end{theorem}
 ```
 
 :::proof "thm:rupert_implies_rot_rupert"
-TODO: informalize proof
+Write $`K` for the closure of the inner shadow and $`L` for the interior of the outer
+shadow; both are point-symmetric and $`L` is convex. From $`o + K \subseteq L` and
+symmetry, $`-o + K = -(o + K) \subseteq L`. Every $`k \in K` is the midpoint of
+$`o + k \in L` and $`-o + k \in L`, so $`k \in L` by convexity.
 :::
 
 ```tex
 \begin{proof}
 \leanok
-TODO: informalize proof
+Write $K$ for the closure of the inner shadow and $L$ for the interior of the outer
+shadow; both are point-symmetric and $L$ is convex. From $o + K \subseteq L$ and
+symmetry, $-o + K = -(o + K) \subseteq L$. Every $k \in K$ is the midpoint of
+$o + k \in L$ and $-o + k \in L$, so $k \in L$ by convexity.
 \end{proof}
+```
+
+# Shadows and the separation criterion
+
+From now on $`\PPP` denotes the Noperthedron (Definition {bpref "def:noperthedron"}[]).
+
+```tex
+From now on $\PPP$ denotes the Noperthedron (Definition~\ref{def:noperthedron}).
+```
+
+:::definition "def:shadow" (lean := "Cayley.shadow, Cayley.RupPair") (uses := "def:noperthedron")
+The *shadow* of a $`3 \times 3` matrix $`R` is $`\mathrm{Sh}(R) = \pi(R\,\PPP)`.
+A pair of matrices $`(R_o, R_i)` is a *Rupert pair* if
+$`\overline{\mathrm{Sh}(R_i)} \subseteq \operatorname{int} \mathrm{Sh}(R_o)`.
+:::
+
+```tex
+\begin{definition}
+\label{def:shadow}
+\lean{Cayley.shadow, Cayley.RupPair}
+\leanok
+\uses{def:noperthedron}
+The \emph{shadow} of a $3 \times 3$ matrix $R$ is $\mathrm{Sh}(R) = \pi(R\,\PPP)$.
+A pair of matrices $(R_o, R_i)$ is a \emph{Rupert pair} if
+$\overline{\mathrm{Sh}(R_i)} \subseteq \operatorname{int} \mathrm{Sh}(R_o)$.
+\end{definition}
+```
+
+:::lemma_ "lem:exists_rup_pair" (lean := "Cayley.exists_rupPair") (uses := "def:shadow, thm:rupert_iff_rupert_set, thm:rupert_implies_rot_rupert, lemma:nopert_point_symmetric")
+If $`\PPP` is Rupert, then there is a Rupert pair $`(R_o, R_i)` with
+$`R_o, R_i \in SO(3)`.
+:::
+
+```tex
+\begin{lemma}
+\label{lem:exists_rup_pair}
+\lean{Cayley.exists_rupPair}
+\leanok
+\uses{def:shadow, thm:rupert_iff_rupert_set, thm:rupert_implies_rot_rupert, lemma:nopert_point_symmetric}
+If $\PPP$ is Rupert, then there is a Rupert pair $(R_o, R_i)$ with
+$R_o, R_i \in SO(3)$.
+\end{lemma}
+```
+
+:::proof "lem:exists_rup_pair"
+Combine Theorem {bpref "thm:rupert_iff_rupert_set"}[] and
+Theorem {bpref "thm:rupert_implies_rot_rupert"}[]; $`\PPP` is point-symmetric
+(Lemma {bpref "lemma:nopert_point_symmetric"}[]) and convex.
+:::
+
+```tex
+\begin{proof}
+\leanok
+Combine Theorem~\ref{thm:rupert_iff_rupert_set} and
+Theorem~\ref{thm:rupert_implies_rot_rupert}; $\PPP$ is point-symmetric
+(Lemma~\ref{lemma:nopert_point_symmetric}) and convex.
+\end{proof}
+```
+
+For $`w = (w_0, w_1) \in \R^2` write $`\langle w, x \rangle = w_0 x_0 + w_1 x_1` for
+$`x \in \R^3` (only the screen coordinates enter).
+
+```tex
+For $w = (w_0, w_1) \in \R^2$ write $\langle w, x \rangle = w_0 x_0 + w_1 x_1$ for
+$x \in \R^3$ (only the screen coordinates enter).
+```
+
+:::theorem "thm:separation" (lean := "Cayley.not_rupPair_of_sep") (uses := "def:shadow")
+*Separation criterion.*
+
+Let $`S` be a vertex of $`\PPP` and $`w \ne 0`. If
+
+$$`
+\langle w, R_o T \rangle \le \langle w, R_i S \rangle
+`
+
+for every vertex $`T` of $`\PPP`, then $`(R_o, R_i)` is not a Rupert pair.
+:::
+
+```tex
+\begin{theorem}[Separation criterion]
+\label{thm:separation}
+\lean{Cayley.not_rupPair_of_sep}
+\leanok
+\uses{def:shadow}
+Let $S$ be a vertex of $\PPP$ and $w \ne 0$. If
+\[
+  \langle w, R_o T \rangle \le \langle w, R_i S \rangle
+\]
+for every vertex $T$ of $\PPP$, then $(R_o, R_i)$ is not a Rupert pair.
+\end{theorem}
+```
+
+:::proof "thm:separation"
+The outer shadow is the convex hull of the points $`\pi(R_o T)`, so it lies in the
+closed half-plane $`\{ z : \langle w, z \rangle \le \langle w, R_i S \rangle \}`. The
+point $`\pi(R_i S)` of the inner shadow lies on the boundary line of this half-plane,
+so it is not an interior point of the outer shadow.
+:::
+
+```tex
+\begin{proof}
+\leanok
+The outer shadow is the convex hull of the points $\pi(R_o T)$, so it lies in the
+closed half-plane $\{ z : \langle w, z \rangle \le \langle w, R_i S \rangle \}$. The
+point $\pi(R_i S)$ of the inner shadow lies on the boundary line of this half-plane,
+so it is not an interior point of the outer shadow.
+\end{proof}
+```
+
+Only a non-strict inequality is needed, so poses in which the two shadows touch need
+no special treatment.
+
+```tex
+Only a non-strict inequality is needed, so poses in which the two shadows touch need
+no special treatment.
 ```

@@ -15,14 +15,13 @@ import Contents.TeXPrelude
 import Authors
 import Bibliography
 import Contents.Introduction
-import Contents.Compatibility
 import Chapters.Noperthedron
-import Chapters.Bounding
 import Chapters.Prelims
-import Chapters.GlobalTheorem
-import Chapters.LocalTheorem
-import Chapters.Rational
-import Chapters.Computational
+import Chapters.Cayley
+import Chapters.Reduction
+import Chapters.Certificates
+import Chapters.PolynomialBounds
+import Chapters.Data
 import Chapters.Main
 
 open Verso.Genre
@@ -44,12 +43,12 @@ authors := ["David Renshaw", "Jason Reed"]
 
 {include 0 Contents.Introduction}
 {include 0 Chapters.Noperthedron}
-{include 0 Chapters.Bounding}
 {include 0 Chapters.Prelims}
-{include 0 Chapters.GlobalTheorem}
-{include 0 Chapters.LocalTheorem}
-{include 0 Chapters.Rational}
-{include 0 Chapters.Computational}
+{include 0 Chapters.Cayley}
+{include 0 Chapters.Reduction}
+{include 0 Chapters.Certificates}
+{include 0 Chapters.PolynomialBounds}
+{include 0 Chapters.Data}
 {include 0 Chapters.Main}
 
 {blueprint_graph}

@@ -7,6 +7,8 @@ open Informal
 tex_prelude r#"
 % KaTeX in the current harness is missing this shorthand.
 \newcommand{\Q}{\mathbb{Q}}
+\providecommand{\Z}{\mathbb{Z}}
+\providecommand{\tr}{\mathrm{tr}}
 % \newcommand{\R}{\mathbb{R}}
 % \newcommand{\N}{\mathbb{N}}
 \newcommand{\hull}[1]{\mathsf{Co}(#1)}

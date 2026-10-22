@@ -1,234 +1,280 @@
-/-
-Copyright (c) 2025 Lean FRO LLC. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Author: David Renshaw, Jason Reed, Adaptation to Verso by Emilio J. Gallego Arias
--/
-
-import Verso
-import VersoManual
-import VersoBlueprint
 import Macros
 import Bibliography
-import Noperthedron.NoperthedronIsNotRupert
+import Cayley
 
-open Verso.Genre Manual Informal
-open Noperthedron
+open Verso.Genre
+open Verso.Genre.Manual hiding citep citet citehere
+open Informal
 
 set_option doc.verso true
 set_option verso.blueprint.trimTeXLabelPrefix true
-set_option pp.rawOnError true
-set_option verso.code.warnLineLength 0
 
-#doc (Manual) "Main Theorems" =>
+#doc (Manual) "The case analysis and the main theorem" =>
 
-:::group "main_tight_interval"
-No Rupert solution on the certified tight interval.
-:::
+%%%
+tag := "chap:main"
+%%%
 
-:::group "main_pose_reductions"
-Reductions from general poses to certified subcases.
-:::
+# Root boxes
 
-:::group "main_final_nonrupert"
-Final non-Rupert conclusions for the noperthedron.
-:::
+:::definition "def:root_boxes" (lean := "Cayley.K.rootK") (uses := "def:box")
+There are 15 root boxes, all with $`(u, v) \in [0, 1] \times [0, \frac12]`:
 
-:::theorem "thm:no_nopert_tight_pose" (lean := "Noperthedron.no_nopert_tight_pose") (parent := "main_tight_interval") (uses := "def:noperthedron")
-
-There does not in fact exist a noperthedron Rupert solution with
-
-$$`
-\begin{align*}
-\theta_1,\theta_2&\in[0,2\pi/15] \subset [0,0.42], \\
-\varphi_1&\in [0,\pi] \subset [0,3.15],\\
-\varphi_2&\in [0,\pi/2] \subset [0,1.58],\\
-\alpha &\in [-\pi/2,\pi/2] \subset [-1.58,1.58].
-\end{align*}
-`
+- charts $`1, 2, 3` with $`r \in [-1, 1]^3`;
+- chart $`0`, one box for each face $`f`, with $`(s_0, s_1) \in [-1,1]^2` and
+     $`\rho \in [0, 1]`;
+- chart $`4`, one box for each face $`f`, with $`(s_0, s_1) \in [-1,1]^2` and
+     $`\rho \in [0, 2]`.
 :::
 
 ```tex
-\begin{theorem}
-\label{thm:no_nopert_tight_pose}
-\lean{Noperthedron.no_nopert_tight_pose}
-\uses{def:noperthedron}
+\begin{definition}
+\label{def:root_boxes}
+\lean{Cayley.K.rootK}
 \leanok
-There does not in fact exist a noperthedron Rupert solution with
-\begin{align*}
-\theta_1,\theta_2&\in[0,2\pi/15] \subset [0,0.42], \\
-\varphi_1&\in [0,\pi] \subset [0,3.15],\\
-\varphi_2&\in [0,\pi/2] \subset [0,1.58],\\
-\alpha &\in [-\pi/2,\pi/2] \subset [-1.58,1.58].
-\end{align*}
-\end{theorem}
+\uses{def:box}
+There are 15 root boxes, all with $(u, v) \in [0, 1] \times [0, \frac12]$:
+\begin{itemize}
+\item charts $1, 2, 3$ with $r \in [-1, 1]^3$;
+\item chart $0$, one box for each face $f$, with $(s_0, s_1) \in [-1,1]^2$ and
+  $\rho \in [0, 1]$;
+\item chart $4$, one box for each face $f$, with $(s_0, s_1) \in [-1,1]^2$ and
+  $\rho \in [0, 2]$.
+\end{itemize}
+\end{definition}
 ```
 
-:::proof "thm:no_nopert_tight_pose" (uses := "thm:exists_solution_table, thm:row_valid_imp_not_rupert")
+:::lemma_ "lem:cover" (lean := "Cayley.Pack.cover, Cayley.Pack.rootK_inv") (uses := "def:root_boxes, def:reduced, lem:exists_face")
+*Coverage.*
 
-By {uses "thm:exists_solution_table"}[this theorem], there is a valid solution table
-containing a valid row whose pose interval is a superset of
-the 5-dimensional interval above. By {uses "thm:row_valid_imp_not_rupert"}[this theorem],
-there is no Rupert solution in that interval.
+Every reduced $`(u, v, j, r)` is a point of one of the root boxes of chart $`j`.
+:::
+
+```tex
+\begin{lemma}[Coverage]
+\label{lem:cover}
+\lean{Cayley.Pack.cover, Cayley.Pack.rootK_inv}
+\leanok
+\uses{def:root_boxes, def:reduced, lem:exists_face}
+Every reduced $(u, v, j, r)$ is a point of one of the root boxes of chart $j$.
+\end{lemma}
+```
+
+:::proof "lem:cover"
+The wedge and disk conditions give $`0 \le u \le 1` and $`0 \le v \le \frac{57}{128}u \le \frac12`.
+In charts 1--3, $`|r_i| \le 1`. In charts 0 and 4, Lemma {bpref "lem:exists_face"}[] writes
+$`r = \rho\, c_f(s_0, s_1)` with $`0 \le \rho \le 1` or $`0 \le \rho \le 2`.
 :::
 
 ```tex
 \begin{proof}
 \leanok
-\uses{thm:exists_solution_table,thm:row_valid_imp_not_rupert}
-By \ref{thm:exists_solution_table}, there is a valid solution table
-containing a valid row whose pose interval is a superset of
-the 5-d interval above. By \ref{thm:row_valid_imp_not_rupert}, this means
-there is no Rupert solution in that interval.
+The wedge and disk conditions give $0 \le u \le 1$ and $0 \le v \le \frac{57}{128}u \le \frac12$.
+In charts 1--3, $|r_i| \le 1$. In charts 0 and 4, Lemma~\ref{lem:exists_face} writes
+$r = \rho\, c_f(s_0, s_1)$ with $0 \le \rho \le 1$ or $0 \le \rho \le 2$.
 \end{proof}
 ```
 
-:::theorem "thm:no_nopert_pose" (lean := "Noperthedron.no_nopert_pose") (parent := "main_pose_reductions")
-There is no 5-parameter pose that makes the noperthedron have the Rupert property.
+# The tree walk
+
+:::definition "def:kcheck" (lean := "Cayley.K.KTree, Cayley.K.KBox.split, Cayley.K.kCheck") (uses := "def:gap_leaf, def:dom_leaf")
+A certificate tree has internal nodes that split a box in half along one coordinate,
+and leaves that are gap leaves or domain leaves. A tree is *accepted* on a box if
+every leaf passes on its sub-box.
 :::
 
 ```tex
-\begin{theorem}
-\label{thm:no_nopert_pose}
-\lean{Noperthedron.no_nopert_pose}
+\begin{definition}
+\label{def:kcheck}
+\lean{Cayley.K.KTree, Cayley.K.KBox.split, Cayley.K.kCheck}
 \leanok
-There is no 5-parameter pose that makes the noperthedron have the Rupert property.
-\end{theorem}
+\uses{def:gap_leaf, def:dom_leaf}
+A certificate tree has internal nodes that split a box in half along one coordinate,
+and leaves that are gap leaves or domain leaves. A tree is \emph{accepted} on a box if
+every leaf passes on its sub-box.
+\end{definition}
 ```
 
-:::proof "thm:no_nopert_pose" (uses := "thm:no_nopert_tight_pose, cor:rupert_tightening")
+Splitting halves one radius $`h_i`; if $`h_i` is odd, the scale $`K` is first increased by one
+and all centres and radii are doubled, so that box coordinates stay integers.
 
-Theorem {uses "thm:no_nopert_tight_pose"}[] says there is no tight pose
-that makes the noperthedron Rupert. Corollary {uses "cor:rupert_tightening"}[]
-says that this suffices for the general case.
+```tex
+Splitting halves one radius $h_i$; if $h_i$ is odd, the scale $K$ is first increased by one
+and all centres and radii are doubled, so that box coordinates stay integers.
+```
+
+:::lemma_ "lem:split_cover" (lean := "Cayley.Pack.split_cover") (uses := "def:kcheck")
+Every point of a box is a point of one of its two halves.
+:::
+
+```tex
+\begin{lemma}
+\label{lem:split_cover}
+\lean{Cayley.Pack.split_cover}
+\leanok
+\uses{def:kcheck}
+Every point of a box is a point of one of its two halves.
+\end{lemma}
+```
+
+:::proof "lem:split_cover"
+If $`t_d \le 0` the point is the point of the lower half at $`2 t_d + 1`, otherwise of the
+upper half at $`2 t_d - 1`.
 :::
 
 ```tex
 \begin{proof}
-\uses{thm:no_nopert_tight_pose, cor:rupert_tightening}
 \leanok
-Theorem~\ref{thm:no_nopert_tight_pose} says there is no tight pose
-that makes the noperthedron Rupert. Corollary~\ref{cor:rupert_tightening}
-says that this suffices for the general case.
+If $t_d \le 0$ the point is the point of the lower half at $2 t_d + 1$, otherwise of the
+upper half at $2 t_d - 1$.
 \end{proof}
 ```
 
-:::theorem "thm:no_nopert_rot_pose" (lean := "Noperthedron.no_nopert_rot_pose") (parent := "main_pose_reductions")
-There is no purely rotational pose that makes the noperthedron have the Rupert property.
+:::theorem "thm:walk" (lean := "Cayley.Pack.walk, Cayley.Pack.covered_of_check") (uses := "lem:split_cover, thm:gap_leaf_sound, thm:dom_leaf_sound, def:bad")
+If a tree is accepted on a box, then the box is covered.
 :::
 
 ```tex
 \begin{theorem}
-\label{thm:no_nopert_rot_pose}
-\lean{Noperthedron.no_nopert_rot_pose}
+\label{thm:walk}
+\lean{Cayley.Pack.walk, Cayley.Pack.covered_of_check}
 \leanok
-There is no purely rotational pose that makes the noperthedron have the Rupert property.
+\uses{lem:split_cover, thm:gap_leaf_sound, thm:dom_leaf_sound, def:bad}
+If a tree is accepted on a box, then the box is covered.
 \end{theorem}
 ```
 
-:::proof "thm:no_nopert_rot_pose" (uses := "thm:pose_of_matrix_pose, thm:no_nopert_pose")
-
-Suppose there were a purely rotational pose. Then convert that to an equivalent
-5-parameter pose with Theorem {uses "thm:pose_of_matrix_pose"}[] and
-appeal to Theorem {uses "thm:no_nopert_pose"}[].
+:::proof "thm:walk"
+Induction on the tree, using Lemma {bpref "lem:split_cover"}[] at the internal nodes and
+Theorems {bpref "thm:gap_leaf_sound"}[] and {bpref "thm:dom_leaf_sound"}[] at the leaves.
 :::
 
 ```tex
 \begin{proof}
-\uses{thm:pose_of_matrix_pose, thm:no_nopert_pose}
 \leanok
-Suppose there were a purely rotational pose. Then convert that to an equivalent 5-parameter pose
-with Theorem~\ref{thm:pose_of_matrix_pose} and
-appeal to Theorem~\ref{thm:no_nopert_pose}.
+Induction on the tree, using Lemma~\ref{lem:split_cover} at the internal nodes and
+Theorems~\ref{thm:gap_leaf_sound} and~\ref{thm:dom_leaf_sound} at the leaves.
 \end{proof}
 ```
 
-:::theorem "thm:no_nopert_matrix_pose" (lean := "Noperthedron.no_nopert_matrix_pose") (parent := "main_pose_reductions")
-There is no pose that makes the noperthedron have the Rupert property.
+For the kernel check the tree of each root box is cut into a *skeleton* whose
+leaves include *holes*, and a list of subtrees, one for each hole, each checked by a
+separate theorem.
+
+```tex
+For the kernel check the tree of each root box is cut into a \emph{skeleton} whose
+leaves include \emph{holes}, and a list of subtrees, one for each hole, each checked by a
+separate theorem.
+```
+
+:::lemma_ "lem:root_covered" (lean := "Cayley.Pack.root_covered, Cayley.K.holes") (uses := "thm:walk")
+If the skeleton is accepted on a root box when holes count as passing, its holes are
+exactly the boxes of the listed subtrees, and every listed subtree is accepted on its
+box, then the root box is covered.
 :::
 
 ```tex
-\begin{theorem}
-\label{thm:no_nopert_matrix_pose}
-\lean{Noperthedron.no_nopert_matrix_pose}
+\begin{lemma}
+\label{lem:root_covered}
+\lean{Cayley.Pack.root_covered, Cayley.K.holes}
 \leanok
-There is no pose that makes the noperthedron have the Rupert property.
-\end{theorem}
+\uses{thm:walk}
+If the skeleton is accepted on a root box when holes count as passing, its holes are
+exactly the boxes of the listed subtrees, and every listed subtree is accepted on its
+box, then the root box is covered.
+\end{lemma}
 ```
 
-:::proof "thm:no_nopert_matrix_pose" (uses := "lemma:nopert_point_symmetric, thm:no_nopert_rot_pose, thm:rupert_implies_rot_rupert")
-
-By Theorem {uses "thm:rupert_implies_rot_rupert"}[], we need only show that the noperthedron
-is pointsymmetric to see that if it is Rupert, then it must be Rupert via a purely rotational pose.
-But Lemma {uses "lemma:nopert_point_symmetric"}[] shows exactly this. And yet we know via
-Theorem {uses "thm:no_nopert_rot_pose"}[] that the noperthedron is not rotationally Rupert, so we have
-a contradiction, hence the noperthedron has no pose that makes it Rupert.
+:::proof "lem:root_covered"
+A bad point of the root box lies in a hole, by the same induction as
+Theorem {bpref "thm:walk"}[], and the hole's box is covered.
 :::
 
 ```tex
 \begin{proof}
-\uses{lemma:nopert_point_symmetric, thm:no_nopert_rot_pose, thm:rupert_implies_rot_rupert}
 \leanok
-By Theorem~\ref{thm:rupert_implies_rot_rupert}, we need only show that the noperthedron
-is pointsymmetric to see that if it is Rupert, then it must be Rupert via a purely rotational pose.
-But Lemma~\ref{lemma:nopert_point_symmetric} shows exactly this. And yet we know via
-Theorem~\ref{thm:no_nopert_rot_pose} that the noperthedron is not rotationally Rupert, so we have
-a contradiction, hence the noperthedron has no pose that makes it Rupert.
+A bad point of the root box lies in a hole, by the same induction as
+Theorem~\ref{thm:walk}, and the hole's box is covered.
 \end{proof}
 ```
 
-:::theorem "thm:nopert_not_rupert_set" (lean := "Noperthedron.nopert_not_rupert_set") (parent := "main_final_nonrupert") (uses := "def:noperthedron")
+# The main theorem
 
-The noperthedron is not a Rupert set.
+:::theorem "thm:kernel_sound" (lean := "Cayley.Pack.RootOK, Cayley.Pack.kernel_sound") (uses := "thm:reduction, lem:cover, lem:root_covered")
+*Soundness.*
+
+If each of the 15 root boxes carries an accepted skeleton with accepted subtrees for its
+holes, then $`\PPP` is not Rupert.
 :::
 
 ```tex
-\begin{theorem}
-\uses{def:noperthedron}
-\label{thm:nopert_not_rupert_set}
-\lean{Noperthedron.nopert_not_rupert_set}
+\begin{theorem}[Soundness]
+\label{thm:kernel_sound}
+\lean{Cayley.Pack.RootOK, Cayley.Pack.kernel_sound}
 \leanok
-The noperthedron is not a Rupert set.
+\uses{thm:reduction, lem:cover, lem:root_covered}
+If each of the 15 root boxes carries an accepted skeleton with accepted subtrees for its
+holes, then $\PPP$ is not Rupert.
 \end{theorem}
 ```
 
-:::proof "thm:nopert_not_rupert_set" (uses := "thm:no_nopert_matrix_pose")
-
-By Theorem {uses "thm:no_nopert_matrix_pose"}[], there is no pose that makes the noperthedron a Rupert set.
+:::proof "thm:kernel_sound"
+If $`\PPP` were Rupert, Theorem {bpref "thm:reduction"}[] would give a reduced
+$`(u, v, j, r)` with a Rupert pair. By Lemma {bpref "lem:cover"}[] it is a point of a root box,
+where it would be a bad point. Lemma {bpref "lem:root_covered"}[] says there is none.
 :::
 
 ```tex
 \begin{proof}
-\uses{thm:no_nopert_matrix_pose}
 \leanok
-By Theorem~\ref{thm:no_nopert_matrix_pose}, there is no pose that makes the noperthedron a Rupert set.
+If $\PPP$ were Rupert, Theorem~\ref{thm:reduction} would give a reduced
+$(u, v, j, r)$ with a Rupert pair. By Lemma~\ref{lem:cover} it is a point of a root box,
+where it would be a bad point. Lemma~\ref{lem:root_covered} says there is none.
 \end{proof}
 ```
 
-:::theorem "thm:nopert_not_rupert" (lean := "Noperthedron.nopert_not_rupert") (parent := "main_final_nonrupert")
-The noperthedron is not a Rupert polyhedron.
+The certificate has $`245{,}484` leaves. It is generated by a floating-point search
+(`cayley/search`) and cut into $`28{,}082` chunks of at most 16 leaves. For each
+chunk, the statement that the checker accepts it is proved by `Eq.refl true`, so
+the Lean kernel evaluates the checker on that chunk. The kernel-checked theorems live in
+[CayleyKernel/Main.lean](https://github.com/jcreedcmu/Noperthedron/blob/0ec3d16bc7859599d14d090e2cd4951552702bc7/CayleyKernel/Main.lean); they are not part of the default build, since they
+need the generated data.
+
+```tex
+The certificate has $245{,}484$ leaves. It is generated by a floating-point search
+(\texttt{cayley/search}) and cut into $28{,}082$ chunks of at most 16 leaves. For each
+chunk, the statement that the checker accepts it is proved by \texttt{Eq.refl true}, so
+the Lean kernel evaluates the checker on that chunk. The kernel-checked theorems live in
+\texttt{CayleyKernel/Main.lean}; they are not part of the default build, since they
+need the generated data.
+```
+
+:::theorem "thm:main" (uses := "thm:kernel_sound, lemma:nopert_interior, def:exists_non_rupert")
+The Noperthedron is not Rupert (`Cayley.KProof.noperthedron_not_rupert`). Hence
+there is a convex polyhedron with nonempty interior that is not Rupert
+(`Cayley.KProof.exists_not_rupert`).
 :::
 
 ```tex
 \begin{theorem}
-\label{thm:nopert_not_rupert}
-\lean{Noperthedron.nopert_not_rupert}
+\label{thm:main}
 \leanok
-The noperthedron is not a Rupert polyhedron.
+\uses{thm:kernel_sound, lemma:nopert_interior, def:exists_non_rupert}
+The Noperthedron is not Rupert (\texttt{Cayley.KProof.noperthedron\_not\_rupert}). Hence
+there is a convex polyhedron with nonempty interior that is not Rupert
+(\texttt{Cayley.KProof.exists\_not\_rupert}).
 \end{theorem}
 ```
 
-:::proof "thm:nopert_not_rupert" (uses := "thm:rupert_iff_rupert_set, thm:nopert_not_rupert_set")
-
-By {uses "thm:rupert_iff_rupert_set"}[], it suffices to show that the convex hull of
-noperthedron vertices is not a Rupert set, which is exactly
-{uses "thm:nopert_not_rupert_set"}[the previous theorem].
+:::proof "thm:main"
+Theorem {bpref "thm:kernel_sound"}[], with the 15 hypotheses supplied by the kernel-checked
+chunk theorems, and Lemma {bpref "lemma:nopert_interior"}[].
 :::
 
 ```tex
 \begin{proof}
 \leanok
-\uses{thm:rupert_iff_rupert_set, thm:nopert_not_rupert_set}
-By Theorem~\ref{thm:rupert_iff_rupert_set} it suffices to show that the convex hull of
-the noperthedron vertices is not a Rupert set. But this is exactly what Theorem~\ref{thm:nopert_not_rupert_set} shows.
+Theorem~\ref{thm:kernel_sound}, with the 15 hypotheses supplied by the kernel-checked
+chunk theorems, and Lemma~\ref{lemma:nopert_interior}.
 \end{proof}
 ```

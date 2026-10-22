@@ -3,31 +3,35 @@
 package_name = "Contents"
 blueprint_main = "Main"
 formalization_path = "Noperthedron"
-chapter_root = "Chapters"
+# This retrofit has direct-port modules under both Contents/ and Chapters/.
+# The explicit LT list below defines the complete source scope.
+chapter_root = "."
 
 # Canonical TeX source of truth from the pinned upstream formalization.
 tex_source_glob = "Noperthedron/blueprint/src/chapters/*.tex"
 
 [lt]
 default_chapters = [
+  "Contents/Introduction.lean",
   "Chapters/Noperthedron.lean",
-  "Chapters/Bounding.lean",
   "Chapters/Prelims.lean",
-  "Chapters/GlobalTheorem.lean",
-  "Chapters/LocalTheorem.lean",
-  "Chapters/Rational.lean",
-  "Chapters/Computational.lean",
+  "Chapters/Cayley.lean",
+  "Chapters/Reduction.lean",
+  "Chapters/Certificates.lean",
+  "Chapters/PolynomialBounds.lean",
+  "Chapters/Data.lean",
   "Chapters/Main.lean",
 ]
 
 [lt.source_files]
+"Contents/Introduction.lean" = ["Noperthedron/blueprint/src/chapters/intro.tex"]
 "Chapters/Noperthedron.lean" = ["Noperthedron/blueprint/src/chapters/noperthedron.tex"]
-"Chapters/Bounding.lean" = ["Noperthedron/blueprint/src/chapters/bounding.tex"]
 "Chapters/Prelims.lean" = ["Noperthedron/blueprint/src/chapters/prelims.tex"]
-"Chapters/GlobalTheorem.lean" = ["Noperthedron/blueprint/src/chapters/global_theorem.tex"]
-"Chapters/LocalTheorem.lean" = ["Noperthedron/blueprint/src/chapters/local_theorem.tex"]
-"Chapters/Rational.lean" = ["Noperthedron/blueprint/src/chapters/rational.tex"]
-"Chapters/Computational.lean" = ["Noperthedron/blueprint/src/chapters/computational.tex"]
+"Chapters/Cayley.lean" = ["Noperthedron/blueprint/src/chapters/cayley.tex"]
+"Chapters/Reduction.lean" = ["Noperthedron/blueprint/src/chapters/reduction.tex"]
+"Chapters/Certificates.lean" = ["Noperthedron/blueprint/src/chapters/certificates.tex"]
+"Chapters/PolynomialBounds.lean" = ["Noperthedron/blueprint/src/chapters/polybounds.tex"]
+"Chapters/Data.lean" = ["Noperthedron/blueprint/src/chapters/data.tex"]
 "Chapters/Main.lean" = ["Noperthedron/blueprint/src/chapters/main.tex"]
 
 [harness]

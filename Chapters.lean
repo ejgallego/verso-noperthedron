@@ -1,8 +1,8 @@
-import Chapters.Prelims
-import Chapters.Bounding
 import Chapters.Noperthedron
-import Chapters.GlobalTheorem
-import Chapters.LocalTheorem
-import Chapters.Rational
-import Chapters.Computational
+import Chapters.Prelims
+import Chapters.Cayley
+import Chapters.Reduction
+import Chapters.Certificates
+import Chapters.PolynomialBounds
+import Chapters.Data
 import Chapters.Main
