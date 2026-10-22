@@ -98,9 +98,7 @@ Direct computation: $N(r) N(r)^T = D(r)^2 I$ and $\det N(r) = D(r)^3$.
 ```
 
 :::lemma_ "lem:cayley_rodrigues" (lean := "Cayley.cayleyMatrix_apply_sub, Cayley.num_sub_denom") (uses := "def:cayley")
-*Rodrigues form.*
-
-For every $`S \in \R^3`,
+*Rodrigues form.* For every $`S \in \R^3`,
 
 $$`
 N(r) S - D(r) S = 2\,\bigl(r \times S + r \times (r \times S)\bigr).
@@ -137,7 +135,7 @@ $r \times (r \times S) = r (r \cdot S) - |r|^2 S$.
 ```
 
 The Rodrigues form is the source of the blow-up identity
-(Lemma {bpref "lem:blowup_identity"}[]): the difference $`\mathrm{Cay}(r) S - S` is divisible
+({bpref "lem:blowup_identity"}[]): the difference $`\mathrm{Cay}(r) S - S` is divisible
 by $`r`.
 
 ```tex
@@ -189,7 +187,7 @@ $|r|^2 \le 3$.
 
 :::proof "thm:cayley_surj" (uses := "lem:axis_angle")
 Write $`A` as a rotation by angle $`\gamma \in (-\pi, \pi]` about a unit axis $`a`
-(Lemma {bpref "lem:axis_angle"}[]). Then $`\tr A = 1 + 2 \cos\gamma \ge 0` gives
+({bpref "lem:axis_angle"}[]). Then $`\tr A = 1 + 2 \cos\gamma \ge 0` gives
 $`\cos\gamma \ge -1/2`. Put $`c = \sin\gamma / (1 + \cos\gamma) = \tan(\gamma/2)` and
 $`r = c\,a`. Then $`c^2 = (1 - \cos\gamma)/(1 + \cos\gamma) \le 3`, and comparing the
 Rodrigues forms of $`A` and of $`\mathrm{Cay}(r)` gives $`A = \mathrm{Cay}(r)`.
@@ -208,9 +206,7 @@ Rodrigues forms of $A$ and of $\mathrm{Cay}(r)$ gives $A = \mathrm{Cay}(r)$.
 ```
 
 :::lemma_ "lem:axis_angle" (lean := "Cayley.BalancedSupport.exists_axisAngle, Cayley.BalancedSupport.AxisAngle.matrix_trace_eq")
-*Axis-angle form.*
-
-Every $`A \in SO(3)` is a rotation by some angle $`\gamma \in (-\pi, \pi]` about some unit
+*Axis-angle form.* Every $`A \in SO(3)` is a rotation by some angle $`\gamma \in (-\pi, \pi]` about some unit
 axis $`a`:
 $`A v - v = \sin\gamma\; a \times v + (1 - \cos\gamma)\; a \times (a \times v)`.
 Its trace is $`1 + 2\cos\gamma`.

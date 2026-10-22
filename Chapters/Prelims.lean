@@ -70,9 +70,7 @@ nonempty interior and which is not Rupert.
 # Rupert sets
 
 :::theorem "thm:rupert_iff_rupert_set" (lean := "rupert_iff_rupert_set") (uses := "def:rupert")
-*Rupert Polyhedron iff Rupert Set.*
-
-The convex polyhedron with vertex set $`V` is Rupert if and only if the convex hull of
+*Rupert Polyhedron iff Rupert Set.* The convex polyhedron with vertex set $`V` is Rupert if and only if the convex hull of
 $`V` is a Rupert set, i.e. there is a pose (two rotations and an offset) under which
 the closure of the inner shadow lies in the interior of the outer shadow.
 :::
@@ -135,7 +133,7 @@ $o + k \in L$ and $-o + k \in L$, so $k \in L$ by convexity.
 
 # Shadows and the separation criterion
 
-From now on $`\PPP` denotes the Noperthedron (Definition {bpref "def:noperthedron"}[]).
+From now on $`\PPP` denotes the Noperthedron ({bpref "def:noperthedron"}[]).
 
 ```tex
 From now on $\PPP$ denotes the Noperthedron (Definition~\ref{def:noperthedron}).
@@ -176,9 +174,9 @@ $R_o, R_i \in SO(3)$.
 ```
 
 :::proof "lem:exists_rup_pair"
-Combine Theorem {bpref "thm:rupert_iff_rupert_set"}[] and
-Theorem {bpref "thm:rupert_implies_rot_rupert"}[]; $`\PPP` is point-symmetric
-(Lemma {bpref "lemma:nopert_point_symmetric"}[]) and convex.
+Combine {bpref "thm:rupert_iff_rupert_set"}[] and
+{bpref "thm:rupert_implies_rot_rupert"}[]; $`\PPP` is point-symmetric
+({bpref "lemma:nopert_point_symmetric"}[]) and convex.
 :::
 
 ```tex
@@ -199,9 +197,7 @@ $x \in \R^3$ (only the screen coordinates enter).
 ```
 
 :::theorem "thm:separation" (lean := "Cayley.not_rupPair_of_sep") (uses := "def:shadow")
-*Separation criterion.*
-
-Let $`S` be a vertex of $`\PPP` and $`w \ne 0`. If
+*Separation criterion.* Let $`S` be a vertex of $`\PPP` and $`w \ne 0`. If
 
 $$`
 \langle w, R_o T \rangle \le \langle w, R_i S \rangle

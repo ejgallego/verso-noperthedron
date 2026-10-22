@@ -51,9 +51,7 @@ There are 15 root boxes, all with $(u, v) \in [0, 1] \times [0, \frac12]$:
 ```
 
 :::lemma_ "lem:cover" (lean := "Cayley.Pack.cover, Cayley.Pack.rootK_inv") (uses := "def:root_boxes, def:reduced, lem:exists_face")
-*Coverage.*
-
-Every reduced $`(u, v, j, r)` is a point of one of the root boxes of chart $`j`.
+*Coverage.* Every reduced $`(u, v, j, r)` is a point of one of the root boxes of chart $`j`.
 :::
 
 ```tex
@@ -68,7 +66,7 @@ Every reduced $(u, v, j, r)$ is a point of one of the root boxes of chart $j$.
 
 :::proof "lem:cover"
 The wedge and disk conditions give $`0 \le u \le 1` and $`0 \le v \le \frac{57}{128}u \le \frac12`.
-In charts 1--3, $`|r_i| \le 1`. In charts 0 and 4, Lemma {bpref "lem:exists_face"}[] writes
+In charts 1--3, $`|r_i| \le 1`. In charts 0 and 4, {bpref "lem:exists_face"}[] writes
 $`r = \rho\, c_f(s_0, s_1)` with $`0 \le \rho \le 1` or $`0 \le \rho \le 2`.
 :::
 
@@ -151,8 +149,8 @@ If a tree is accepted on a box, then the box is covered.
 ```
 
 :::proof "thm:walk"
-Induction on the tree, using Lemma {bpref "lem:split_cover"}[] at the internal nodes and
-Theorems {bpref "thm:gap_leaf_sound"}[] and {bpref "thm:dom_leaf_sound"}[] at the leaves.
+Induction on the tree, using {bpref "lem:split_cover"}[] at the internal nodes and
+{bpref "thm:gap_leaf_sound"}[] and {bpref "thm:dom_leaf_sound"}[] at the leaves.
 :::
 
 ```tex
@@ -193,7 +191,7 @@ box, then the root box is covered.
 
 :::proof "lem:root_covered"
 A bad point of the root box lies in a hole, by the same induction as
-Theorem {bpref "thm:walk"}[], and the hole's box is covered.
+{bpref "thm:walk"}[], and the hole's box is covered.
 :::
 
 ```tex
@@ -207,9 +205,7 @@ Theorem~\ref{thm:walk}, and the hole's box is covered.
 # The main theorem
 
 :::theorem "thm:kernel_sound" (lean := "Cayley.Pack.RootOK, Cayley.Pack.kernel_sound") (uses := "thm:reduction, lem:cover, lem:root_covered")
-*Soundness.*
-
-If each of the 15 root boxes carries an accepted skeleton with accepted subtrees for its
+*Soundness.* If each of the 15 root boxes carries an accepted skeleton with accepted subtrees for its
 holes, then $`\PPP` is not Rupert.
 :::
 
@@ -225,9 +221,9 @@ holes, then $\PPP$ is not Rupert.
 ```
 
 :::proof "thm:kernel_sound"
-If $`\PPP` were Rupert, Theorem {bpref "thm:reduction"}[] would give a reduced
-$`(u, v, j, r)` with a Rupert pair. By Lemma {bpref "lem:cover"}[] it is a point of a root box,
-where it would be a bad point. Lemma {bpref "lem:root_covered"}[] says there is none.
+If $`\PPP` were Rupert, {bpref "thm:reduction"}[] would give a reduced
+$`(u, v, j, r)` with a Rupert pair. By {bpref "lem:cover"}[] it is a point of a root box,
+where it would be a bad point. {bpref "lem:root_covered"}[] says there is none.
 :::
 
 ```tex
@@ -273,8 +269,8 @@ there is a convex polyhedron with nonempty interior that is not Rupert
 ```
 
 :::proof "thm:main"
-Theorem {bpref "thm:kernel_sound"}[], with the 15 hypotheses supplied by the kernel-checked
-chunk theorems, and Lemma {bpref "lemma:nopert_interior"}[].
+{bpref "thm:kernel_sound"}[], with the 15 hypotheses supplied by the kernel-checked
+chunk theorems, and {bpref "lemma:nopert_interior"}[].
 :::
 
 ```tex

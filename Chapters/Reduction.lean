@@ -36,9 +36,7 @@ $\mathcal{C}_{30}$, and $\PPP = -\PPP$.
 # Moves that preserve Rupert pairs
 
 :::lemma_ "lem:move_left" (lean := "Cayley.rupPair_left, Cayley.rupPair_Rz, Cayley.rupPair_RxPi") (uses := "def:shadow")
-*Common left factor.*
-
-Let $`L \in SO(3)` with $`L e_z = \pm e_z`. If $`(R_o, R_i)` is a Rupert pair, then so is
+*Common left factor.* Let $`L \in SO(3)` with $`L e_z = \pm e_z`. If $`(R_o, R_i)` is a Rupert pair, then so is
 $`(L R_o, L R_i)`. In particular this holds for $`L = R_z(\gamma)` and for the half-turn
 $`L = R_x(\pi)`.
 :::
@@ -69,9 +67,7 @@ the screen, so $\mathrm{Sh}(L R) = \ell(\mathrm{Sh}(R))$, and $\ell$ is a homeom
 ```
 
 :::lemma_ "lem:move_sym" (lean := "Cayley.rupPair_inner_gR, Cayley.rupPair_outer_gR, Cayley.shadow_mul_gR") (uses := "def:shadow, def:noperthedron")
-*Symmetries.*
-
-If $`(R_o, R_i)` is a Rupert pair, then so are $`(R_o g_k, R_i)` and $`(R_o, R_i g_k)`.
+*Symmetries.* If $`(R_o, R_i)` is a Rupert pair, then so are $`(R_o g_k, R_i)` and $`(R_o, R_i g_k)`.
 :::
 
 ```tex
@@ -98,9 +94,7 @@ $\mathrm{Sh}(R g_k) = \mathrm{Sh}(R)$.
 ```
 
 :::lemma_ "lem:move_halfturn" (lean := "Cayley.rupPair_inner_RzPi, Cayley.shadow_RzPi_mul") (uses := "def:shadow, lemma:nopert_point_symmetric")
-*Inner half-turn.*
-
-If $`(R_o, R_i)` is a Rupert pair, then so is $`(R_o, R_z(\pi) R_i)`.
+*Inner half-turn.* If $`(R_o, R_i)` is a Rupert pair, then so is $`(R_o, R_z(\pi) R_i)`.
 :::
 
 ```tex
@@ -153,13 +147,13 @@ $(s(u, v), R_i)$ with
 
 :::proof "lem:step_outer"
 Let $`n` be the view (third row) of $`R_o`. Applying $`R_x(\pi)` on the left if necessary
-(Lemma {bpref "lem:move_left"}[]) makes $`n_z \ge 0`. Replacing $`R_o` by $`R_o g_k` for a
-suitable $`k` (Lemma {bpref "lem:move_sym"}[]) rotates the azimuth of $`n` into
+({bpref "lem:move_left"}[]) makes $`n_z \ge 0`. Replacing $`R_o` by $`R_o g_k` for a
+suitable $`k` ({bpref "lem:move_sym"}[]) rotates the azimuth of $`n` into
 $`[0, 2\pi/15]`, a wedge in which $`n_y \le \frac{57}{128} n_x` because
-$`\tan(2\pi/15) \le 57/128` (Lemma {bpref "lem:sin_wedge"}[]). A view with $`n_z \ge 0` in this
+$`\tan(2\pi/15) \le 57/128` ({bpref "lem:sin_wedge"}[]). A view with $`n_z \ge 0` in this
 wedge is the view of $`s(u, v)` for $`(u, v)` in the stated set
-(Lemma {bpref "lem:outer_view"}[]). Then $`R_o = R_z(\gamma) s(u, v)`
-(Lemma {bpref "lem:outer_unique"}[]), and the left factor $`R_z(-\gamma)` removes $`R_z(\gamma)`.
+({bpref "lem:outer_view"}[]). Then $`R_o = R_z(\gamma) s(u, v)`
+({bpref "lem:outer_unique"}[]), and the left factor $`R_z(-\gamma)` removes $`R_z(\gamma)`.
 :::
 
 ```tex
@@ -179,8 +173,8 @@ wedge is the view of $s(u, v)$ for $(u, v)$ in the stated set
 # Step B: the relative rotation
 
 Fix the outer rotation $`s = s(u, v)` and write the inner rotation as $`s\,Q`, so that
-$`Q = s^T R_i` is the *relative rotation*. The moves of Lemma {bpref "lem:move_sym"}[]
-(inner) and Lemma {bpref "lem:move_halfturn"}[] act on $`Q` without changing $`s`:
+$`Q = s^T R_i` is the *relative rotation*. The moves of {bpref "lem:move_sym"}[]
+(inner) and {bpref "lem:move_halfturn"}[] act on $`Q` without changing $`s`:
 $`Q \mapsto Q g_k` and $`Q \mapsto H Q`, where $`H = s^T R_z(\pi) s` is the half-turn about
 the view. The orbit $`\{ H^e Q g_k : e \in \{0, 1\},\ 0 \le k < 15 \}` has at most 30
 elements.
@@ -318,7 +312,7 @@ $(s, s\,Q)$ with $Q \in SO(3)$ and $F(H^e Q g_k) \le F(Q)$ for all $e$ and $k$.
 
 :::proof "lem:step_orbit"
 Take the element of the finite orbit of $`s^T R_i` with the largest score; it is reached
-by the moves of Lemmas {bpref "lem:move_sym"}[] and {bpref "lem:move_halfturn"}[], and the orbit of
+by the moves of {bpref "lem:move_sym"}[] and {bpref "lem:move_halfturn"}[], and the orbit of
 a member of the orbit is the same orbit.
 :::
 
@@ -357,8 +351,10 @@ $Q_j(r) = B_j\, \mathrm{Cay}(r)$.
 $`\sum_{k=0}^{3} \tr(B_k^T X) = 0` for every $`3 \times 3` matrix $`X`, and
 
 $$`
-\tr\bigl(\mathrm{diag}(a, b, c)\,\mathrm{Cay}(x, y, z)\bigr) =
-  \frac{a(1 + x^2 - y^2 - z^2) + b(1 - x^2 + y^2 - z^2) + c(1 - x^2 - y^2 + z^2)}{1 + x^2 + y^2 + z^2}.
+\begin{aligned}
+&\tr\bigl(\mathrm{diag}(a, b, c)\,\mathrm{Cay}(x, y, z)\bigr)\\
+&\quad= \frac{a(1 + x^2 - y^2 - z^2) + b(1 - x^2 + y^2 - z^2) + c(1 - x^2 - y^2 + z^2)}{1 + x^2 + y^2 + z^2}.
+\end{aligned}
 `
 :::
 
@@ -406,10 +402,10 @@ $Q = Q_j(r)$ for some $r$ with $|r_i| \le 1$ (if $j \le 3$) or $|r_i| \le 2$ (if
 ```
 
 :::proof "lem:step_chart"
-By Lemma {bpref "lem:klein_sum"}[] the four Klein traces sum to $`0`, so the largest trace is
-nonnegative, and Theorem {bpref "thm:cayley_surj"}[] gives $`B_j^T Q = \mathrm{Cay}(r)` with
+By {bpref "lem:klein_sum"}[] the four Klein traces sum to $`0`, so the largest trace is
+nonnegative, and {bpref "thm:cayley_surj"}[] gives $`B_j^T Q = \mathrm{Cay}(r)` with
 $`|r|^2 \le 3`. This settles $`j = 4`. For $`j \le 3`, maximality against the other three
-Klein charts and the trace formula of Lemma {bpref "lem:klein_sum"}[] give
+Klein charts and the trace formula of {bpref "lem:klein_sum"}[] give
 $`4 - 4 r_i^2 \ge 0` for each $`i`.
 :::
 
@@ -454,9 +450,7 @@ A tuple $(u, v, j, r)$ with $j \in \{0, \dots, 4\}$ is \emph{reduced} if
 ```
 
 :::theorem "thm:reduction" (lean := "Cayley.reduction") (uses := "lem:exists_rup_pair, lem:step_outer, lem:step_orbit, lem:step_chart, def:reduced")
-*Reduction.*
-
-If $`\PPP` is Rupert, then there is a reduced $`(u, v, j, r)` such that
+*Reduction.* If $`\PPP` is Rupert, then there is a reduced $`(u, v, j, r)` such that
 $`\bigl(s(u, v),\ s(u, v)\, Q_j(r)\bigr)` is a Rupert pair.
 :::
 
@@ -472,9 +466,9 @@ $\bigl(s(u, v),\ s(u, v)\, Q_j(r)\bigr)$ is a Rupert pair.
 ```
 
 :::proof "thm:reduction"
-Lemma {bpref "lem:exists_rup_pair"}[] gives a Rupert pair in $`SO(3)`. Apply Step A
-(Lemma {bpref "lem:step_outer"}[]), then Step B (Lemma {bpref "lem:step_orbit"}[]) to the
-relative rotation, then Step C (Lemma {bpref "lem:step_chart"}[]) to the orbit-maximal $`Q`.
+{bpref "lem:exists_rup_pair"}[] gives a Rupert pair in $`SO(3)`. Apply Step A
+({bpref "lem:step_outer"}[]), then Step B ({bpref "lem:step_orbit"}[]) to the
+relative rotation, then Step C ({bpref "lem:step_chart"}[]) to the orbit-maximal $`Q`.
 Step C does not change $`Q`, so the orbit condition persists.
 :::
 

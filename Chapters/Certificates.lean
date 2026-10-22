@@ -53,8 +53,13 @@ on the same cube.
 
 :::definition "def:bad" (lean := "Cayley.Bad, Cayley.PtOK") (uses := "def:box, def:reduced")
 A point $`X` of a box is *bad* if, with $`r` the Cayley vector of $`X`
-(Definition {bpref "def:faces"}[]), the tuple $`(X_0, X_1, j, r)` is reduced and
-$`\bigl(s(X_0, X_1),\ s(X_0, X_1)\, Q_j(r)\bigr)` is a Rupert pair. A box is
+({bpref "def:faces"}[]), the tuple $`(X_0, X_1, j, r)` is reduced and
+
+$$`
+\bigl(s(X_0, X_1),\ s(X_0, X_1)\, Q_j(r)\bigr)
+`
+
+is a Rupert pair. A box is
 *covered* if none of its points with $`X_0^2 + X_1^2 \le 1` and $`|r_i| \le 2` is bad.
 :::
 
@@ -87,7 +92,7 @@ of the box is reduced.
 
 Fix a box in chart $`j`, an inner vertex $`S`, an outer vertex $`T` and a direction
 $`w \in \Z^2 \setminus \{0\}`. The separation criterion
-(Theorem {bpref "thm:separation"}[]) asks for
+({bpref "thm:separation"}[]) asks for
 
 ```tex
 Fix a box in chart $j$, an inner vertex $S$, an outer vertex $T$ and a direction
@@ -110,7 +115,7 @@ $$`
 Multiplying by the positive denominators $`D_o = 1 + u^2 + v^2` and $`D_r = D(r)` and by an
 integer $`\kappa_j \ge 1` that makes $`M_j = \kappa_j B_j` an integer matrix
 ($`\kappa_j = 1` for $`j \le 3`, and $`\kappa_4 = x^2 + y^2` in the notation of
-Definition {bpref "def:tau"}[], after scaling $`C_3` to integers) clears every denominator.
+{bpref "def:tau"}[], after scaling $`C_3` to integers) clears every denominator.
 
 ```tex
 Multiplying by the positive denominators $D_o = 1 + u^2 + v^2$ and $D_r = D(r)$ and by an
@@ -120,9 +125,7 @@ Definition~\ref{def:tau}, after scaling $C_3$ to integers) clears every denomina
 ```
 
 :::lemma_ "lem:gap_poly" (lean := "Cayley.gap_identity, Cayley.Pack.Fp_real, Cayley.Pack.Fp_split") (uses := "def:box, def:cayley, def:outer_rot, def:charts, thm:separation")
-*Gap polynomial.*
-
-$$`
+*Gap polynomial.* $$`
 D_o\,\kappa_j\,D_r\,\mathrm{gap}_T
   = \bigl\langle w,\ N_o\, M_j\, N(r)\, S \bigr\rangle - \kappa_j D_r \bigl\langle w,\ N_o\, T \bigr\rangle,
 `
@@ -170,7 +173,7 @@ $r = \rho\, c_f(s_0, s_1)$). The product is bilinear in these two groups of vari
 ```
 
 The checker uses dyadic approximations $`\hat S`, $`\hat T` of the vertices with error
-at most $`2^{-60}` per coordinate (Lemma {bpref "lem:vertex_approx"}[]). The error is absorbed
+at most $`2^{-60}` per coordinate ({bpref "lem:vertex_approx"}[]). The error is absorbed
 by an explicit allowance $`\mathrm{err} = 128\, \kappa_j\, 2^{-60} (|w_0| + |w_1|)`; this
 uses $`u^2 + v^2 \le 1`, $`|r_i| \le 2` and the fact that orthogonal matrices do not enlarge
 vectors.
@@ -190,7 +193,7 @@ tag := "sec:blowup"
 
 In charts 0 and 4 each inner vertex $`S` has a *paired* outer vertex
 $`\sigma(S)`: $`\sigma(S) = S` in chart 0, and in chart 4 $`\sigma(S) = \tau S` for the 30
-copies of $`C_3` (Lemma {bpref "lem:tau_pair"}[]). At $`r = 0` the pair has
+copies of $`C_3` ({bpref "lem:tau_pair"}[]). At $`r = 0` the pair has
 $`Q_j(0) S = B_j S = \sigma(S)`, so $`\mathrm{gap}_{\sigma(S)}` vanishes identically on
 $`\rho = 0`, and no box touching $`\rho = 0` can have a positive lower bound for it.
 
@@ -203,9 +206,7 @@ $\rho = 0$, and no box touching $\rho = 0$ can have a positive lower bound for i
 ```
 
 :::lemma_ "lem:blowup_identity" (lean := "Cayley.num_sub_denom, Cayley.Pack.Lp_real") (uses := "lem:cayley_rodrigues, lem:gap_poly, lem:tau_pair")
-*Blow-up identity.*
-
-In charts 0 and 4, with $`r = \rho\, c`,
+*Blow-up identity.* In charts 0 and 4, with $`r = \rho\, c`,
 
 $$`
 D_o\, \kappa_j\, D_r\, \mathrm{gap}_{\sigma(S)}
@@ -231,7 +232,7 @@ In charts 0 and 4, with $r = \rho\, c$,
 
 :::proof "lem:blowup_identity"
 $`Q_j(r) S - \sigma(S) = B_j(\mathrm{Cay}(r) S - S)` in both charts (for chart 4,
-$`\sigma(S) = \tau S = B_4 S`). Apply Lemma {bpref "lem:cayley_rodrigues"}[] and
+$`\sigma(S) = \tau S = B_4 S`). Apply {bpref "lem:cayley_rodrigues"}[] and
 $`r = \rho c`.
 :::
 
@@ -255,9 +256,7 @@ Since $\rho \ge 0$, $L \ge 0$ implies $\mathrm{gap}_{\sigma(S)} \ge 0$.
 ```
 
 :::theorem "thm:gap_core" (lean := "Cayley.gap_core") (uses := "thm:separation, lem:gap_poly, lem:blowup_identity, lem:vertex_approx")
-*Gap core.*
-
-Let $`X` be a point of a box in chart $`j` with $`u^2 + v^2 \le 1` and $`|r_i| \le 2`, let $`S`
+*Gap core.* Let $`X` be a point of a box in chart $`j` with $`u^2 + v^2 \le 1` and $`|r_i| \le 2`, let $`S`
 be an inner vertex and $`w \ne 0`. Suppose that for every outer vertex $`T`, either
 
 $$`
@@ -286,7 +285,7 @@ computed with $\hat S$. Then $\bigl(s, s\, Q_j(r)\bigr)$ is not a Rupert pair.
 
 :::proof "thm:gap_core"
 In both cases the true gap $`\mathrm{gap}_T(X)` is nonnegative once the approximation
-error is accounted for, so the separation criterion (Theorem {bpref "thm:separation"}[])
+error is accounted for, so the separation criterion ({bpref "thm:separation"}[])
 applies with the inner vertex $`S` and direction $`w`.
 :::
 
@@ -356,8 +355,8 @@ $|r_i| \le 2$ gives a Rupert pair $(s, s\, Q_j(r))$.
 
 :::proof "thm:gap_leaf_sound" (uses := "lem:quick_test")
 Each test that succeeds gives the corresponding hypothesis of
-Theorem {bpref "thm:gap_core"}[] at every point of the box: the quick test by
-Lemma {bpref "lem:quick_test"}[], the others by Theorems {bpref "thm:coef_bound"}[]
+{bpref "thm:gap_core"}[] at every point of the box: the quick test by
+{bpref "lem:quick_test"}[], the others by {bpref "thm:coef_bound"}[]
 and {bpref "thm:bern_bound"}[].
 :::
 
@@ -373,9 +372,7 @@ and~\ref{thm:bern_bound}.
 ```
 
 :::lemma_ "lem:quick_test" (lean := "Cayley.Pack.quick_real, Cayley.Pack.quick_G1") (uses := "lem:gap_poly, thm:coef_bound")
-*Quick test.*
-
-Suppose $`A \ge c_0 - \mathrm{sl}` and $`|E_k - e_k| \le a_k` on the box, where $`c_0`, $`e_k`
+*Quick test.* Suppose $`A \ge c_0 - \mathrm{sl}` and $`|E_k - e_k| \le a_k` on the box, where $`c_0`, $`e_k`
 are constant terms and $`\mathrm{sl}`, $`a_k` are coefficient sums. If
 
 $$`
@@ -414,7 +411,7 @@ Linear arithmetic.
 # Domain leaves
 
 :::definition "def:dom_leaf" (lean := "Cayley.K.pDomOK") (uses := "def:reduced, def:box")
-A domain leaf names one condition of Definition {bpref "def:reduced"}[] that fails on the whole
+A domain leaf names one condition of {bpref "def:reduced"}[] that fails on the whole
 box:
 
 1. (disk) $`u^2 + v^2 > 1`, tested at the lower corner of the box;
@@ -466,8 +463,8 @@ $|r_i| \le 2$ is reduced.
 
 :::proof "thm:dom_leaf_sound"
 The disk and wedge tests are monotonicity arguments on the box. The chart and orbit
-tests bound polynomials from below with Theorem {bpref "thm:coef_bound"}[]; for the orbit test,
-the error of the tabulated rotations is bounded with Lemma {bpref "lem:group_approx"}[] and the
+tests bound polynomials from below with {bpref "thm:coef_bound"}[]; for the orbit test,
+the error of the tabulated rotations is bounded with {bpref "lem:group_approx"}[] and the
 fact that the entries of a rotation are at most $`1` in absolute value.
 :::
 

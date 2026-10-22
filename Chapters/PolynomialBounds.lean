@@ -73,14 +73,13 @@ instances.
 # The coefficient bound
 
 :::theorem "thm:coef_bound" (lean := "Cayley.Pack.lower_le_ev, Cayley.Pack.pLower_le, Cayley.Pack.pStats_sound") (uses := "def:pe")
-*Coefficient bound.*
-
-Let $`p = \sum_m c_m t^m`. For $`t \in [-1,1]^5`,
+*Coefficient bound.* Let $`p = \sum_m c_m t^m`. For $`t \in [-1,1]^5`,
 
 $$`
-p(t) \ge c_0 - \sum_{m \text{ with an odd exponent}} |c_m| - \sum_{\substack{m \ne 0 \text{ all exponents even}\\ c_m < 0}} |c_m|,
-  \qquad
-  |p(t) - c_0| \le \sum_{m \ne 0} |c_m|.
+\begin{aligned}
+p(t) &\ge c_0 - \sum_{m \text{ with an odd exponent}} |c_m| - \sum_{\substack{m \ne 0 \text{ all exponents even}\\ c_m < 0}} |c_m|,\\
+|p(t) - c_0| &\le \sum_{m \ne 0} |c_m|.
+\end{aligned}
 `
 :::
 
@@ -123,8 +122,10 @@ $b_0 \beta_0(t) + b_1 \beta_1(t) + b_2 \beta_2(t)$ with
 ```
 
 $$`
-(b_0, b_1, b_2) = (a_0 - a_1 + a_2,\ a_0 - a_2,\ a_0 + a_1 + a_2),\qquad
-  \beta_0 = \Bigl(\frac{1 - t}{2}\Bigr)^2,\ \beta_1 = \frac{1 - t^2}{2},\ \beta_2 = \Bigl(\frac{1 + t}{2}\Bigr)^2.
+\begin{aligned}
+(b_0, b_1, b_2) &= (a_0 - a_1 + a_2,\ a_0 - a_2,\ a_0 + a_1 + a_2),\\
+\beta_0 &= \Bigl(\frac{1 - t}{2}\Bigr)^2,\ \beta_1 = \frac{1 - t^2}{2},\ \beta_2 = \Bigl(\frac{1 + t}{2}\Bigr)^2.
+\end{aligned}
 `
 
 ```tex
@@ -159,9 +160,7 @@ along each variable in turn. There are $3^5 = 243$ of them.
 ```
 
 :::theorem "thm:bern_bound" (lean := "Cayley.Pack.bern_real, Cayley.Pack.bernGE_le") (uses := "def:bernstein")
-*Bernstein bound.*
-
-If every Bernstein coefficient of $`p` is at least $`m`, then $`p(t) \ge m` for all
+*Bernstein bound.* If every Bernstein coefficient of $`p` is at least $`m`, then $`p(t) \ge m` for all
 $`t \in [-1,1]^5`.
 :::
 
@@ -281,7 +280,7 @@ remainder modulo $2^W - 1$.
 :::lemma_ "lem:packed_bounds" (lean := "Cayley.Pack.pLowerL_eq, Cayley.Pack.pStatsL_eq, Cayley.Pack.bern3_pv, Cayley.Pack.bernGE_spec") (uses := "lem:kronecker, thm:coef_bound, def:bernstein")
 If the coefficient norm of $`p` is below the bound fixed by the slot width, then the
 checker's mask computations applied to $`p` at the Kronecker point return exactly the
-coefficient bound of Theorem {bpref "thm:coef_bound"}[], and its packed Bernstein transform
+coefficient bound of {bpref "thm:coef_bound"}[], and its packed Bernstein transform
 returns the packed Bernstein coefficients. A Bernstein test that passes therefore
 certifies that every Bernstein coefficient is at least $`m`.
 :::
@@ -301,7 +300,7 @@ certifies that every Bernstein coefficient is at least $m$.
 ```
 
 :::proof "lem:packed_bounds" (uses := "lem:packN")
-Digit-by-digit arithmetic on packed numbers (Lemma {bpref "lem:packN"}[]). The Bernstein
+Digit-by-digit arithmetic on packed numbers ({bpref "lem:packN"}[]). The Bernstein
 transform along variable $`i` separates the slots by their digit $`i` with masks, shifts
 them to a common position, and recombines them.
 :::
@@ -355,9 +354,7 @@ which leaves room for the Bernstein transform.
 ```
 
 :::lemma_ "lem:norm_guard" (lean := "Cayley.Pack.gapNrm_mono, Cayley.Pack.gapNrmOK_worst, Cayley.Pack.gapNrmOK_box") (uses := "lem:packed_bounds")
-*Norm guard.*
-
-If a gap leaf's box has scale $`2^K` with $`K \le 16` and its direction has
+*Norm guard.* If a gap leaf's box has scale $`2^K` with $`K \le 16` and its direction has
 $`|w_0|, |w_1| \le 1024`, then every polynomial the leaf decodes has coefficient norm below
 $`2^{390}`.
 :::

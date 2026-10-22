@@ -74,7 +74,7 @@ $\sin(2\pi/15) \le \frac{57}{128} \cos(2\pi/15)$.
 ```
 
 :::proof "lem:sin_wedge"
-From the bounds of Lemma {bpref "lem:theta1"}[].
+From the bounds of {bpref "lem:theta1"}[].
 :::
 
 ```tex
@@ -104,7 +104,7 @@ true values.
 
 :::proof "lem:trig_table"
 Let $`z_k = e^{2\pi i k/15}` and let $`\hat z_k` be the table entry. Then
-$`|z_1 - \hat z_1| \le 2^{-79}` by Lemma {bpref "lem:theta1"}[], and
+$`|z_1 - \hat z_1| \le 2^{-79}` by {bpref "lem:theta1"}[], and
 $`z_{k+1} = z_k z_1`, so
 $`|z_{k+1} - \hat z_{k+1}| \le |z_k - \hat z_k| + |\hat z_k|\, 2^{-79} + |\hat z_k \hat z_1 - \hat z_{k+1}|`.
 The last two terms are computed exactly in $`\Q` and are at most $`2^{-75}` for each $`k`,
@@ -171,7 +171,7 @@ corresponding entry of $g_k = R_z(2\pi k/15)$.
 ```
 
 :::proof "lem:group_approx"
-Immediate from Lemma {bpref "lem:trig_table"}[].
+Immediate from {bpref "lem:trig_table"}[].
 :::
 
 ```tex
@@ -182,7 +182,7 @@ Immediate from Lemma~\ref{lem:trig_table}.
 ```
 
 The pairing used in the blow-up of chart 4 is exact: $`\tau` maps true vertices to true
-vertices (Lemma {bpref "lem:tau_pair"}[]), and the blow-up bracket $`L` is linear in $`S`, so the
+vertices ({bpref "lem:tau_pair"}[]), and the blow-up bracket $`L` is linear in $`S`, so the
 same vertex error bound applies to it.
 
 ```tex

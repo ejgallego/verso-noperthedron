@@ -16,7 +16,7 @@ set_option verso.blueprint.trimTeXLabelPrefix true
 
 #doc (Manual) "Introduction" =>
 
-Steininger and Yurkevich {citet polyhedron.without.rupert}[] constructed a convex
+{citet polyhedron.without.rupert}[] constructed a convex
 polyhedron, the *Noperthedron*, and proved that it does not have Rupert's
 property: no copy of it can be passed through a hole in another copy. This blueprint
 describes a Lean proof of the same theorem that is checked by the Lean kernel alone,
