@@ -3,7 +3,7 @@ open Lake DSL
 
 require Noperthedron from "./Noperthedron"
 require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint.git" @ "v4.35.0"
-require mathlib from git "https://github.com/leanprover-community/mathlib4" @ "56a005855ea17e0b0958f73ec801ae140b0a1679"
+require mathlib from git "https://github.com/leanprover-community/mathlib4" @ "v4.35.0"
 
 package Contents where
   precompileModules := false
