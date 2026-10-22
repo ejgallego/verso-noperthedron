@@ -7,6 +7,7 @@ Author: David Renshaw, Jason Reed, Adaptation to Verso by Emilio J. Gallego Aria
 import Macros
 import Bibliography
 import Cayley
+import Noperthedron.Vertices.InteriorNonempty
 
 open Verso.Genre
 open Verso.Genre.Manual hiding citep citet citehere
